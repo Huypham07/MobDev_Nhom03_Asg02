@@ -13,7 +13,6 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize" android:elevation="4dp" android:background="#FFFFFF">
         <ImageView
-                android:src="@tools:sample/avatars"
                 android:layout_width="30dp"
                 android:layout_height="30dp" android:id="@+id/backbtn"
                 android:layout_gravity="center_vertical"
@@ -28,9 +27,8 @@
     </LinearLayout>
 
     <ImageView
-            android:src="@tools:sample/avatars"
-            android:layout_width="117dp"
-            android:layout_height="116dp" android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp" android:id="@+id/imageView"
             app:srcCompat="@drawable/choosing_avatar" android:layout_marginBottom="8dp"
             android:layout_gravity="center_horizontal"/>
     <LinearLayout
@@ -63,7 +61,7 @@
                     android:layout_height="wrap_content" android:id="@+id/textView34" android:textSize="13sp"
                     android:gravity="center_horizontal"/>
             <TextView
-                    android:text="4,400,000 đ"
+                    android:text="0 đ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView35" android:textSize="22sp"
                     android:gravity="center_horizontal"/>
@@ -78,7 +76,7 @@
                     android:layout_height="wrap_content" android:id="@+id/textView36"
                     android:gravity="center_horizontal"/>
             <TextView
-                    android:text="4810"
+                    android:text="0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView37" android:textSize="22sp"
                     android:gravity="center_horizontal"/>
@@ -86,27 +84,47 @@
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginStart="30dp" android:layout_marginEnd="30dp">
+            android:layout_height="wrap_content" android:layout_marginStart="30dp" android:layout_marginEnd="30dp"
+            android:layout_marginTop="8dp">
 
         <ImageView
-                android:src="@tools:sample/avatars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/imageView2"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/svip_icon"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/svip_icon" app:layout_constraintBottom_toTopOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.8"/>
         <ImageView
-                android:src="@tools:sample/avatars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/vip_icon"/>
-        <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="81dp"
-                android:layout_height="33dp"
-                android:id="@+id/progressBar2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/vip_icon" app:layout_constraintBottom_toTopOf="@id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.3"/>
+
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                app:rcBackgroundColor="#B4B4B4"
+                android:id="@+id/progressBar"
+                app:rcMax="10000000"
+                app:rcProgressColor="#23A8F3"
+                android:progress="3000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+                android:text="3.000.000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView33"
+                app:layout_constraintTop_toBottomOf="@id/progressBar" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.275"
+                android:layout_marginTop="4dp"/>
+        <TextView
+                android:text="8.000.000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView45"
+                app:layout_constraintTop_toBottomOf="@id/progressBar" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.843"
+                android:layout_marginTop="4dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
             android:textSize="15sp" android:layout_marginStart="40dp"
