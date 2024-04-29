@@ -13,6 +13,30 @@
             android:theme="@style/Theme.MobDev_Nhom03_Asg02User"
             tools:targetApi="31">
         <activity
+                android:name=".AccountInformationEditingActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".AccountInformationActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".SettingsActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".RegisterActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".LoginActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".ForgotPasswordActivity3"
+                android:exported="false"/>
+        <activity
+                android:name=".ForgotPasswordActivity2"
+                android:exported="false"/>
+        <activity
+                android:name=".ForgotPasswordActivity1"
+                android:exported="false"/>
+        <activity
                 android:name=".MainActivity"
                 android:exported="true">
             <intent-filter>
