@@ -24,7 +24,7 @@ public class AdminMainActivity extends AppCompatActivity {
         historyBtn = findViewById(R.id.historyBtn);
 
         cinemaBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminCinemaActivity.class);
+            Intent intent = new Intent(this, AdminAddCinemaActivity.class);
             startActivity(intent);
         });
 
