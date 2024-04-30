@@ -25,11 +25,12 @@ public class AdminMainActivity extends AppCompatActivity {
 
         cinemaBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminAddCinemaActivity.class);
+            intent.putExtra("CinemaName", "");
             startActivity(intent);
         });
 
         eventBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminEventActivity.class);
+            Intent intent = new Intent(this, AdminAddEventActivity.class);
             startActivity(intent);
         });
 

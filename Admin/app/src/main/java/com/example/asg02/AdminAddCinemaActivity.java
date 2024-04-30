@@ -1,5 +1,6 @@
 package com.example.asg02;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,6 +27,12 @@ public class AdminAddCinemaActivity extends AppCompatActivity {
         continueBtn = findViewById(R.id.continueBtn);
         enterCinemaName = findViewById(R.id.enterCinemaName);
 
+        cinemaName = getIntent().getExtras().getString("CinemaName", "");
+        if (!cinemaName.isEmpty()) {
+            enterCinemaName.setText(cinemaName);
+            continueBtn.setEnabled(true);
+        }
+
         enterCinemaName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -40,15 +47,29 @@ public class AdminAddCinemaActivity extends AppCompatActivity {
             }
         });
 
-        continueBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminAddCinemaActivity2.class);
-            intent.putExtra("CinemaName", cinemaName);
-            startActivity(intent);
-        });
+        continueBtn.setOnClickListener(v -> showConfirmationDialog());
 
         backBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminMainActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có chắc chắn muốn thêm cụm rạp này không?");
+
+        builder.setPositiveButton("Tiếp tục", (dialog, which) -> {
+            Intent intent = new Intent(this, AdminAddCinemaActivity2.class);
+            intent.putExtra("CinemaName", cinemaName);
+            startActivity(intent);
+        });
+
+        builder.setNegativeButton("Quay lại", (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

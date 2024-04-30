@@ -35,7 +35,8 @@ public class AdminAddCinemaActivity2 extends AppCompatActivity {
         password = findViewById(R.id.password);
         finishBtn = findViewById(R.id.finishBtn);
 
-        String cinemaName = getIntent().getExtras().getString("CinemaName", "cinema name");
+        String extra = getIntent().getExtras().getString("CinemaName", "cinema name");
+        String cinemaName = extra;
         cinemaName = cinemaName.replaceAll(" ", "");
 
         emailNameText = cinemaName + emailNameText;
@@ -73,6 +74,7 @@ public class AdminAddCinemaActivity2 extends AppCompatActivity {
         });
 
         finishBtn.setOnClickListener(v -> {
+            // do something
             String textToCopy = "Tài khoản: " + emailNameText + "\nMật khẩu: " + passwordText;
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clipData = ClipData.newPlainText("text", textToCopy);
@@ -84,6 +86,7 @@ public class AdminAddCinemaActivity2 extends AppCompatActivity {
 
         backBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminAddCinemaActivity.class);
+            intent.putExtra("CinemaName", extra);
             startActivity(intent);
         });
     }
