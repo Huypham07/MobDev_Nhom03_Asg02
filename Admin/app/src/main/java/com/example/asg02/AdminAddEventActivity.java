@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,7 +27,14 @@ public class AdminAddEventActivity extends AppCompatActivity {
     private ImageView selectPoster;
     private EditText enterSDate;
     private EditText enterEDate;
+    private EditText enterEventInfo;
     private Button addEventBtn;
+    String eventName = "";
+    private Bitmap posterBitmap;
+    String startDate = "";
+    String endDate = "";
+    String eventInfo = "";
+
     private static final int PICK_IMAGE = 1;
 
 
@@ -42,9 +48,10 @@ public class AdminAddEventActivity extends AppCompatActivity {
         selectPoster = findViewById(R.id.selectPoster);
         enterSDate = findViewById(R.id.enterSDate);
         enterEDate = findViewById(R.id.enterEDate);
+        enterEventInfo = findViewById(R.id.enterEventInfo);
         addEventBtn = findViewById(R.id.addEventBtn);
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
+        enterEventName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -53,13 +60,53 @@ public class AdminAddEventActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                //checking format event
+                eventName = enterEventName.getText().toString();
+                addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                        && !eventInfo.isEmpty() && posterBitmap != null);
             }
-        };
+        });
+        enterSDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-        enterEventName.addTextChangedListener(afterTextChangedListener);
-        enterSDate.addTextChangedListener(afterTextChangedListener);
-        enterEDate.addTextChangedListener(afterTextChangedListener);
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                startDate = enterSDate.getText().toString();
+                addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                        && !eventInfo.isEmpty() && posterBitmap != null);
+            }
+        });
+        enterEDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                endDate = enterEDate.getText().toString();
+                addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                        && !eventInfo.isEmpty() && posterBitmap != null);
+            }
+        });
+        enterEventInfo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                eventInfo = enterEventInfo.getText().toString();
+                addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                        && !eventInfo.isEmpty() && posterBitmap != null);
+            }
+        });
 
         selectPoster.setOnClickListener(v -> selectImage());
 
@@ -92,13 +139,18 @@ public class AdminAddEventActivity extends AppCompatActivity {
         });
 
         backBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminMainActivity.class);
+            Intent intent = new Intent(this, AdminEventActivity.class);
             startActivity(intent);
         });
 
         addEventBtn.setOnClickListener(v -> {
-            //do something
-            Intent intent = new Intent(this, AdminMainActivity.class);
+
+//            Event event = new Event(eventName, posterBitmap, startDate, endDate, eventInfo);
+
+            // Thêm chức năng đưa sự kiện lên firebase để chia sẻ cho các tài khoản khác ở đây
+
+            Intent intent = new Intent(this, AdminEventActivity.class);
+//            intent.putExtra("event", event);
             startActivity(intent);
         });
     }
@@ -118,9 +170,11 @@ public class AdminAddEventActivity extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                selectPoster.setImageBitmap(bitmap);
+                posterBitmap = BitmapFactory.decodeStream(inputStream);
+                selectPoster.setImageBitmap(posterBitmap);
                 selectPoster.setBackground(null);
+                addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                        && !eventInfo.isEmpty() && posterBitmap != null);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

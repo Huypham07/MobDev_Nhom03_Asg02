@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AdminMainActivity extends AppCompatActivity {
 
     FrameLayout cinemaBtn;
     FrameLayout eventBtn;
     FrameLayout messageBtn;
     FrameLayout historyBtn;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,7 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         eventBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminAddEventActivity.class);
+            Intent intent = new Intent(this, AdminEventActivity.class);
             startActivity(intent);
         });
 
