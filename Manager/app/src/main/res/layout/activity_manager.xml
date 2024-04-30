@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ManagerActivity">
+    <Button
+        android:id="@+id/editInfo"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/roundstyle"
+        android:text="Chỉnh sửa thông tin"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/moviesInMyCinema"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="148dp"
+        android:background="@drawable/roundstyle"
+        android:text="Phim tại rạp"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cinemaSystem"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="284dp"
+        android:background="@drawable/roundstyle"
+        android:text="Hệ thống các rạp"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addNewCinema"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="284dp"
+        android:background="@drawable/roundstyle"
+        android:text="Thêm rạp chiếu phim mới"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addNewMovie"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="412dp"
+        android:background="@drawable/roundstyle"
+        android:text="Thêm phim mới"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addNewShowtime"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="412dp"
+        android:background="@drawable/roundstyle"
+        android:text="Thêm suất chiếu mới"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="548dp"
+        android:background="@drawable/roundstyle"
+        android:text="Đăng xuất"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
