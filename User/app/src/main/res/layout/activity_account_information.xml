@@ -8,23 +8,13 @@
         tools:context=".LoginActivity" android:orientation="vertical" android:background="#FFFFFF"
 >
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:elevation="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize" android:elevation="4dp" android:background="#FFFFFF">
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp" android:id="@+id/backbtn"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp" app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
-                app:tint="#23A8F3" android:layout_marginEnd="8dp"/>
-        <TextView
-                android:text="Thành viên"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView2"
-                android:layout_gravity="center_vertical" android:textStyle="bold" android:textSize="18sp"
-                android:textColor="#000000"/>
-    </LinearLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Thành viên"
+            app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"/>
 
     <ImageView
             android:layout_width="100dp"
@@ -85,7 +75,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginStart="30dp" android:layout_marginEnd="30dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp" android:layout_marginBottom="8dp">
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -126,64 +116,70 @@
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.843"
                 android:layout_marginTop="4dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Họ tên: Lê Thành Doanh"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView38" android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"/>
-    <TextView
-            android:textSize="15sp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Số điện thoại: 0975464123 "
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView39"
-            android:gravity="center_vertical"/>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Email: test@gmail.com"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView40" android:gravity="clip_vertical|center_vertical"/>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Ngày sinh: 02/10/2004 "
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView41"
-            android:gravity="center_vertical"/>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Giới tính: Nam"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView42" android:gravity="center_vertical"/>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Khu vực: Hà Nội"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView43" android:gravity="center_vertical"/>
-    <TextView
-            android:textSize="15sp" android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/black"
-            android:text="Rạp yêu thích: Idochina Plaza Hà Nội"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" android:id="@+id/textView44" android:gravity="center_vertical"/>
+
+    <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="200dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="200dp" android:orientation="vertical">
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Họ tên: Lê Thành Doanh"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView38" android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"/>
+            <TextView
+                    android:textSize="15sp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Số điện thoại: 0975464123 "
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView39"
+                    android:gravity="center_vertical"/>
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Email: test@gmail.com"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView40" android:gravity="clip_vertical|center_vertical"/>
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Ngày sinh: 02/10/2004 "
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView41"
+                    android:gravity="center_vertical"/>
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Giới tính: Nam"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView42" android:gravity="center_vertical"/>
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Khu vực: Hà Nội"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView43" android:gravity="center_vertical"/>
+            <TextView
+                    android:textSize="15sp" android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="@color/black"
+                    android:text="Rạp yêu thích: Idochina Plaza Hà Nội"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/textView44" android:gravity="center_vertical"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
     <Button
             android:text="CHỈNH SỬA" android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/button2" android:padding="12dp"
-            android:layout_marginStart="40dp" android:layout_marginEnd="40dp" android:backgroundTint="#23A8F3"
+            android:layout_marginStart="40dp" android:layout_marginEnd="40dp"
             android:layout_marginTop="20dp"/>
 
 </LinearLayout>

@@ -1,9 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MobDev_Nhom03_Asg02User" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="toolbarStyle">@style/MyToolBarStyle</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="floatingActionButtonStyle">@style/fab_rounded</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/blue</item>
+    </style>
+    <style name="fab_rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+    <style name="MyToolBarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="Theme.MobDev_Nhom03_Asg02User" parent="Base.Theme.MobDev_Nhom03_Asg02User"/>
+    <style name="Theme.MobDev_Nhom03_Asg02User.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.MobDev_Nhom03_Asg02User.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.MobDev_Nhom03_Asg02User.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
