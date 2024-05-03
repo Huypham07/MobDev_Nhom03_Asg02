@@ -16,10 +16,19 @@ public class ManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
         editInfoBution = findViewById(R.id.editInfo);
+        moviesInMyCinemaButtion = findViewById(R.id.moviesInMyCinema);
+
         editInfoBution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ManagerActivity.this, InfoActivity.class);
+                startActivity(intent);
+            }
+        });
+        moviesInMyCinemaButtion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ManagerActivity.this, MoviesInCinemaActivity.class);
                 startActivity(intent);
             }
         });
