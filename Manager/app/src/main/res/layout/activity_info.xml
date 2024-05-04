@@ -6,25 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".InfoActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="526dp"
-        android:layout_height="86dp"
-        android:layout_marginBottom="644dp"
-        android:backgroundTint="@color/white"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="40dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:contentDescription="..."
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="40dp"
+            android:gravity="top"
+            android:text="Thông tin chung"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView"
@@ -51,13 +68,13 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="146dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="144dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_account_circle" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -95,8 +112,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="408dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="416dp"
         android:text="Đổi mật khẩu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

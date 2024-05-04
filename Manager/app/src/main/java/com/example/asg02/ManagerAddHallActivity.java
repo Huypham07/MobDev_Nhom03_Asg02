@@ -5,25 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-public class MoviesInCinemaActivity extends AppCompatActivity {
+public class ManagerAddHallActivity extends AppCompatActivity {
     ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movies_in_cinema);
-        back = findViewById(R.id.backIn);
+        setContentView(R.layout.activity_manager_add_hall);
+        back = findViewById(R.id.backHall);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
-                Intent intent = new Intent(MoviesInCinemaActivity.this, ManagerActivity.class);
+                Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
                 startActivity(intent);
             }
 
         });
-
     }
 }

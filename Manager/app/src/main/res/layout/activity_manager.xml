@@ -6,6 +6,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ManagerActivity">
+
+    <Button
+        android:id="@+id/addNewHall"
+        android:layout_width="161dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="556dp"
+        android:background="@drawable/roundstyle"
+        android:text="Thêm phòng chiếu"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/editInfo"
         android:layout_width="161dp"
