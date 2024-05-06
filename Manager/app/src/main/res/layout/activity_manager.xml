@@ -12,12 +12,12 @@
         android:layout_width="161dp"
         android:layout_height="107dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="556dp"
+        android:layout_marginTop="548dp"
         android:background="@drawable/roundstyle"
         android:text="Thêm phòng chiếu"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,9 @@
         android:text="Chỉnh sửa thông tin"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        android:elevation="5dp"
+        android:translationZ="5dp"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +47,7 @@
         android:text="Phim tại rạp"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +61,7 @@
         android:text="Hệ thống các rạp"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +75,7 @@
         android:text="Thêm rạp chiếu phim mới"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,7 +89,7 @@
         android:text="Thêm phim mới"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,7 +103,7 @@
         android:text="Thêm suất chiếu mới"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,8 +117,29 @@
         android:text="Đăng xuất"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:backgroundTint="@color/orange"
+        app:backgroundTint="@color/opacity_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="115dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="148dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_account_circle" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="113dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="8dp"
+        android:text="Tên cụm rạp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,8 +80,8 @@
         android:id="@+id/imageView4"
         android:layout_width="67dp"
         android:layout_height="46dp"
-        android:layout_marginTop="248dp"
-        android:layout_marginEnd="152dp"
+        android:layout_marginTop="256dp"
+        android:layout_marginEnd="140dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/camera" />
@@ -97,23 +97,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="360dp"
-        android:text="CGV"
+        android:layout_marginTop="340dp"
+        android:text=""
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
+        android:layout_width="262dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="416dp"
+        android:background="@drawable/roundstyle"
         android:text="Đổi mật khẩu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

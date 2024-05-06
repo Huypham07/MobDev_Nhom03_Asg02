@@ -138,7 +138,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="200dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
@@ -154,7 +154,6 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:focusable="false"
                     android:hint="Tỉnh/ Thành phố"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +166,7 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:focusable="false"
+
                     android:hint="Quận/ Huyện"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +180,7 @@
                     android:layout_marginStart="25dp"
 
                     android:layout_marginEnd="25dp"
-                    android:focusable="false"
+
                     android:hint="Phường/ Xã"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -195,7 +194,6 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:focusable="false"
                     android:hint="Địa chỉ"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
