@@ -8,9 +8,29 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <!-- Login -->
+    <string name="title_activity_login">Đăng nhập</string>
+    <string name="title_activity_register">Đăng ký</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="find_account">Tìm tài khoản</string>
+    <string name="authentication">Xác thực</string>
+    <string name="reset_password">Đặt lại mật khẩu</string>
+    <!-- End -->
+
+    <!-- Settings -->
+    <string name="title_settings">Cài đặt</string>
+    <string name="privacy_policy">Chính sách bảo mật</string>
+    <string name="terms_of_service">Điều khoản dịch vụ</string>
+    <string name="account">Thành viên</string>
+    <string name="account_editing">Thông tin tài khoản</string>
+    <!-- End -->
+
+    <!-- notice -->
+    <string name="title_fragment_notice">Thông báo</string>
+
+    <!-- Order -->
+    <string name="order_button">Đặt vé</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">SettingsActivity</string>

@@ -7,19 +7,12 @@
 
     <fragment
             android:id="@+id/nav_home"
-            android:name="com.example.asg02.ui.home.HomeFragment"
+            android:name="com.example.asg02.view.ui.home.HomeFragment"
             tools:layout="@layout/fragment_home">
     </fragment>
 
-    <fragment
-            android:id="@+id/nav_gallery"
-            android:name="com.example.asg02.ui.gallery.GalleryFragment"
-            android:label="@string/menu_gallery"
-            tools:layout="@layout/fragment_gallery"/>
-
-    <fragment
-            android:id="@+id/nav_slideshow"
-            android:name="com.example.asg02.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow"/>
+    <fragment android:id="@+id/nav_notification"
+              android:name="com.example.asg02.view.ui.notice.NotificationFragment"
+              android:label="@string/title_fragment_notice"
+              tools:layout="@layout/fragment_notification"/>
 </navigation>

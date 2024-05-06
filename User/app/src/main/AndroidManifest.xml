@@ -13,26 +13,22 @@
             android:theme="@style/Theme.MobDev_Nhom03_Asg02User"
             tools:targetApi="31">
         <activity
-                android:name=".SettingsActivity"
+                android:name=".view.PasswordRecoveryActivity"
+                android:exported="false"/>
+        <activity
+                android:name=".view.SettingsActivity"
                 android:exported="false"
                 android:label="@string/title_activity_settings"/>
         <activity
-                android:name=".MainActivity"
+                android:name=".view.MainActivity"
                 android:exported="false">
         </activity>
         <activity
-                android:name=".AccountInformationEditingActivity"
-                android:exported="false"/>
-        <activity
-                android:name=".AccountInformationActivity"
-                android:exported="true">
-        </activity>
-        <activity
-                android:name=".RegisterActivity"
+                android:name=".view.RegisterActivity"
                 android:exported="false">
         </activity>
         <activity
-                android:name=".LoginActivity"
+                android:name=".view.LoginActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,15 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".ForgotPasswordActivity3"
-                android:exported="false"/>
-        <activity
-                android:name=".ForgotPasswordActivity2"
-                android:exported="false"/>
-        <activity
-                android:name=".ForgotPasswordActivity1"
-                android:exported="false"/>
     </application>
 
 </manifest>

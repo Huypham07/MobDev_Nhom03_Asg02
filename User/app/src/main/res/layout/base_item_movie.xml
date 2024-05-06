@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Card View widget-->
+<androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardElevation="0dp"
+        card_view:contentPadding="8dp">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+        <androidx.cardview.widget.CardView android:layout_width="240dp"
+                                           android:layout_height="320dp"
+                                           android:layout_gravity="center_horizontal"
+                                           card_view:cardCornerRadius="6dp">
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:id="@+id/poster"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/movie_name"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginTop="12dp"
+                  android:text="Movie Name"
+                  android:textSize="18sp"
+                  android:textColor="@color/black"
+                  android:textStyle="bold"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/movie_length"
+                  android:layout_gravity="center_horizontal"
+                  android:text=" 1 giờ 30 phút"
+                  android:layout_marginTop="4dp"
+                  android:textColor="@color/textGrey"
+                  android:drawableLeft="@drawable/movie_length"
+                  android:textSize="15sp"/>
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

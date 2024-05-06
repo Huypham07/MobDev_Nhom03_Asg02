@@ -5,14 +5,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".LoginActivity" android:orientation="vertical" android:background="#FFFFFF">
+        tools:context=".view.LoginActivity" android:orientation="vertical" android:background="#FFFFFF">
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:elevation="4dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Đăng nhập"/>
+            app:title="@string/title_activity_login"/>
 
     <ImageView
             android:layout_width="match_parent"
