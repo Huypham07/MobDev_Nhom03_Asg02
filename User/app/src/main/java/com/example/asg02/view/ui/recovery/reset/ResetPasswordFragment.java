@@ -13,15 +13,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.example.asg02.databinding.FragmentResetPasswordBinding;
 import com.example.asg02.view.LoginActivity;
 import com.example.asg02.R;
+import com.example.asg02.view.Utils;
 
 public class ResetPasswordFragment extends Fragment {
     private ResetPasswordViewModel mViewModel;
     private FragmentResetPasswordBinding binding;
     private boolean isHidePassword = true;
     private boolean isHideConfirmPassword = true;
+    private EditText editNewPassword;
+    private EditText editConfirmPassword;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,40 +37,64 @@ public class ResetPasswordFragment extends Fragment {
         binding = FragmentResetPasswordBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // assign
+
+        editNewPassword = binding.newPassword;
+        editConfirmPassword = binding.confirmNewPassword;
+
         changePasswordVisibility(binding.newPassword, isHidePassword);
         changePasswordVisibility(binding.confirmNewPassword, isHideConfirmPassword);
 
-        binding.newPassword.setOnTouchListener((v, event) -> {
+        editNewPassword.setOnTouchListener((v, event) -> {
             final int DRAWABLE_RIGHT = 2;
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (event.getRawX() >= (binding.newPassword.getRight() - binding.newPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width() - 32)) {
+                if (event.getRawX() >= (editNewPassword.getRight() - editNewPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width() - 32)) {
                     isHidePassword = !isHidePassword;
-                    changePasswordVisibility(binding.newPassword, isHidePassword);
+                    changePasswordVisibility(editNewPassword, isHidePassword);
                     return true;
                 }
             }
             return false;
         });
-
-        binding.confirmNewPassword.setOnTouchListener((v, event) -> {
+        editConfirmPassword.setOnTouchListener((v, event) -> {
             final int DRAWABLE_RIGHT = 2;
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (event.getRawX() >= (binding.confirmNewPassword.getRight() - binding.confirmNewPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width() - 32)) {
+                if (event.getRawX() >= (editConfirmPassword.getRight() - editConfirmPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width() - 32)) {
                     isHideConfirmPassword = !isHideConfirmPassword;
-                    changePasswordVisibility(binding.confirmNewPassword, isHideConfirmPassword);
+                    changePasswordVisibility(editConfirmPassword, isHideConfirmPassword);
                     return true;
                 }
             }
             return false;
         });
+
+        editNewPassword.addTextChangedListener(Utils.afterEditTextChanged(editNewPassword, v -> {
+            if (isEnableLoginButton()) {
+                binding.finishResetPassword.setEnabled(true);
+            } else {
+                binding.finishResetPassword.setEnabled(false);
+            }
+        }));
+
+        editConfirmPassword.addTextChangedListener(Utils.afterEditTextChanged(editConfirmPassword, v -> {
+            if (isEnableLoginButton()) {
+                binding.finishResetPassword.setEnabled(true);
+            } else {
+                binding.finishResetPassword.setEnabled(false);
+            }
+        }));
 
         binding.finishResetPassword.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         });
 
         return root;
+    }
+
+    private boolean isEnableLoginButton() {
+        return !editNewPassword.getText().toString().isEmpty() && !editConfirmPassword.getText().toString().isEmpty();
     }
 
     private void changePasswordVisibility(EditText editText, boolean isHidePassword) {

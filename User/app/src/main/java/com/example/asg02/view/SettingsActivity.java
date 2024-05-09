@@ -6,8 +6,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.example.asg02.R;
 import com.example.asg02.databinding.SettingsActivityBinding;
+import com.example.asg02.model.User;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
     private SettingsActivityBinding binding;
     private NavController controller;
 

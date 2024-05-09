@@ -1,82 +1,201 @@
 package com.example.asg02.view;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.text.method.PasswordTransformationMethod;
-import android.view.MotionEvent;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
-import com.example.asg02.R;
-import com.example.asg02.controller.RegisterController;
-import com.example.asg02.model.User;
 
-public class RegisterActivity extends AppCompatActivity {
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+
+import com.example.asg02.R;
+import com.example.asg02.controller.GetProvinceController;
+import com.example.asg02.controller.RegisterController;
+import com.example.asg02.databinding.ActivityRegisterBinding;
+import com.example.asg02.model.User;
+import com.google.android.material.snackbar.Snackbar;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
+public class RegisterActivity extends BaseActivity {
     private boolean isHidePassword = true;
     private RegisterController registerController;
+    private ActivityRegisterBinding binding;
+    private EditText editName;
+    private EditText editPhone;
+    private EditText editEmail;
+    private EditText editPassword;
+    private AutoCompleteTextView editBirthDate;
+    private AutoCompleteTextView editSex;
+    private AutoCompleteTextView editRegion;
+    private AutoCompleteTextView editFavorite;
+    private ProgressBar progressBar;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        registerController = new RegisterController();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v_back -> {
+        // assign
+        setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
         });
 
-        EditText editPassword = findViewById(R.id.editPassword);
-        changePasswordVisibility(editPassword, isHidePassword);
-        editPassword.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
+        editName = binding.editName;
+        editPhone = binding.editPhone;
+        editEmail = binding.editEmail;
+        editPassword = binding.editPassword;
+        ImageView passwordIcon = binding.hidePasswordButton;
+        editBirthDate = binding.editBirthDate;
+        editSex = binding.editSex;
+        editRegion = binding.editRegion;
+        editFavorite = binding.editFavorite;
+        progressBar = binding.progressBar;
+        registerController = new RegisterController(progressBar);
 
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (event.getRawX() >= (editPassword.getRight() - editPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    isHidePassword = !isHidePassword;
-                    changePasswordVisibility(editPassword, isHidePassword);
-                    return true;
+        editBirthDate.setOnClickListener(v -> {
+            String currentDate = editBirthDate.getText().toString();
+            int iDate[] = new int[3];
+            if (currentDate.isEmpty()) {
+                iDate[2] = 2000;
+                iDate[1] = 1;
+                iDate[0] = 1;
+            } else {
+                String sDate[] = currentDate.split("/");
+                for (int i = 0; i < sDate.length; i++) {
+                    iDate[i] = Integer.parseInt(sDate[i]);
                 }
             }
-            return false;
+            new DatePickerDialog(RegisterActivity.this,
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                            editBirthDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
+                        }
+                    }, iDate[2], iDate[1] - 1, iDate[0]).show();
         });
 
-        Button register = findViewById(R.id.register);
-        register.setOnClickListener(v -> {
-            EditText editName = findViewById(R.id.editName);
-            String name = editName.getText().toString();
+        editSex.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"Nam", "Nữ", "Khác"}));
 
-            EditText editPhone = findViewById(R.id.editPhone);
-            String phone = editPhone.getText().toString();
+        editRegion.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item
+                , new GetProvinceController().getAllProvinces()));
 
-            EditText editEmail = findViewById(R.id.editEmail);
-            String email = editEmail.getText().toString();
+        editFavorite.setOnTouchListener((v, e) -> {
+            return true;
+        });
 
-            String password = editPassword.getText().toString();
 
-            EditText editBirthDate = findViewById(R.id.editBirthdate);
-            String birthDate = editBirthDate.getText().toString();
+        changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
+        passwordIcon.setOnClickListener(v -> {
+            isHidePassword = !isHidePassword;
+            changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
+        });
 
-            EditText editSex = findViewById(R.id.editSex);
-            String sex = editSex.getText().toString();
+        editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, v -> {
+            if (editPassword.getText().toString().length() < 8) {
+                editPassword.setError("Mật khẩu cần dai ít nhất 8 ký tự");
+                return;
+            }
 
-            EditText editRegion = findViewById(R.id.editRegion);
-            String region = editRegion.getText().toString();
+            if (!editPassword.getText().toString().matches(".*\\d.*")) {
+                editPassword.setError("Mật khẩu cần chứa ít nhất 1 số");
+                return;
+            }
 
-            EditText editFavorite = findViewById(R.id.editFavorite);
-            String favorite = editFavorite.getText().toString();
+            if (!editPassword.getText().toString().matches(".*[a-zA-Z].*")) {
+                editPassword.setError("Mật khẩu cần chứa ít nhất 1 chữ cái");
+                return;
+            }
 
-            User user = new User(email, password, name, birthDate, sex, phone, region, favorite, 0);
+            editPassword.setError(null);
+        }));
 
-            if (findViewById(R.id.checkBox).isActivated()) {
-                if (registerController.register(user)) {
-                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        binding.register.setOnClickListener(v -> {
+            User user = getUserFromInput();
+            CheckBox checkBox = binding.checkBox;
+            if (checkBox.isChecked()) {
+                switch (registerController.register(user)) {
+                    case RegisterController.FAIL:
+                        Snackbar.make(v, "Đăng ký thất bại.\nVui lòng điền đầy đủ thông tin hợp lệ", Snackbar.LENGTH_LONG).show();
+                        break;
+                    case RegisterController.EMAIL_EXISTS:
+                        Snackbar.make(v, "Email đã tồn tại", Snackbar.LENGTH_LONG).show();
+                        break;
+                    case RegisterController.PHONE_EXISTS:
+                        Snackbar.make(v, "Số điện thoại đã tồn tại", Snackbar.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Snackbar.make(v, "Đăng ký thành công", Snackbar.LENGTH_LONG).show();
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 }
+            } else {
+                Snackbar.make(v, "Vui lòng đồng ý với điều khoản và điều kiện", Snackbar.LENGTH_LONG).show();
             }
         });
+
+        binding.scrollView.setOnTouchListener((v, event) -> {
+            hideKeyboard();
+            return true;
+        });
+    }
+
+    private User getUserFromInput() {
+        if (!isFilledEditTexts()) {
+            return null;
+        }
+
+        String name = editName.getText().toString();
+        String phone = editPhone.getText().toString();
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
+        String birthDate = editBirthDate.getText().toString();
+        String sex = editSex.getText().toString();
+        String region = editRegion.getText().toString();
+        String favorite = editFavorite.getText().toString();
+
+        return new User(email, password, name, birthDate, sex, phone, region, favorite, 0);
+    }
+
+    private static final String ERROR_MESSAGE = "Mục này không được để trống";
+
+    private boolean isFilledEditTexts() {
+        List<EditText> editTexts = Arrays.asList(editName, editPhone, editEmail, editPassword);
+        List<EditText> notFilledEditTexts = new ArrayList<>();
+
+        for (EditText editText : editTexts) {
+            if (editText == null) {
+                return false;
+            }
+            if (editText.getText().toString().isEmpty()) {
+                notFilledEditTexts.add(editText);
+                editText.setError(ERROR_MESSAGE);
+            }
+        }
+
+        List<AutoCompleteTextView> autoCompleteTextViews = Arrays.asList(editBirthDate, editSex, editRegion);
+        List<AutoCompleteTextView> notFilledAutoCompleteTextViews = new ArrayList<>();
+        for (AutoCompleteTextView a : autoCompleteTextViews) {
+            if (a == null) {
+                return false;
+            }
+            if (a.getText().toString().isEmpty()) {
+                notFilledAutoCompleteTextViews.add(a);
+                a.setError(ERROR_MESSAGE);
+            }
+        }
+
+        return notFilledEditTexts.isEmpty() && notFilledAutoCompleteTextViews.isEmpty();
     }
 
     @Override
@@ -85,12 +204,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void changePasswordVisibility(EditText editText, boolean isHidePassword) {
+    private void changePasswordVisibility(ImageView imageView, EditText editText, boolean isHidePassword) {
         if (isHidePassword) {
-            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.hide_password_icon), null);
+            imageView.setImageResource(R.drawable.hide_password_icon);
             editText.setTransformationMethod(new PasswordTransformationMethod());
         } else {
-            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.show_password_icon), null);
+            imageView.setImageResource(R.drawable.show_password_icon);
             editText.setTransformationMethod(null);
         }
     }

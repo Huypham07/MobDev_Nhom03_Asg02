@@ -1,5 +1,8 @@
 package com.example.asg02.model;
 
+import androidx.annotation.Nullable;
+
+import java.io.Serializable;
 import java.util.Date;
 
 public class User extends Account {
@@ -11,6 +14,9 @@ public class User extends Account {
     private String favouriteCinema;
     private long point;
 
+    public User() {
+    }
+
     public User(String email, String password, String name, String birthDate
             , String sex, String phone, String region, String favouriteCinema, long point) {
         super(email, password);
@@ -19,7 +25,6 @@ public class User extends Account {
         this.sex = sex;
         this.phone = phone;
         this.region = region;
-        this.favouriteCinema = favouriteCinema;
         this.point = point;
     }
 

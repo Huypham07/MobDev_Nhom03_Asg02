@@ -1,5 +1,7 @@
 package com.example.asg02.controller;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
@@ -12,7 +14,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import org.jetbrains.annotations.NotNull;
 
-public class LoginController implements AccountDatabase {
+import java.util.concurrent.CompletableFuture;
+
+public class LoginController implements AccountReader {
     private FirebaseDatabase database;
     private FirebaseAuth auth;
 
@@ -21,7 +25,10 @@ public LoginController() {
         auth = FirebaseAuth.getInstance();
     }
 
-    public Account login(String id, String password) {
+    public CompletableFuture<Account> login(String id, String password) {
+        if (id == null || password == null) {
+            return null;
+        }
         if (idIsEmail(id)) {
             return getAccountWithEmail(id, password);
         } else {
@@ -32,15 +39,10 @@ public LoginController() {
     private boolean idIsEmail(String id) {
         return id.contains("@");
     }
-    @Override
-    public boolean createAccount(Account account) {
-        return false;
-    }
 
     @Override
-    public Account getAccountWithPhone(String phone, String password) {
-        //
-        final User[] user = new User[1];
+    public CompletableFuture<Account> getAccountWithPhone(String phone, String password) {
+        CompletableFuture<Account> future = new CompletableFuture<>();
         database.getReference("Users").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -48,34 +50,26 @@ public LoginController() {
                     User u = data.getValue(User.class);
                     if (u.getPhone().equals(phone)) {
                         // return account
-                        user[0] = u;
+                        auth.signInWithEmailAndPassword(u.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    future.complete(u);
+                                } else {
+                                    // return null
+                                }
+                            }
+                        });
                     }
                 }
             }
         });
-
-        if (user[0] == null) {
-            return null;
-        }
-        String email = user[0].getEmail();
-
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    //
-                } else {
-                    // return null
-                }
-            }
-        });
-        return user[0];
+        return future;
     }
 
     @Override
-    public Account getAccountWithEmail(String email, String password) {
-        try {
-            final User[] users = new User[1];
+    public CompletableFuture<Account> getAccountWithEmail(String email, String password) {
+        CompletableFuture<Account> future = new CompletableFuture<>();
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -83,34 +77,12 @@ public LoginController() {
                             if (task.isSuccessful()) {
                                 String uID = auth.getCurrentUser().getUid();
                                 database.getReference("Users").child(uID).get()
-                                        .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                                users[0] = dataSnapshot.getValue(User.class);
-                                                // return account
-                                            }
-                                        });
+                                        .addOnCompleteListener(task_ -> future.complete(task_.getResult().getValue(User.class)));
                             } else {
                                 // return null
                             }
                         }
                     });
-            return users[0];
-        } catch (NullPointerException e) {
-            return null;
-        } catch (Exception e) {
-            return null;
-        }
+            return future;
     }
-
-    @Override
-    public boolean updateAccount(Account account) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteAccount(Account account) {
-        return false;
-    }
-
 }
