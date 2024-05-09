@@ -24,9 +24,10 @@
             android:layout_gravity="center|left"
             android:layout_marginLeft="10dp"
             android:background="#00000000"
+            android:contentDescription="hahah"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_back_button"
-            android:contentDescription="hahah"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +90,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <EditText
-                    android:id="@+id/enterEventName"
+                    android:id="@+id/enterTitle"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="25dp"
@@ -188,7 +189,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="405dp"
+                android:layout_height="432dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
@@ -199,12 +200,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                 <EditText
-                    android:id="@+id/enterDate"
+                    android:id="@+id/enterReleased"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:hint="Ngày công chiếu dự kiến"
+                    android:hint="Ngày công chiếu"
                     android:inputType="datetime"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -212,28 +213,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/enterDuration"
+                    android:id="@+id/enterRuntime"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-
                     android:hint="Thời lượng phim"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterDate" />
-                <EditText
-                    android:id="@+id/enterFormat"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Định dạng phim"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterDuration" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterReleased" />
 
                 <EditText
                     android:id="@+id/enterGenre"
@@ -245,7 +234,7 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterFormat" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterRuntime" />
 
                 <EditText
                     android:id="@+id/enterDirector"
@@ -253,64 +242,78 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:hint="Đạo diễn"
+                    android:hint= "Đạo diễn"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/enterGenre" />
+
                 <EditText
-                    android:id="@+id/enterActor"
+                    android:id="@+id/enterWriter"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:hint="Nhà sản xuất kịch bản"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/enterDirector" />
+
+                <EditText
+                    android:id="@+id/enterActors"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:hint="Diễn viên"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterDirector" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterWriter" />
+
+                <EditText
+                    android:id="@+id/enterPlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:hint="Cốt truyện"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/enterActors" />
+
                 <EditText
                     android:id="@+id/enterLanguage"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:hint="Ngôn ngữ"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterActor" />
-                <EditText
-                    android:id="@+id/enterIntroduction"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Giới thiệu phim"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterLanguage" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterPlot" />
                 <EditText
                     android:id="@+id/enterTrailerLink"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:hint="Thời lượng phim"
+                    android:hint="Link trailer"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterIntroduction" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterLanguage" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
-                android:id="@+id/addEventBtn"
+                android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="40dp"
-                android:enabled="false"
                 android:text="Thêm"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -320,7 +323,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addEventBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/add" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
