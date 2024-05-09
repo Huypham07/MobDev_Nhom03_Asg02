@@ -9,10 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.GetMovieController;
 import com.example.asg02.databinding.FragmentCurrentMovieBinding;
 import com.example.asg02.model.Movie;
@@ -46,6 +49,13 @@ public class CurrentMovieFragment extends Fragment {
         movieList = movieController.getAllCurrentMovies();
 
         movieAdapter = new MovieAdapter(movieList);
+        movieAdapter.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                controller.navigate(R.id.nav_movie);
+            }
+        });
 
         recyclerView = binding.recyclerview;
         recyclerView.setAdapter(movieAdapter);

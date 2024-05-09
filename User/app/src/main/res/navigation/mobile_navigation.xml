@@ -8,11 +8,20 @@
     <fragment
             android:id="@+id/nav_home"
             android:name="com.example.asg02.view.ui.home.HomeFragment"
-            tools:layout="@layout/fragment_home">
-    </fragment>
+            tools:layout="@layout/fragment_home"/>
 
     <fragment android:id="@+id/nav_notification"
               android:name="com.example.asg02.view.ui.notice.NotificationFragment"
               android:label="@string/title_fragment_notice"
               tools:layout="@layout/fragment_notification"/>
+    <fragment
+        android:id="@+id/nav_movie"
+        android:name="com.example.asg02.view.ui.movie.MovieFragment"
+        android:label="@string/title_fragment_movie"
+        tools:layout="@layout/fragment_movie" />
+    <fragment
+        android:id="@+id/nav_news_detail"
+        android:name="com.example.asg02.view.ui.news.NewsFragment"
+        android:label="@string/title_fragment_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>

@@ -17,6 +17,11 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     List<String> newsList;
+    private View.OnClickListener listener;
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
     public NewsAdapter(List<String> newsList) {
         this.newsList = newsList;
     }
@@ -42,6 +47,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsHolder holder, int position) {
         holder.imageView.setImageResource(R.drawable.newsss);
+        holder.imageView.setOnClickListener(listener);
     }
 
     @Override

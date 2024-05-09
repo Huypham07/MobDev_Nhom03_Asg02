@@ -28,7 +28,7 @@ public class DeleteAccountController implements AccountDeleter {
             }
         });
 
-        database.getReference("users").child(Uid.toString()).
+        database.getReference("Users").child(Uid.toString()).
                 removeValue().addOnSuccessListener(aVoid -> {
             deleted = true;
         });

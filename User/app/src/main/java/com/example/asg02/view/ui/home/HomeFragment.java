@@ -8,10 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.GetNewsController;
 import com.example.asg02.databinding.FragmentHomeBinding;
 import com.example.asg02.view.ui.home.movieOverview.CustomFragmentAdapter;
@@ -54,6 +57,10 @@ public class HomeFragment extends Fragment {
         getNewsController = new GetNewsController();
         newsList = getNewsController.getAllNews();
         newsAdapter = new NewsAdapter(newsList);
+        newsAdapter.setOnClickListener(v -> {
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            controller.navigate(R.id.nav_news_detail);
+        });
         recyclerView = binding.recyclerview;
         recyclerView.setAdapter(newsAdapter);
 
