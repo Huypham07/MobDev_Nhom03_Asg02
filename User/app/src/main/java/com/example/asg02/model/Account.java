@@ -1,8 +1,13 @@
 package com.example.asg02.model;
 
-public abstract class Account {
+import java.io.Serializable;
+
+public abstract class Account implements Serializable {
     private String email;
     private String password;
+
+    public Account() {
+    }
 
     public Account(String email, String password) {
         this.email = email;

@@ -8,15 +8,26 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
+import com.example.asg02.controller.GetNewsController;
 import com.example.asg02.databinding.FragmentHomeBinding;
 import com.example.asg02.view.ui.home.movieOverview.CustomFragmentAdapter;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private TabLayoutMediator mediator;
     private CustomFragmentAdapter fragmentAdapter;
+    private NewsAdapter newsAdapter;
+    private RecyclerView recyclerView;
+    private List<String> newsList;
+    private GetNewsController getNewsController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +50,15 @@ public class HomeFragment extends Fragment {
         if (!mediator.isAttached()) {
             mediator.attach();
         }
+
+        getNewsController = new GetNewsController();
+        newsList = getNewsController.getAllNews();
+        newsAdapter = new NewsAdapter(newsList);
+        recyclerView = binding.recyclerview;
+        recyclerView.setAdapter(newsAdapter);
+
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
 
         return root;
     }

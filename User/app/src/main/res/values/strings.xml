@@ -8,6 +8,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- API KEY -->
+    <string name="googleMap_key">AIzaSyB7040OPgEBUXuw8_O595nxb7cYaAzOYWQ</string>
+
     <!-- Login -->
     <string name="title_activity_login">Đăng nhập</string>
     <string name="title_activity_register">Đăng ký</string>

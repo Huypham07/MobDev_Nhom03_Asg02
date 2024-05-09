@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import com.example.asg02.R;
@@ -11,11 +12,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.asg02.databinding.ActivityMainBinding;
+import com.example.asg02.model.Account;
+import com.example.asg02.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
     private NavController controller;
+    private User user;
 
     @SuppressLint("ResourceType")
     @Override
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.navigationToggle.setOnClickListener(v -> {
-            binding.drawerLayout.openDrawer(Gravity.RIGHT);
+            openDrawer();
         });
 
         controller = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         // open setting
         binding.navViewLayout.settings.setOnClickListener(v -> {
+            closeDrawer();
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         });
 
@@ -58,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         binding.navViewLayout.logOut.setOnClickListener(v -> {
             String message = "Bạn chắc chắn muốn đăng xuất chứ?";
             Dialog dialog = Utils.createAskingDialog(message, MainActivity.this, v1 -> {
+                closeDrawer();
                 // logout
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             });
             dialog.show();
@@ -67,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.toolbar.setNavigationOnClickListener(v -> {
             if (controller.getCurrentDestination().getId() == R.id.nav_home) {
                 moveToAccountInfo();
+                closeDrawer();
             } else {
                 controller.navigateUp();
             }
@@ -74,12 +83,25 @@ public class MainActivity extends AppCompatActivity {
 
         binding.navViewLayout.accountInfo.setOnClickListener(v -> {
             moveToAccountInfo();
+            closeDrawer();
         });
 
         binding.navViewLayout.notification.setOnClickListener(v -> {
             controller.navigate(R.id.nav_notification);
-            binding.drawerLayout.close();
+            closeDrawer();
         });
+    }
+
+    private void closeDrawer() {
+        if (binding.drawerLayout != null) {
+            binding.drawerLayout.closeDrawer(Gravity.RIGHT);
+        }
+    }
+
+    private void openDrawer() {
+        if (binding.drawerLayout != null) {
+            binding.drawerLayout.openDrawer(Gravity.RIGHT);
+        }
     }
 
     private void moveToAccountInfo() {
@@ -87,11 +109,20 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putInt("fragmentID", R.id.nav_account);
-
         intent.putExtras(bundle);
+        intent.putExtra("user", user);
+
 
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user = (User) getIntent().getSerializableExtra("user");
+        binding.navViewLayout.name.setText(user.getName());
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

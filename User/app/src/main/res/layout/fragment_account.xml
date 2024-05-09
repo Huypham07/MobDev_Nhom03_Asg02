@@ -116,7 +116,7 @@
                     android:textColor="@color/black"
                     android:text="Họ tên: Lê Thành Doanh"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/textView38" android:layout_gravity="center_vertical"
+                    android:layout_height="40dp" android:id="@+id/name" android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"/>
             <TextView
                     android:textSize="15sp"
@@ -125,7 +125,7 @@
                     android:textColor="@color/black"
                     android:text="Số điện thoại: 0975464123 "
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/textView39"
+                    android:layout_height="40dp" android:id="@+id/phone"
                     android:gravity="center_vertical"/>
             <TextView
                     android:textSize="15sp" android:layout_marginStart="40dp"
@@ -133,14 +133,14 @@
                     android:textColor="@color/black"
                     android:text="Email: test@gmail.com"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/textView40" android:gravity="clip_vertical|center_vertical"/>
+                    android:layout_height="40dp" android:id="@+id/email" android:gravity="clip_vertical|center_vertical"/>
             <TextView
                     android:textSize="15sp" android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     android:textColor="@color/black"
                     android:text="Ngày sinh: 02/10/2004 "
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/textView41"
+                    android:layout_height="40dp" android:id="@+id/birthdate"
                     android:gravity="center_vertical"/>
             <TextView
                     android:textSize="15sp" android:layout_marginStart="40dp"
@@ -148,7 +148,7 @@
                     android:textColor="@color/black"
                     android:text="Giới tính: Nam"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/textView42" android:gravity="center_vertical"/>
+                    android:layout_height="40dp" android:id="@+id/sex" android:gravity="center_vertical"/>
             <TextView
                     android:textSize="15sp" android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"

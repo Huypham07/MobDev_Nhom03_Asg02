@@ -17,9 +17,11 @@
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 
         <LinearLayout
+                android:id="@+id/scroll_view"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -55,13 +57,16 @@
                         </LinearLayout>
 
                         <EditText
-                                android:id="@+id/editName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:hint="Họ và tên"
-                                android:ems="10"
-                                android:minHeight="48dp" android:maxLines="1"/>
+                            android:id="@+id/editName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#FF838385"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:minHeight="48dp"
+                            android:textSize="16sp"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"/>
                     </LinearLayout>
                 </TableRow>
                 <TableRow
@@ -88,42 +93,63 @@
                         </LinearLayout>
 
                         <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="phone"
-                                android:hint="Số điện thoại"
-                                android:id="@+id/editPhone" android:minHeight="48dp" android:maxLines="1"/>
+                            android:id="@+id/editPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#FF838385"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:minHeight="48dp"
+                            android:textSize="16sp"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"/>
                     </LinearLayout>
                 </TableRow>
+
                 <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#838385"
+                    android:orientation="vertical">
+
                     <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" android:layout_weight="1">
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                      android:orientation="horizontal" android:layout_marginBottom="8dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal">
+
                             <TextView
-                                    android:text="Email"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView9"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"/>
+                                android:id="@+id/textView9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Email"
+                                android:textColor="#000000"
+                                android:textSize="16sp" />
+
                             <TextView
-                                    android:text=" *"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" android:id="@+id/textView10"
-                                    android:textColor="#FF0000"
-                                    android:textSize="16sp"/>
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" *"
+                                android:textColor="#FF0000"
+                                android:textSize="16sp" />
                         </LinearLayout>
 
                         <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textEmailAddress"
-                                android:hint="Email"
-                                android:id="@+id/editEmail" android:minHeight="48dp" android:maxLines="1"/>
+                            android:id="@+id/editEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#FF838385"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:minHeight="48dp"
+                            android:textSize="16sp"
+                            android:paddingStart="16dp" android:paddingEnd="16dp"/>
                     </LinearLayout>
                 </TableRow>
                 <TableRow
@@ -148,14 +174,30 @@
                                     android:textColor="#FF0000"
                                     android:textSize="16sp"/>
                         </LinearLayout>
-
-                        <EditText
-                                android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/edit_password"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
-                                android:hint="Mật khẩu"
-                                android:drawableRight="@drawable/hide_password_icon"
-                                android:id="@+id/editPassword" android:minHeight="48dp" android:maxLines="1"/>
+                                android:maxLines="1"
+                                android:paddingStart="16dp" android:paddingEnd="16dp"
+                                android:backgroundTint="#FF838385"
+                                android:layout_weight="1"
+                                android:textSize="16sp"
+                                android:minHeight="48dp" />
+
+                            <ImageView
+                                android:id="@+id/hide_password_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/hide_password_icon"
+                                android:layout_gravity="end|center_vertical"
+                                android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </TableRow>
                 <TableRow
@@ -185,13 +227,21 @@
                                         android:textColor="#FF0000"
                                         android:textSize="16sp"/>
                             </LinearLayout>
-                            <EditText android:layout_width="match_parent" android:layout_height="match_parent"
-                                      android:id="@+id/editBirthdate"
-                                      android:inputType="date"
-                                      android:textColor="#000000" android:textSize="16sp"
-                                      android:hint="dd/mm/yyyy" android:minHeight="48dp"
-                                      android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                                      android:drawableTint="#6A6A6A"/>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="8dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                                android:minHeight="48dp">
+                                <AutoCompleteTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/white"
+                                    android:inputType="none"
+                                    android:textSize="16sp"
+                                    android:id="@+id/editBirthDate"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
                         </LinearLayout>
                     </TableRow>
                     <TableRow
@@ -217,13 +267,20 @@
                                         android:textColor="#FF0000"
                                         android:textSize="16sp"/>
                             </LinearLayout>
-                            <EditText android:layout_width="match_parent" android:layout_height="match_parent"
-                                      android:id="@+id/editSex"
-                                      android:inputType="text"
-                                      android:textColor="#000000" android:textSize="16sp" android:minHeight="48dp"
-                                      android:hint="Nam/Nữ/Khác"
-                                      android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                                      android:editable="false"/>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="8dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                                android:minHeight="48dp">
+                                <AutoCompleteTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/white"
+                                    android:inputType="none"
+                                    android:textSize="16sp"
+                                    android:id="@+id/edit_sex"/>
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </TableRow>
                 </TableRow>
@@ -237,7 +294,7 @@
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                                       android:orientation="horizontal" android:layout_marginBottom="8dp">
                             <TextView
-                                    android:text="Khu vực"
+                                    android:text="Chọn khu vực của bạn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" android:id="@+id/textView17"
                                     android:textColor="#000000"
@@ -249,13 +306,23 @@
                                     android:textColor="#FF0000"
                                     android:textSize="16sp"/>
                         </LinearLayout>
-                        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
-                                  android:id="@+id/editRegion"
-                                  android:inputType="text"
-                                  android:textColor="#000000" android:textSize="16sp" android:minHeight="48dp"
-                                  android:hint="Chọn khu vực của bạn"
-                                  android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                                  android:editable="false"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="8dp"
+                            android:minHeight="48dp"
+                            app:boxCollapsedPaddingTop="10dp">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/edit_region"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="none"
+                                android:textSize="16sp"
+                                android:background="@color/white"/>
+                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </TableRow>
                 <TableRow
@@ -280,13 +347,20 @@
                                     android:textColor="#FF0000"
                                     android:textSize="16sp"/>
                         </LinearLayout>
-                        <EditText android:layout_width="match_parent" android:layout_height="match_parent"
-                                  android:id="@+id/editFavorite"
-                                  android:inputType="text"
-                                  android:textColor="#000000" android:textSize="16sp" android:minHeight="48dp"
-                                  android:hint="Chọn rạp ưa thích"
-                                  android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-                                  android:editable="false"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="8dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                            android:minHeight="48dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/edit_favorite"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:textSize="16sp"
+                                android:inputType="none"/>
+                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </TableRow>
             </TableLayout>
@@ -318,7 +392,15 @@
                     android:layout_height="wrap_content" android:id="@+id/register" android:backgroundTint="@color/softPink"
                     android:layout_marginStart="40dp" android:layout_marginEnd="40dp" android:layout_marginTop="30dp"
                     android:textSize="18sp" android:padding="12dp" android:textColor="#000000"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="16dp"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="50dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
