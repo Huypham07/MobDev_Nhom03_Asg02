@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.model;
 
 import android.graphics.Bitmap;
 
@@ -11,6 +11,8 @@ public class Event implements Serializable {
     private String startDate;
     private String endDate;
     private String eventInfo;
+
+    public Event(){}
 
     public Event(String eventName, String poster, String startDate, String endDate, String eventInfo) {
         this.eventName = eventName;
@@ -58,5 +60,10 @@ public class Event implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

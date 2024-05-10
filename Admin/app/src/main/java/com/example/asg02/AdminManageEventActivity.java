@@ -1,26 +1,33 @@
 package com.example.asg02;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.example.asg02.controller.GetEventController;
+import com.example.asg02.model.Event;
 
-public class AdminEventActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdminManageEventActivity extends BaseActivity {
 
     private ImageButton backBtn;
     private FrameLayout addNewEventBtn;
 
     private ListView eventListView;
-    private ArrayList<Event> eventList;
+    private List<Event> eventList;
     private CustomAdapter adapter;
+
+    private GetEventController getEventsController;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handleReceivedEvent();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +40,7 @@ public class AdminEventActivity extends AppCompatActivity {
         eventList = new ArrayList<>();
         adapter = new CustomAdapter(this, eventList);
         eventListView.setAdapter(adapter);
-
-        handleReceivedEvent();
+        getEventsController = new GetEventController();
 
         addNewEventBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminAddEventActivity.class);
@@ -48,17 +54,14 @@ public class AdminEventActivity extends AppCompatActivity {
     }
 
     private void handleReceivedEvent() {
-        // Thêm chức năng lấy danh sách các sự kiện ở đây
+        getEventsController.getAllEvent().thenApply(events -> {
+            if (!events.isEmpty()) {
+                eventList.clear();
+                eventList.addAll(events);
+                adapter.notifyDataSetChanged();
 
-        if (eventList.isEmpty()) {
-            // Tạo một sự kiện mặc định
-            Event defaultEvent = new Event("Tên sự kiện mặc định", "Đường dẫn hình ảnh mặc định", "Ngày bắt đầu", "Ngày kết thúc", "Thông tin sự kiện");
-
-            // Thêm sự kiện mặc định vào danh sách
-            eventList.add(defaultEvent);
-        }
-
-        // Cập nhật adapter
-        adapter.notifyDataSetChanged();
+            }
+            return null;
+        });
     }
 }

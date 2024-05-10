@@ -26,7 +26,6 @@ public class AdminMainActivity extends AppCompatActivity {
         cinemaBtn = findViewById(R.id.cinemaBtn);
         eventBtn = findViewById(R.id.eventBtn);
         messageBtn = findViewById(R.id.messageBtn);
-        historyBtn = findViewById(R.id.historyBtn);
 
         cinemaBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminAddCinemaActivity.class);
@@ -35,17 +34,12 @@ public class AdminMainActivity extends AppCompatActivity {
         });
 
         eventBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminEventActivity.class);
+            Intent intent = new Intent(this, AdminManageEventActivity.class);
             startActivity(intent);
         });
 
         messageBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminMessageActivity.class);
-            startActivity(intent);
-        });
-
-        historyBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminHistoryActivity.class);
             startActivity(intent);
         });
     }

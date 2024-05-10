@@ -14,9 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.asg02.controller.RegisterController;
+import com.example.asg02.model.Manager;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class AdminAddCinemaActivity2 extends AppCompatActivity {
+public class AdminAddCinemaActivity2 extends BaseActivity {
 
     ImageButton backBtn;
     EditText emailName;
@@ -74,7 +76,7 @@ public class AdminAddCinemaActivity2 extends AppCompatActivity {
         });
 
         finishBtn.setOnClickListener(v -> {
-            // do something
+            new RegisterController().register(new Manager(emailNameText, passwordText));
             String textToCopy = "Tài khoản: " + emailNameText + "\nMật khẩu: " + passwordText;
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clipData = ClipData.newPlainText("text", textToCopy);

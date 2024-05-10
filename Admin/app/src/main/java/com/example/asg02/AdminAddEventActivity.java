@@ -1,7 +1,5 @@
 package com.example.asg02;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,11 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.asg02.controller.CreateEventController;
+import com.example.asg02.model.Event;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Calendar;
 
-public class AdminAddEventActivity extends AppCompatActivity {
+public class AdminAddEventActivity extends BaseActivity {
 
     private ImageButton backBtn;
     private EditText enterEventName;
@@ -34,6 +35,7 @@ public class AdminAddEventActivity extends AppCompatActivity {
     String startDate = "";
     String endDate = "";
     String eventInfo = "";
+    private CreateEventController createEventController;
 
     private static final int PICK_IMAGE = 1;
 
@@ -50,6 +52,8 @@ public class AdminAddEventActivity extends AppCompatActivity {
         enterEDate = findViewById(R.id.enterEDate);
         enterEventInfo = findViewById(R.id.enterEventInfo);
         addEventBtn = findViewById(R.id.addEventBtn);
+
+        createEventController = new CreateEventController(this);
 
         enterEventName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -139,17 +143,17 @@ public class AdminAddEventActivity extends AppCompatActivity {
         });
 
         backBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminEventActivity.class);
+            Intent intent = new Intent(this, AdminManageEventActivity.class);
             startActivity(intent);
         });
 
         addEventBtn.setOnClickListener(v -> {
 
-//            Event event = new Event(eventName, posterBitmap, startDate, endDate, eventInfo);
+            Event event = new Event(eventName, null, startDate, endDate, eventInfo);
 
-            // Thêm chức năng đưa sự kiện lên firebase để chia sẻ cho các tài khoản khác ở đây
+            createEventController.createEvent(event);
 
-            Intent intent = new Intent(this, AdminEventActivity.class);
+            Intent intent = new Intent(this, AdminManageEventActivity.class);
 //            intent.putExtra("event", event);
             startActivity(intent);
         });

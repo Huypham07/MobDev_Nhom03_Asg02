@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class AdminAddCinemaActivity extends AppCompatActivity {
+public class AdminAddCinemaActivity extends BaseActivity {
 
     ImageButton backBtn;
     Button continueBtn;
