@@ -24,13 +24,32 @@ jobs:
       run: chmod +x Admin/gradlew
     - name: Build with Gradle
       run: cd Admin && ./gradlew build
+    - name: Upload a Build Artifact (Admin App)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: Cinecomplex_Admin
+        path: UserApp/build/outputs/apk/release/*.apk
 
     - name: Grant execute permission for gradlew (Manager App)
       run: chmod +x Manager/gradlew
     - name: Build with Gradle
       run: cd Manager && ./gradlew build
+    - name: Upload a Build Artifact (Manager App)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: Cinecomplex_Admin
+        path: Manager/build/outputs/apk/release/*.apk
+
 
     - name: Grant execute permission for gradlew (User App)
       run: chmod +x User/gradlew
     - name: Build with Gradle
       run: cd User && ./gradlew build
+    - name: Upload a Build Artifact (User App)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+        name: Cinecomplex_Admin
+        path: User/build/outputs/apk/release/*.apk
+
+
+
