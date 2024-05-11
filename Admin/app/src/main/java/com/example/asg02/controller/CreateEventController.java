@@ -25,7 +25,7 @@ public class CreateEventController implements EventCreator {
         if (event == null) {
             return;
         }
-        database.getReference("Events").child(String.valueOf(event.hashCode())).setValue(event)
+        database.getReference("Events").child(String.valueOf(event.getId())).setValue(event)
                 .addOnSuccessListener(aVoid -> Toast.makeText(context, "Thêm thành công", Toast.LENGTH_LONG))
                 .addOnFailureListener(e -> Toast.makeText(context, "Thêm không thành công", Toast.LENGTH_LONG));
     }

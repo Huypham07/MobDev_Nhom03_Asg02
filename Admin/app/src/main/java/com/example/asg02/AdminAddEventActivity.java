@@ -1,5 +1,7 @@
 package com.example.asg02;
 
+import static com.example.asg02.model.Event.encodeImage;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,8 +19,10 @@ import android.widget.ImageView;
 import com.example.asg02.controller.CreateEventController;
 import com.example.asg02.model.Event;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.Calendar;
 
 public class AdminAddEventActivity extends BaseActivity {
@@ -30,15 +34,17 @@ public class AdminAddEventActivity extends BaseActivity {
     private EditText enterEDate;
     private EditText enterEventInfo;
     private Button addEventBtn;
-    String eventName = "";
-    private Bitmap posterBitmap;
-    String startDate = "";
-    String endDate = "";
-    String eventInfo = "";
+    private Event event;
+    private String eventName = "";
+    private String posterUri;
+    private String startDate = "";
+    private String endDate = "";
+    private String eventInfo = "";
     private CreateEventController createEventController;
 
     private static final int PICK_IMAGE = 1;
 
+    boolean fromShowEvent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,24 @@ public class AdminAddEventActivity extends BaseActivity {
 
         createEventController = new CreateEventController(this);
 
+        event = (Event) getIntent().getSerializableExtra("event");
+        if (event != null) {
+            fromShowEvent = true;
+            eventName = event.getEventName();
+            enterEventName.setText(eventName);
+            posterUri = event.getPoster();
+            Bitmap posterBitmap = Event.decodeBitmap(posterUri);
+            selectPoster.setImageBitmap(posterBitmap);
+            startDate = event.getStartDate();
+            enterSDate.setText(startDate);
+            endDate = event.getEndDate();
+            enterEDate.setText(endDate);
+            eventInfo = event.getEventInfo();
+            enterEventInfo.setText(eventInfo);
+            addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
+                    && !eventInfo.isEmpty() && posterUri != null);
+        }
+
         enterEventName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -66,7 +90,7 @@ public class AdminAddEventActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 eventName = enterEventName.getText().toString();
                 addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
-                        && !eventInfo.isEmpty() && posterBitmap != null);
+                        && !eventInfo.isEmpty() && posterUri != null);
             }
         });
         enterSDate.addTextChangedListener(new TextWatcher() {
@@ -80,7 +104,7 @@ public class AdminAddEventActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 startDate = enterSDate.getText().toString();
                 addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
-                        && !eventInfo.isEmpty() && posterBitmap != null);
+                        && !eventInfo.isEmpty() && posterUri != null);
             }
         });
         enterEDate.addTextChangedListener(new TextWatcher() {
@@ -94,7 +118,7 @@ public class AdminAddEventActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 endDate = enterEDate.getText().toString();
                 addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
-                        && !eventInfo.isEmpty() && posterBitmap != null);
+                        && !eventInfo.isEmpty() && posterUri != null);
             }
         });
         enterEventInfo.addTextChangedListener(new TextWatcher() {
@@ -108,7 +132,7 @@ public class AdminAddEventActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 eventInfo = enterEventInfo.getText().toString();
                 addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
-                        && !eventInfo.isEmpty() && posterBitmap != null);
+                        && !eventInfo.isEmpty() && posterUri != null);
             }
         });
 
@@ -143,23 +167,30 @@ public class AdminAddEventActivity extends BaseActivity {
         });
 
         backBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AdminManageEventActivity.class);
-            startActivity(intent);
+            finish();
         });
 
         addEventBtn.setOnClickListener(v -> {
 
-            Event event = new Event(eventName, null, startDate, endDate, eventInfo);
-
+            if (event == null) {
+                event = new Event(eventName, posterUri, startDate, endDate, eventInfo);
+            } else {
+                event.setValue(eventName, posterUri, startDate, endDate, eventInfo);
+            }
             createEventController.createEvent(event);
 
-            Intent intent = new Intent(this, AdminManageEventActivity.class);
-//            intent.putExtra("event", event);
+            Intent intent;
+            if (fromShowEvent) {
+                intent = new Intent(this, AdminShowEventActivity.class);
+                intent.putExtra("event", event);
+            } else {
+                intent = new Intent(this, AdminManageEventActivity.class);
+            }
             startActivity(intent);
         });
     }
 
-    public void selectImage() {
+    private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -174,11 +205,12 @@ public class AdminAddEventActivity extends BaseActivity {
             Uri uri = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
-                posterBitmap = BitmapFactory.decodeStream(inputStream);
+                Bitmap posterBitmap = BitmapFactory.decodeStream(inputStream);
                 selectPoster.setImageBitmap(posterBitmap);
                 selectPoster.setBackground(null);
+                posterUri = encodeImage(posterBitmap);
                 addEventBtn.setEnabled(!eventName.isEmpty() && !startDate.isEmpty() && !endDate.isEmpty()
-                        && !eventInfo.isEmpty() && posterBitmap != null);
+                        && !eventInfo.isEmpty() && posterUri != null);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

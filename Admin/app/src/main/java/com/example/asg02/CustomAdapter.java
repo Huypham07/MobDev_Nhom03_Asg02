@@ -2,6 +2,7 @@ package com.example.asg02;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,8 @@ public class CustomAdapter extends ArrayAdapter<Event> {
         ConstraintLayout showEventBtn = view.findViewById(R.id.showEventBtn);
 
         deleteEventBtn.setOnClickListener(v -> {
+            events.remove(event);
             if (deleteEventController.deleteEvent(event)) {
-                events.remove(event);
                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_LONG);
             } else {
                 Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_LONG);
@@ -64,10 +65,10 @@ public class CustomAdapter extends ArrayAdapter<Event> {
             context.startActivity(intent);
         });
 
-//         posterImageView.setImageBitmap(event.getPoster());
-         nameTextView.setText(event.getEventName());
-         posterImageView.setImageResource(R.drawable.poster_test);
-         dateTextView.setText(event.getStartDate() + " - " + event.getEndDate());
+        nameTextView.setText(event.getEventName());
+        Bitmap posterBitmap = Event.decodeBitmap(event.getPoster());
+        posterImageView.setImageBitmap(posterBitmap);
+        dateTextView.setText(event.getStartDate() + " - " + event.getEndDate());
 
         return view;
     }

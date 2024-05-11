@@ -59,7 +59,6 @@ public class AdminManageEventActivity extends BaseActivity {
                 eventList.clear();
                 eventList.addAll(events);
                 adapter.notifyDataSetChanged();
-
             }
             return null;
         });

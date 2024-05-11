@@ -1,5 +1,6 @@
 package com.example.asg02.controller;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.asg02.model.Event;
@@ -18,7 +19,7 @@ public class DeleteEventController implements EventDeleter{
         if (event == null) {
             return deleted;
         }
-        database.getReference("Events").child(String.valueOf(event.hashCode())).removeValue()
+        database.getReference("Events").child(String.valueOf(event.getId())).removeValue()
                 .addOnSuccessListener(aVoid -> deleted = true);
         return deleted;
     }
