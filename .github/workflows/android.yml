@@ -37,7 +37,7 @@ jobs:
     - name: Upload a Build Artifact (Manager App)
       uses: actions/upload-artifact@v4.3.3
       with:
-        name: Cinecomplex_Admin
+        name: Cinecomplex_Manager
         path: Manager/app/build/outputs/apk/debug/app-debug.apk
 
     - name: Grant execute permission for gradlew (User App)
@@ -49,7 +49,7 @@ jobs:
     - name: Upload a Build Artifact (User App)
       uses: actions/upload-artifact@v4.3.3
       with:
-        name: Cinecomplex_Admin
+        name: Cinecomplex_User
         path: User/app/build/outputs/apk/debug/app-debug.apk
 
 
