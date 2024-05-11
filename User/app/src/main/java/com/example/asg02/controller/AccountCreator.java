@@ -12,5 +12,5 @@ public interface AccountCreator {
 
     CompletableFuture<Boolean> checkExistEmail(String email);
     CompletableFuture<Boolean> checkExistPhone(String phone);
-    int createAccount(Account account);
+    CompletableFuture<Integer> createAccount(Account account);
 }

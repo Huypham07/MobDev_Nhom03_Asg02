@@ -18,15 +18,12 @@ import com.example.asg02.model.User;
 
 public class AccountFragment extends Fragment {
 
-    private AccountViewModel mViewModel;
-
     private FragmentAccountBinding binding;
     private User user;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
 
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -41,7 +38,6 @@ public class AccountFragment extends Fragment {
         if (user != null) {
             binding.name.setText(String.valueOf("Họ tên: " + user.getName()));
             binding.phone.setText(String.valueOf("Số điện thoại: " + user.getPhone()));
-            Log.e("email", user.getEmail() + " " + user.getBirthDate() + " " + user.getSex());
             binding.email.setText(String.valueOf("Email: " + user.getEmail()));
             binding.birthdate.setText(String.valueOf("Ngày sinh: " + user.getBirthDate()));
             binding.sex.setText(String.valueOf("Giới tính: " + user.getSex()));

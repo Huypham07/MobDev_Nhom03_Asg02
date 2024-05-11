@@ -3,7 +3,9 @@ package com.example.asg02.view;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -62,7 +64,7 @@ public class RegisterActivity extends BaseActivity {
         editRegion = binding.editRegion;
         editFavorite = binding.editFavorite;
         progressBar = binding.progressBar;
-        registerController = new RegisterController(progressBar);
+        registerController = new RegisterController();
 
         editBirthDate.setOnClickListener(v -> {
             String currentDate = editBirthDate.getText().toString();
@@ -85,11 +87,26 @@ public class RegisterActivity extends BaseActivity {
                         }
                     }, iDate[2], iDate[1] - 1, iDate[0]).show();
         });
+        editBirthDate.addTextChangedListener(Utils.afterEditTextChanged(editBirthDate, v -> {
+            if (!editBirthDate.getText().toString().isEmpty()) {
+                editBirthDate.setError(null);
+            }
+        }));
 
         editSex.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"Nam", "Nữ", "Khác"}));
+        editSex.addTextChangedListener(Utils.afterEditTextChanged(editSex, v -> {
+            if (!editSex.getText().toString().isEmpty()) {
+                editSex.setError(null);
+            }
+        }));
 
         editRegion.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item
                 , new GetProvinceController().getAllProvinces()));
+        editRegion.addTextChangedListener(Utils.afterEditTextChanged(editRegion, v -> {
+            if (!editRegion.getText().toString().isEmpty()) {
+                editRegion.setError(null);
+            }
+        }));
 
         editFavorite.setOnTouchListener((v, e) -> {
             return true;
@@ -125,20 +142,32 @@ public class RegisterActivity extends BaseActivity {
             User user = getUserFromInput();
             CheckBox checkBox = binding.checkBox;
             if (checkBox.isChecked()) {
-                switch (registerController.register(user)) {
-                    case RegisterController.FAIL:
-                        Snackbar.make(v, "Đăng ký thất bại.\nVui lòng điền đầy đủ thông tin hợp lệ", Snackbar.LENGTH_LONG).show();
-                        break;
-                    case RegisterController.EMAIL_EXISTS:
-                        Snackbar.make(v, "Email đã tồn tại", Snackbar.LENGTH_LONG).show();
-                        break;
-                    case RegisterController.PHONE_EXISTS:
-                        Snackbar.make(v, "Số điện thoại đã tồn tại", Snackbar.LENGTH_LONG).show();
-                        break;
-                    default:
-                        Snackbar.make(v, "Đăng ký thành công", Snackbar.LENGTH_LONG).show();
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                }
+                progressBar.setVisibility(View.VISIBLE);
+                registerController.createAccount(user).thenAccept(i -> {
+                    switch (i) {
+                        case RegisterController.FAIL:
+                            Snackbar.make(v, "Đăng ký thất bại.\nVui lòng điền đầy đủ thông tin hợp lệ", Snackbar.LENGTH_LONG).show();
+                            break;
+                        case RegisterController.EMAIL_EXISTS:
+                            Snackbar.make(v, "Email đã tồn tại", Snackbar.LENGTH_LONG).show();
+                            break;
+                        case RegisterController.PHONE_EXISTS:
+                            Snackbar.make(v, "Số điện thoại đã tồn tại", Snackbar.LENGTH_LONG).show();
+                            break;
+                        default:
+                            Snackbar.make(v, "Đăng ký thành công. Đang chuyển hướng", Snackbar.LENGTH_LONG).show();
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                }
+                            }, 2000);
+
+                    }
+                    progressBar.setVisibility(View.GONE);
+                });
+
             } else {
                 Snackbar.make(v, "Vui lòng đồng ý với điều khoản và điều kiện", Snackbar.LENGTH_LONG).show();
             }

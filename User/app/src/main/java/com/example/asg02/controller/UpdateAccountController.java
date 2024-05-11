@@ -50,20 +50,18 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
                     return;
                 }
                 if (!oldUser.getEmail().equals(user.getEmail())) {
-                    checkExistEmail(user.getEmail()).thenApply(exist -> {
+                    checkExistEmail(user.getEmail()).thenAccept(exist -> {
                         if (exist) {
                             emailExists = true;
                         }
-                        return null;
                     });
                 }
 
                 if (!oldUser.getPhone().equals(user.getPhone())) {
-                    checkExistPhone(user.getPhone()).thenApply(exist -> {
+                    checkExistPhone(user.getPhone()).thenAccept(exist -> {
                         if (exist) {
                             phoneExists = true;
                         }
-                        return null;
                     });
                 }
             }
@@ -124,7 +122,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
     }
 
     @Override
-    public int createAccount(Account account) {
-        return FAIL;
+    public CompletableFuture<Integer> createAccount(Account account) {
+        return CompletableFuture.completedFuture(FAIL);
     }
 }

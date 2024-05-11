@@ -1,14 +1,13 @@
 package com.example.asg02.view.ui.home.movieOverview;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -19,16 +18,8 @@ import com.example.asg02.R;
 import com.example.asg02.controller.GetMovieController;
 import com.example.asg02.databinding.FragmentCurrentMovieBinding;
 import com.example.asg02.model.Movie;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
-
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.FlipInLeftYAnimator;
-import jp.wasabeef.recyclerview.animators.LandingAnimator;
-import jp.wasabeef.recyclerview.animators.ScaleInAnimator;
-import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
-import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 
 public class CurrentMovieFragment extends Fragment {
 
@@ -49,19 +40,20 @@ public class CurrentMovieFragment extends Fragment {
         movieList = movieController.getAllCurrentMovies();
 
         movieAdapter = new MovieAdapter(movieList);
-        movieAdapter.setListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                controller.navigate(R.id.nav_movie);
-            }
-        });
 
         recyclerView = binding.recyclerview;
         recyclerView.setAdapter(movieAdapter);
 
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+        movieAdapter.setOnItemClickListener(pos -> {
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("movie", movieList.get(pos));
+            controller.navigate(R.id.action_nav_home_to_nav_movie_details, bundle);
+
+        });
 
         return root;
     }

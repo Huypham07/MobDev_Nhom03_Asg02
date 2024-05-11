@@ -82,19 +82,19 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(v -> {
             String id = editId.getText().toString();
             String password = editPassword.getText().toString();
-            loginController.login(id, password).thenApply(account -> {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            loginController.login(id, password).thenAccept(account -> {
                 User user = (User) account;
                 if (user != null) {
                     binding.errorLogin.setVisibility(View.GONE);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user", user);
-                    Log.e("a", user.getEmail());
                     startActivity(intent);
                     finish();
                 } else {
                     binding.errorLogin.setVisibility(View.VISIBLE);
                 }
-                return null;
+                binding.progressBar.setVisibility(View.GONE);
             });
         });
 

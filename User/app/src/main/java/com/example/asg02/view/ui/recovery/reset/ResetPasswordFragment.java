@@ -21,7 +21,6 @@ import com.example.asg02.R;
 import com.example.asg02.view.Utils;
 
 public class ResetPasswordFragment extends Fragment {
-    private ResetPasswordViewModel mViewModel;
     private FragmentResetPasswordBinding binding;
     private boolean isHidePassword = true;
     private boolean isHideConfirmPassword = true;
@@ -32,7 +31,6 @@ public class ResetPasswordFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(ResetPasswordViewModel.class);
 
         binding = FragmentResetPasswordBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

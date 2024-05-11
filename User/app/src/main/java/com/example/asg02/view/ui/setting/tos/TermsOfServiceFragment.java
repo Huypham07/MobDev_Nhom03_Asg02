@@ -12,8 +12,6 @@ import com.example.asg02.R;
 
 public class TermsOfServiceFragment extends Fragment {
 
-    private TermsOfServiceViewModel mViewModel;
-
     public static TermsOfServiceFragment newInstance() {
         return new TermsOfServiceFragment();
     }
@@ -27,7 +25,6 @@ public class TermsOfServiceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(TermsOfServiceViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -16,8 +16,6 @@ import com.example.asg02.R;
 import com.example.asg02.databinding.FragmentFindAccountBinding;
 
 public class FindAccountFragment extends Fragment {
-
-    private FindAccountViewModel mViewModel;
     private FragmentFindAccountBinding binding;
     private boolean isFindByPhoneNumber = true;
 
@@ -27,7 +25,6 @@ public class FindAccountFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(FindAccountViewModel.class);
 
         binding = FragmentFindAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

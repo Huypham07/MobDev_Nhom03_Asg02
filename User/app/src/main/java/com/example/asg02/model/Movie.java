@@ -1,41 +1,65 @@
 package com.example.asg02.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     private String name;
     private String poster;
-    private float rating;
+    private String genre;
     private int durationMins;
     private String releaseDate;
     private String description;
-    private String info;
+    private String director;
+    private String actors;
     private String language;
+    private float rating;
     private List<Review> reviews = new ArrayList<>();
     private List<Show> shows = new ArrayList<>();
 
-    public Movie(String name, float rating, int durationMins, String releaseDate, String description, String info, String language) {
+    public Movie() {
+    }
+
+    public Movie(String name, String poster, String genre, int durationMins
+            , String releaseDate, String description, String director, String actors, String language) {
         this.name = name;
-        this.rating = rating;
+        this.poster = poster;
+        this.genre = genre;
         this.durationMins = durationMins;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.info = info;
+        this.director = director;
+        this.actors = actors;
         this.language = language;
     }
 
-    public Movie(String name, float rating, int durationMins, String releaseDate, String description, String info, String language, List<Review> reviews, List<Show> shows) {
+    public Movie(String name, String poster, String genre, int durationMins
+            , String description, String director, String actors, String language) {
         this.name = name;
-        this.rating = rating;
+        this.poster = poster;
+        this.genre = genre;
+        this.durationMins = durationMins;
+        this.description = description;
+        this.director = director;
+        this.actors = actors;
+        this.language = language;
+    }
+
+    public Movie(String name, String poster, String genre, int durationMins
+            , String releaseDate, String description, String director
+            , String actors, String language, float rating) {
+        this.name = name;
+        this.poster = poster;
+        this.genre = genre;
         this.durationMins = durationMins;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.info = info;
+        this.director = director;
+        this.actors = actors;
         this.language = language;
-        this.reviews = reviews;
-        this.shows = shows;
+        this.rating = rating;
     }
 
     public String getName() {
@@ -46,12 +70,20 @@ public class Movie {
         this.name = name;
     }
 
-    public float getRating() {
-        return rating;
+    public String getPoster() {
+        return poster;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getDurationMins() {
@@ -78,12 +110,20 @@ public class Movie {
         this.description = description;
     }
 
-    public String getInfo() {
-        return info;
+    public String getDirector() {
+        return director;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
     }
 
     public String getLanguage() {
@@ -92,6 +132,14 @@ public class Movie {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public List<Review> getReviews() {

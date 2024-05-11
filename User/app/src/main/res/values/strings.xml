@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MobDev_Nhom03_Asg02(User)</string>
+    <string name="app_name">CineComplex(User)</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

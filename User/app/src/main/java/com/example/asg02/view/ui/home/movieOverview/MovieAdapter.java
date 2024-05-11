@@ -15,15 +15,19 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder> {
     List<Movie> movieList = new ArrayList<>();
-    private View.OnClickListener listener;
+    private OnItemClickListener listener;
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public MovieAdapter(List<Movie> movieList) {
         this.movieList = movieList;
     }
 
-    public void setListener(View.OnClickListener listener) {
-        this.listener = listener;
-    }
 
     public class MovieHolder extends RecyclerView.ViewHolder {
         ImageView poster;
@@ -35,6 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             name = itemView.findViewById(R.id.movie_name);
             duration = itemView.findViewById(R.id.movie_duration);
         }
+
     }
 
     @NonNull
@@ -50,9 +55,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
     @Override
     public void onBindViewHolder(@NonNull @NotNull MovieAdapter.MovieHolder holder, int position) {
         holder.poster.setImageResource(R.drawable.baby);
-        holder.poster.setOnClickListener(listener);
+        holder.poster.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(position);
+            }
+
+        });
         holder.duration.setText(String.valueOf(movieList.get(position).getDurationMins()));
         holder.name.setText(String.valueOf(movieList.get(position).getName()));
+
     }
 
     @Override

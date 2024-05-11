@@ -19,7 +19,7 @@ public class DeleteAccountController implements AccountDeleter {
 
     public boolean deleteAccount() {
         StringBuilder Uid = new StringBuilder();
-
+        deleted = false;
         FirebaseUser user = auth.getCurrentUser();
         Uid.append(user.getUid());
         user.delete().addOnCompleteListener(task1 -> {

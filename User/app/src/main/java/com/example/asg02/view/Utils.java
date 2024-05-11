@@ -50,8 +50,22 @@ public class Utils {
         });
 
         Button continue_ = dialog.findViewById(R.id.continue_action);
-        continue_.setOnClickListener(onConfirmListener);
+        continue_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onConfirmListener.onClick(v);
+                dialog.dismiss();
+            }
+        });
 
         return dialog;
+    }
+
+    public static String getFormattedDuration(int durationMins) {
+        int hours = durationMins / 60;
+        int mins = durationMins % 60;
+        String hourString = (hours == 0) ? "" : hours + " giờ ";
+        String minuteString = (mins == 0) ? "" : mins + " phút";
+        return hourString + minuteString;
     }
 }

@@ -15,8 +15,6 @@ import com.example.asg02.R;
 import com.example.asg02.databinding.FragmentAuthenticationBinding;
 
 public class AuthenticationFragment extends Fragment {
-
-    private AuthenticationViewModel mViewModel;
     private FragmentAuthenticationBinding binding;
     private CountDownTimer countDownTimer;
     TextView countdown;
@@ -24,7 +22,6 @@ public class AuthenticationFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
 
         binding = FragmentAuthenticationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

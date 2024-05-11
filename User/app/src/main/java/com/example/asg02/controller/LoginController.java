@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +80,7 @@ public LoginController() {
                                 database.getReference("Users").child(uID).get()
                                         .addOnCompleteListener(task_ -> future.complete(task_.getResult().getValue(User.class)));
                             } else {
-                                // return null
+                                future.complete(null);
                             }
                         }
                     });

@@ -21,21 +21,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.CompletableFuture;
 
 public class RegisterController implements AccountCreator {
-    ProgressBar progressBar;
     private FirebaseDatabase database;
     private FirebaseAuth auth;
     private boolean createSuccess = false;
     private boolean emailExists = false;
     private boolean phoneExists = false;
 
-    public RegisterController(ProgressBar progressBar) {
+    public RegisterController() {
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-        this.progressBar = progressBar;
-    }
-
-    public int register(Account account) {
-        return createAccount(account);
     }
 
     @Override
@@ -81,49 +75,35 @@ public class RegisterController implements AccountCreator {
     }
 
     @Override
-    public int createAccount(Account account) {
+    public CompletableFuture<Integer> createAccount(Account account) {
         if (account == null) {
-            return FAIL;
+            return CompletableFuture.completedFuture(FAIL);
         }
+        CompletableFuture<Integer> future = new CompletableFuture<>();
         User user = (User) account;
-        checkExistEmail(user.getEmail()).thenApply(exist -> {
-            if (exist) {
-                emailExists = true;
+        checkExistEmail(user.getEmail()).thenAccept(emailExists_ -> {
+            if (emailExists_) {
+                future.complete(EMAIL_EXISTS);
             } else {
-                checkExistPhone(user.getPhone()).thenApply(exist_ -> {
-                    if (exist_) {
-                        phoneExists = true;
+                checkExistPhone(user.getPhone()).thenAccept(phoneExists_ -> {
+                    if (phoneExists_) {
+                        future.complete(PHONE_EXISTS);
                     } else {
                         auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                                 .addOnSuccessListener(authResult -> {
                                     FirebaseUser currentUser = auth.getCurrentUser();
                                     database.getReference("Users")
                                             .child(currentUser.getUid()).setValue(user)
-                                            .addOnSuccessListener(aVoid -> {
-                                                createSuccess = true;
-                                            })
-                                            .addOnFailureListener(e -> {
-                                                createSuccess = false;
-                                            });
+                                            .addOnSuccessListener(aVoid -> future.complete(SUCCESS))
+                                            .addOnFailureListener(e -> future.complete(FAIL));
                                 })
-                                .addOnFailureListener(e -> {
-                                    createSuccess = false;});
+                                .addOnFailureListener(e -> future.complete(FAIL));
                     }
-                    return null;
                 });
             }
-            return null;
         });
 
-        if (emailExists) {
-            return EMAIL_EXISTS;
-        }
-
-        if (phoneExists) {
-            return PHONE_EXISTS;
-        }
-
-        return createSuccess ? SUCCESS : FAIL;
+        return future;
     }
 
 }

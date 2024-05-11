@@ -14,20 +14,15 @@ import com.example.asg02.R;
 import com.example.asg02.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
-
-    private SettingsViewModel mViewModel;
     private FragmentSettingsBinding binding;
 //    private NavController controller;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
 
         binding.moveToAccountSettings.setOnClickListener(v -> {
             // move to account settings

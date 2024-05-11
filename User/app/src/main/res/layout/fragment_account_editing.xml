@@ -14,19 +14,9 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageView
-                    android:layout_width="116dp"
-                    android:layout_height="116dp" android:id="@+id/imageView"
-                    app:srcCompat="@drawable/choosing_avatar"
-                    android:layout_gravity="center_horizontal"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/scroll_view">
 
-            <Button
-                    android:text="Thay ảnh đại diện"
-                    android:backgroundTint="@color/softPink"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/button5" android:layout_gravity="center_horizontal"/>
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:paddingEnd="40dp" android:paddingStart="40dp"
@@ -100,6 +90,7 @@
                             android:maxLines="1"
                             android:minHeight="48dp"
                             android:textSize="16sp"
+                            android:enabled="false"
                             android:paddingStart="16dp" android:paddingEnd="16dp"/>
                     </LinearLayout>
                 </TableRow>
@@ -148,6 +139,7 @@
                             android:maxLines="1"
                             android:minHeight="48dp"
                             android:textSize="16sp"
+                            android:enabled="false"
                             android:paddingStart="16dp" android:paddingEnd="16dp"/>
                     </LinearLayout>
                 </TableRow>
