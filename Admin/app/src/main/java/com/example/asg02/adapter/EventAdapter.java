@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,18 +14,19 @@ import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.asg02.AdminShowEventActivity;
+import com.example.asg02.R;
 import com.example.asg02.controller.DeleteEventController;
 import com.example.asg02.model.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter extends ArrayAdapter<Event> {
+public class EventAdapter extends ArrayAdapter<Event> {
 
     private final Context context;
     private final List<Event> events;
 
-    public CustomAdapter(Context context, List<Event> events) {
+    public EventAdapter(Context context, List<Event> events) {
         super(context, 0, events);
         this.context = context;
         this.events = events;
@@ -42,8 +43,8 @@ public class CustomAdapter extends ArrayAdapter<Event> {
 
         Event event = events.get(position);
 
-        ImageView posterImageView = view.findViewById(R.id.eventPosterImageView);
         TextView nameTextView = view.findViewById(R.id.eventNameTextView);
+        ImageView posterImageView = view.findViewById(R.id.eventPosterImageView);
         TextView dateTextView = view.findViewById(R.id.eventDateTextView);
 
         FrameLayout deleteEventBtn = view.findViewById(R.id.deleteEventBtn);

@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.example.asg02.adapter.EventAdapter;
 import com.example.asg02.controller.GetEventController;
 import com.example.asg02.model.Event;
 
@@ -19,7 +20,7 @@ public class AdminManageEventActivity extends BaseActivity {
 
     private ListView eventListView;
     private List<Event> eventList;
-    private CustomAdapter adapter;
+    private EventAdapter adapter;
 
     private GetEventController getEventsController;
 
@@ -38,7 +39,7 @@ public class AdminManageEventActivity extends BaseActivity {
         addNewEventBtn = findViewById(R.id.addNewEventBtn);
         eventListView = findViewById(R.id.eventListView);
         eventList = new ArrayList<>();
-        adapter = new CustomAdapter(this, eventList);
+        adapter = new EventAdapter(this, eventList);
         eventListView.setAdapter(adapter);
         getEventsController = new GetEventController();
 

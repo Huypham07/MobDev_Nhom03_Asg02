@@ -2,9 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="opacity_back">#99000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="opacity_white">#D2D2D2</color>
     <color name="red">#FF0909</color>
     <color name="blue">#23A8F3</color>
+    <color name="opacity_blue">#4D9AD5F6</color>
     <color name="no_color">#00000000</color>
 </resources>

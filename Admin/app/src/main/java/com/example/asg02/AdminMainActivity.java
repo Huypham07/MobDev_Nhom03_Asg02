@@ -14,7 +14,6 @@ public class AdminMainActivity extends AppCompatActivity {
     FrameLayout cinemaBtn;
     FrameLayout eventBtn;
     FrameLayout messageBtn;
-    FrameLayout historyBtn;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase database;
 
