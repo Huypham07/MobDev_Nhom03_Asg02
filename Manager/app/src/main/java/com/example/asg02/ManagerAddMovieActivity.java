@@ -1,9 +1,12 @@
 package com.example.asg02;
 
+import static com.example.asg02.model.Movie.encodeImage;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.asg02.controller.CreateMovieController;
+import com.example.asg02.model.Movie;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -22,6 +27,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +38,18 @@ public class ManagerAddMovieActivity extends AppCompatActivity {
     EditText enterTitle, enterReleased, enterRuntime, enterGenre, enterDirector, enterWriter,
             enterActors, enterPlot, enterLanguage, enterTrailerLink;
     ImageView selectPosterImageView, setPosterImageView;
+    private CreateMovieController createMovieController;
+    private String name;
+    private String poster;
+    private String genre;
+    private String durationMins;
+    private String releaseDate;
+    private String description;
+    private String director;
+    private String actors;
+    private String language;
+    private String trailerLink;
+    private float rating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +68,7 @@ public class ManagerAddMovieActivity extends AppCompatActivity {
         enterPlot = findViewById(R.id.enterPlot);
         enterLanguage = findViewById(R.id.enterLanguage);
         enterTrailerLink = findViewById(R.id.enterTrailerLink);
+        createMovieController = new CreateMovieController(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,68 +82,42 @@ public class ManagerAddMovieActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 100);
+                startActivityForResult(intent, 1);
             }
         });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference moviesRef = database.getReference("Movies");
-                Map<String, Object> newMovieData = new HashMap<>();
-                newMovieData.put("Title", enterTitle.getText().toString()); // Movie title
-                newMovieData.put("Year", enterReleased.getText().toString()); // Release year
-                newMovieData.put("Rated", "5"); // MPAA rating
-                newMovieData.put("Realeased",enterReleased.getText().toString());
-                newMovieData.put("Runtime", enterRuntime.getText().toString()); // Running time
-                newMovieData.put("Genre", enterGenre.getText().toString()); // Primary genre
-                newMovieData.put("Director", enterDirector.getText().toString()); // Director's name
-                newMovieData.put("Writer", enterWriter.getText().toString());
-                newMovieData.put("Actors", enterActors.getText().toString()); // List of main actors (comma-separated)
-                newMovieData.put("Plot", enterPlot.getText().toString()); // Short description of the movie
-                newMovieData.put("Language", enterLanguage.getText().toString()); // Primary language
-                newMovieData.put("Awards", "7 Oscars, 2 Golden Globes, 25 wins & 71 nominations");
-                newMovieData.put("Metascore", "18"); // Metacritic score
-                newMovieData.put("imdbRating", "2.3"); // IMDb rating
-                newMovieData.put("imdbVotes", "3.7M"); // Number of IMDb votes
-                newMovieData.put("imdbID", "tt0111161"); // IMDb ID
-                moviesRef.push().setValue(newMovieData);
-                setPosterImageView.setDrawingCacheEnabled(true);
-                setPosterImageView.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) setPosterImageView.getDrawable()).getBitmap();
-                new AsyncTask<Void, Void, byte[]>() {
-                    @Override
-                    protected byte[] doInBackground(Void... voids) {
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        return baos.toByteArray();
-                    }
-
-                    @Override
-                    protected void onPostExecute(byte[] data) {
-                        // Sau khi chuyển đổi thành công, tiến hành tải hình ảnh lên Firebase Storage
-                        uploadImageToFirebase(data);
-                    }
-                }.execute();
+                name = enterTitle.getText().toString();
+                genre = enterGenre.getText().toString();
+                durationMins = enterRuntime.getText().toString();
+                releaseDate = enterReleased.getText().toString();
+                description = enterPlot.getText().toString();
+                director = enterDirector.getText().toString();
+                actors = enterActors.getText().toString();
+                language = enterLanguage.getText().toString();
+                trailerLink = enterTrailerLink.getText().toString();
+                rating = 5;
+                Movie movie = new Movie(name, poster, genre, durationMins, releaseDate, description, description, actors, language, trailerLink, rating);
+                createMovieController.createMovie(movie);
+                Intent intent = new Intent(ManagerAddMovieActivity.this, ManagerActivity.class);
+                startActivity(intent);
             }
         });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-            setPosterImageView.setImageURI(imageUri);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap posterBitmap = BitmapFactory.decodeStream(inputStream);
+                setPosterImageView.setImageBitmap(posterBitmap);
+                poster = encodeImage(posterBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-    }
-    private void uploadImageToFirebase(byte[] data) {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        String fileName = enterTitle.getText().toString().replace(" ", "")+ "_poster.png";
-        StorageReference imageRef = storageRef.child("posters/" + fileName);
-        UploadTask uploadTask = imageRef.putBytes(data);
-        uploadTask.addOnSuccessListener(taskSnapshot -> {
-        }).addOnFailureListener(exception -> {
-        });
     }
 }
