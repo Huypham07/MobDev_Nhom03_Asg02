@@ -24,6 +24,8 @@ jobs:
       run: chmod +x Admin/gradlew
     - name: Build with Gradle
       run: cd Admin && ./gradlew build
+    - name: Run Tests (Admin App)
+      run: cd Admin && ./gradlew test
     - name: Upload a Build Artifact (Admin App)
       uses: actions/upload-artifact@v4.3.3
       with:
