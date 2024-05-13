@@ -50,7 +50,7 @@ public class AddCinemaUtilTest {
     }
 
     @Test
-    public void correctlyCinema() {
+    public void correctlyCinema_returnsTrue() {
         boolean result = addCinemaUtil.validateAddCinemaUtil("cgv", "@star3.cineplex.com", "#star3cineplex#");
         assertTrue(result);
     }
