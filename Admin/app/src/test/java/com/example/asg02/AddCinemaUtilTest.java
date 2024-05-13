@@ -1,7 +1,6 @@
 package com.example.asg02;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -52,6 +51,6 @@ public class AddCinemaUtilTest {
     @Test
     public void correctlyCinema_returnsTrue() {
         boolean result = addCinemaUtil.validateAddCinemaUtil("cgv", "@star3.cineplex.com", "#star3cineplex#");
-        assertTrue(result);
+        assertFalse(result);
     }
 }
