@@ -14,7 +14,6 @@ public class Hall {
         this.cinemaId = cinemaId;
         id = hashCode();
     }
-
     public int getCinemaId() {
         return cinemaId;
     }

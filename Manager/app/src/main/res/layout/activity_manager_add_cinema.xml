@@ -100,7 +100,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <EditText
-                    android:id="@+id/enterEventName"
+                    android:id="@+id/enterCinemaName"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="25dp"
@@ -166,7 +166,6 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-
                     android:hint="Quận/ Huyện"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +188,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/enterDistrict" />
 
                 <EditText
-                    android:id="@+id/enterAddress"
+                    android:id="@+id/enterDetailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
@@ -202,14 +201,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/enterCommune" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
-                android:id="@+id/addEventBtn"
+                android:id="@+id/finishAddCinema"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="40dp"
-                android:enabled="false"
-                android:text="Tiếp tục"
+                android:text="Thêm"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addEventBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/addCinema" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

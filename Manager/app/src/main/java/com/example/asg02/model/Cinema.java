@@ -7,16 +7,16 @@ public class Cinema {
     private String district;
     private String commune;
     private String detailAddress;
-    private int managerId;
+    private String manager;
 
-    public Cinema(String name, String province, String district, String commune, String detailAddress, int managerId) {
+    public Cinema(String name, String province, String district, String commune, String detailAddress, String manager) {
         this.name = name;
         this.province = province;
         this.district = district;
         this.commune = commune;
         this.detailAddress = detailAddress;
         id = hashCode();
-        this.managerId = managerId;
+        this.manager = manager;
     }
 
     @Override
@@ -69,11 +69,11 @@ public class Cinema {
         this.detailAddress = detailAddress;
     }
 
-    public int getManagerId() {
-        return managerId;
+    public String getManager() {
+        return manager;
     }
 
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 }

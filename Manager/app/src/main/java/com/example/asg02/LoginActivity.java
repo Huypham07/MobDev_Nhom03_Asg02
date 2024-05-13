@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("email", manager.getEmail());
                     editor.putString("password", manager.getPassword());
                     editor.putString("name", manager.getName());
+                    editor.commit();
                     intent.putExtra("managers", manager);
                     Log.e("a", manager.getEmail());
                     startActivity(intent);

@@ -87,18 +87,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <EditText
-                    android:id="@+id/enterCinema"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Chọn rạp"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <Spinner
+                    android:id="@+id/chooseCinema"
+                    android:layout_width="350dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
                 android:id="@+id/textView2"
@@ -126,7 +122,7 @@
 
 
                 <EditText
-                    android:id="@+id/enterMovie"
+                    android:id="@+id/enterHallName"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="25dp"
@@ -186,7 +182,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/enterSeatNumber"
+                    android:id="@+id/enterNumberOfSeat"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
@@ -202,13 +198,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
-                android:id="@+id/addEventBtn"
+                android:id="@+id/finishAddHall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="40dp"
-                android:enabled="false"
+
                 android:text="Xong"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
