@@ -87,29 +87,29 @@
         app:srcCompat="@drawable/camera" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="304dp"
+        android:id="@+id/name"
+        android:layout_width="180dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="300dp"
         android:text="Tên doanh nghiệp"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/textView3"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="340dp"
-        android:text=""
-        android:textSize="20dp"
+    <Button
+        android:id="@+id/changeName"
+        android:layout_width="262dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="356dp"
+        android:background="@drawable/roundstyle"
+        android:text="Đổi tên doanh nghiệp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/changePassword"
         android:layout_width="262dp"
         android:layout_height="48dp"
         android:layout_marginStart="64dp"
@@ -118,4 +118,5 @@
         android:text="Đổi mật khẩu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

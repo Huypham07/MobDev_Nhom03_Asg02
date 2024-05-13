@@ -16,7 +16,6 @@ public class ManagerAddHallActivity extends AppCompatActivity {
         back = findViewById(R.id.backHall);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
                 startActivity(intent);
