@@ -32,9 +32,7 @@
         <activity
             android:name=".AdminAddCinemaActivity"
             android:exported="false" />
-        <activity
-            android:name=".AdminHistoryActivity"
-            android:exported="false" />
+
         <activity
             android:name=".AdminManageEventActivity"
             android:exported="false" />
