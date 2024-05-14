@@ -26,6 +26,7 @@ public class AdminAddCinemaActivity2 extends BaseActivity {
     Button finishBtn;
     String emailNameText = "@star3.cineplex.com";
     String passwordText = "#star3cineplex#";
+    String cinemaName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,8 @@ public class AdminAddCinemaActivity2 extends BaseActivity {
         finishBtn = findViewById(R.id.finishBtn);
 
         String extra = getIntent().getExtras().getString("CinemaName", "cinema name");
-        String cinemaName = extra;
-        cinemaName = cinemaName.replaceAll(" ", "");
-
-        emailNameText = cinemaName + emailNameText;
+        cinemaName = extra;
+        emailNameText = cinemaName.replaceAll(" ", "") + emailNameText;
         passwordText = passwordText + cinemaName.toLowerCase();
 
         emailName.setText(emailNameText);
@@ -76,7 +75,7 @@ public class AdminAddCinemaActivity2 extends BaseActivity {
         });
 
         finishBtn.setOnClickListener(v -> {
-            new RegisterController().register(new Manager(emailNameText, passwordText));
+            new RegisterController().register(new Manager(emailNameText, passwordText, cinemaName));
             String textToCopy = "Tài khoản: " + emailNameText + "\nMật khẩu: " + passwordText;
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clipData = ClipData.newPlainText("text", textToCopy);

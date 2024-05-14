@@ -16,8 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.asg02.controller.CreateEventController;
 import com.example.asg02.model.Event;
+import com.example.asg02.model.Movie;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -144,7 +147,7 @@ public class AdminAddEventActivity extends BaseActivity {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            enterSDate.setText(String.format("%02d/%02d/%04d", i2, i1, i));
+                            enterSDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
                         }
                     },
                     myCalendar.get(Calendar.YEAR),
@@ -158,7 +161,7 @@ public class AdminAddEventActivity extends BaseActivity {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            enterEDate.setText(String.format("%02d/%02d/%04d", i2, i1, i));
+                            enterEDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
                         }
                     },
                     myCalendar.get(Calendar.YEAR),
@@ -166,12 +169,32 @@ public class AdminAddEventActivity extends BaseActivity {
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
-        backBtn.setOnClickListener(v -> {
+        backBtn.setOnClickListener(v -> showConfirmBackDialog());
+
+        addEventBtn.setOnClickListener(v -> showConfirmAddDialog());
+    }
+
+    private void showConfirmBackDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có chắc chắn muốn thoát không?");
+
+        builder.setPositiveButton("Có", (dialog, which) -> {
             finish();
         });
 
-        addEventBtn.setOnClickListener(v -> {
+        builder.setNegativeButton("Quay lại", (dialog, which) -> {
+            dialog.dismiss();
+        });
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showConfirmAddDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có chắc chắn muốn thêm tin mới & ưu đãi này không?");
+
+        builder.setPositiveButton("Có", (dialog, which) -> {
             if (event == null) {
                 event = new Event(eventName, posterUri, startDate, endDate, eventInfo);
             } else {
@@ -188,6 +211,13 @@ public class AdminAddEventActivity extends BaseActivity {
             }
             startActivity(intent);
         });
+
+        builder.setNegativeButton("Quay lại", (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void selectImage() {

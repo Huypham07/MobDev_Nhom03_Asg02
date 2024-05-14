@@ -16,8 +16,6 @@ public class RegisterController implements AccountCreator {
     private FirebaseDatabase database;
     private FirebaseAuth auth;
     private boolean createSuccess = false;
-    private boolean emailExists = false;
-    private boolean phoneExists = false;
 
     public RegisterController() {
         database = FirebaseDatabase.getInstance();

@@ -14,8 +14,7 @@ public class AdminMainActivity extends AppCompatActivity {
     FrameLayout cinemaBtn;
     FrameLayout eventBtn;
     FrameLayout messageBtn;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase database;
+    FrameLayout movieBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +24,7 @@ public class AdminMainActivity extends AppCompatActivity {
         cinemaBtn = findViewById(R.id.cinemaBtn);
         eventBtn = findViewById(R.id.eventBtn);
         messageBtn = findViewById(R.id.messageBtn);
+        movieBtn = findViewById(R.id.movieBtn);
 
         cinemaBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminAddCinemaActivity.class);
@@ -39,6 +39,11 @@ public class AdminMainActivity extends AppCompatActivity {
 
         messageBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminMessageActivity.class);
+            startActivity(intent);
+        });
+
+        movieBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AdminCreateMovieActivity.class);
             startActivity(intent);
         });
     }
