@@ -1,8 +1,6 @@
 package com.example.asg02.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Movie implements Serializable {
     private int id;
@@ -13,31 +11,37 @@ public class Movie implements Serializable {
     private String releaseDate;
     private int durationMins;
     private String description;
-    private String rated;
+    private String censor;
     private String genre;
     private String director;
     private String actors;
     private String language;
-    private List<Review> reviews = new ArrayList<>();
-    private List<Show> shows = new ArrayList<>();
 
     public Movie() {
     }
 
     public Movie(String name, String poster, String trailerLink, String releaseDate, int durationMins,
-                 String description, String rated, String genre, String director, String actors, String language) {
+                 String description, String censor, String genre, String director, String actors, String language) {
         this.name = name;
         this.poster = poster;
         this.trailerLink = trailerLink;
         this.releaseDate = releaseDate;
         this.durationMins = durationMins;
         this.description = description;
-        this.rated = rated;
+        this.censor = censor;
         this.genre = genre;
         this.director = director;
         this.actors = actors;
         this.language = language;
         id = hashCode();
+    }
+
+    public String getCensor() {
+        return censor;
+    }
+
+    public void setCensor(String censor) {
+        this.censor = censor;
     }
 
     public int getId() {

@@ -3,7 +3,6 @@ package com.example.asg02;
 import static com.example.asg02.model.Event.encodeImage;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -36,7 +35,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
     Button addMovieBtn;
     EditText enterMovieName, enterReleasedDate, enterDurationMins, enterDescription, enterGenre, enterDirector,
             enterActors, enterLanguage, enterTrailerLink;
-    AutoCompleteTextView enterRated;
+    AutoCompleteTextView enterCensor;
     ImageView selectPoster;
     private CreateMovieController createMovieController;
     private String movieName = "";
@@ -44,7 +43,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
     private String releaseDate = "";
     private int durationMins = 0;
     private String description = "";
-    private String rated = "";
+    private String censor = "";
     private String genre = "";
     private String director = "";
     private String actors = "";
@@ -61,7 +60,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
         enterReleasedDate = findViewById(R.id.enterReleasedDate);
         enterDurationMins = findViewById(R.id.enterDurationMins);
         enterDescription = findViewById(R.id.enterDescription);
-        enterRated = findViewById(R.id.enterRated);
+        enterCensor = findViewById(R.id.enterCensor);
         enterGenre = findViewById(R.id.enterGenre);
         enterDirector = findViewById(R.id.enterDirector);
         enterActors = findViewById(R.id.enterActors);
@@ -94,17 +93,17 @@ public class AdminCreateMovieActivity extends BaseActivity {
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
-        enterRated.setOnTouchListener(new View.OnTouchListener() {
+        enterCensor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    enterRated.showDropDown();
+                    enterCensor.showDropDown();
                 }
                 return false;
             }
         });
-        enterRated.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"P", "K", "T13", "T16", "T18", "C"}));
-        enterRated.addTextChangedListener(new TextWatcher() {
+        enterCensor.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"P", "K", "T13", "T16", "T18", "C"}));
+        enterCensor.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
@@ -113,9 +112,9 @@ public class AdminCreateMovieActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                rated = enterRated.getText().toString();
+                censor = enterCensor.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -131,7 +130,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 movieName = enterMovieName.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -147,7 +146,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 trailerLink = enterTrailerLink.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -163,7 +162,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 releaseDate = enterReleasedDate.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -179,7 +178,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 durationMins = Integer.parseInt((enterDurationMins.getText().toString()));
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -195,7 +194,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 description = enterDescription.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -211,7 +210,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 genre = enterGenre.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -227,7 +226,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 director = enterDirector.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -243,7 +242,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 actors = enterActors.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -259,7 +258,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 language = enterLanguage.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -289,7 +288,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
         builder.setMessage("Bạn có chắc chắn muốn thêm phim này không?");
 
         builder.setPositiveButton("Có", (dialog, which) -> {
-            Movie movie = new Movie(movieName, poster, trailerLink, releaseDate, durationMins, description, rated, genre, director, actors, language);
+            Movie movie = new Movie(movieName, poster, trailerLink, releaseDate, durationMins, description, censor, genre, director, actors, language);
             createMovieController.createMovie(movie);
             Intent intent = new Intent(this, AdminMainActivity.class);
             startActivity(intent);
@@ -316,7 +315,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
                 selectPoster.setBackground(null);
                 poster = encodeImage(posterBitmap);
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!rated.isEmpty() &&
+                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

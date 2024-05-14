@@ -207,6 +207,7 @@
                     android:layout_marginEnd="25dp"
                     android:hint="Ngày công chiếu"
                     android:textSize="18sp"
+                    android:inputType="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -237,7 +238,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/enterDurationMins" />
 
                 <AutoCompleteTextView
-                    android:id="@+id/enterRated"
+                    android:id="@+id/enterCensor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
@@ -259,7 +260,7 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterRated" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterCensor" />
 
                 <EditText
                     android:id="@+id/enterDirector"
