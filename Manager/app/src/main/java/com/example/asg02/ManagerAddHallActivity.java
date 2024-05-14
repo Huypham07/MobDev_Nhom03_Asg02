@@ -46,7 +46,7 @@ public class ManagerAddHallActivity extends AppCompatActivity {
         enterHallNameEditText = findViewById(R.id.enterHallName);
         enterTypeEditText = findViewById(R.id.enterType);
         enterNumberOfSeatEditText = findViewById(R.id.enterNumberOfSeat);
-        chooseCinemaSpinner = findViewById(R.id.chooseCinema);
+        chooseCinemaSpinner = findViewById(R.id.chooseCinemaInHall);
         finishAddHallButton = findViewById(R.id.finishAddHall);
         createHallController = new CreateHallController(this);
         cinemaNamesList = new ArrayList<>();

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ManagerAddShowtimeActivity">
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -73,6 +74,7 @@
                     android:textSize="20sp"
                     app:layout_constraintStart_toEndOf="@+id/textView"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
                     android:layout_width="match_parent"
@@ -86,18 +88,48 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                    <EditText
-                        android:id="@+id/enterCinema"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:hint="Chọn rạp"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <Spinner
+                        android:id="@+id/chooseCinemaInShowtime"
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="24dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                        tools:ignore="TouchTargetSizeCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textViewToChooseHall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Phòng chiếu"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewToChooseHall">
+
+
+                    <Spinner
+                        android:id="@+id/chooseHallInShowtime"
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                     android:id="@+id/textView2"
@@ -108,7 +140,8 @@
                     android:text="Phim"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout3"
                     android:layout_width="match_parent"
@@ -124,18 +157,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2">
 
 
-                    <EditText
-                        android:id="@+id/enterMovie"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:hint="Chọn rạp"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <Spinner
+                        android:id="@+id/chooseMovieInShowtime"
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="24dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                        tools:ignore="TouchTargetSizeCheck" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                     android:id="@+id/textView3"
@@ -161,7 +190,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout4"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="5dp"
@@ -177,7 +206,7 @@
                         android:layout_height="48dp"
                         android:layout_marginStart="25dp"
                         android:layout_marginEnd="25dp"
-                        android:hint="Ngày công chiếu"
+                        android:hint="Ngày chiếu"
                         android:inputType="datetime"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -207,28 +236,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/enterStartTime" />
 
-                    <EditText
-                        android:id="@+id/enterRoom"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:hint="Phòng"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/enterEndTime" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <Button
-                    android:id="@+id/addEventBtn"
+                    android:id="@+id/finishAddShowtime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="40dp"
-                    android:enabled="false"
+
                     android:text="Xong"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -238,7 +255,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addEventBtn" />
+                    app:layout_constraintTop_toBottomOf="@+id/finishAddShowtime" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
