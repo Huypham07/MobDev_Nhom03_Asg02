@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerAddShowtimeActivity">
+    tools:context=".ManagerAddShowActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/backShowtime"
+            android:id="@+id/backShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
@@ -89,7 +89,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView">
 
                     <Spinner
-                        android:id="@+id/chooseCinemaInShowtime"
+                        android:id="@+id/chooseCinemaInShow"
                         android:layout_width="350dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="24dp"
@@ -123,7 +123,7 @@
 
 
                     <Spinner
-                        android:id="@+id/chooseHallInShowtime"
+                        android:id="@+id/chooseHallInShow"
                         android:layout_width="350dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="24dp"
@@ -158,7 +158,7 @@
 
 
                     <Spinner
-                        android:id="@+id/chooseMovieInShowtime"
+                        android:id="@+id/chooseMovieInShow"
                         android:layout_width="350dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="24dp"
@@ -239,7 +239,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <Button
-                    android:id="@+id/finishAddShowtime"
+                    android:id="@+id/finishAddShow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -255,7 +255,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/finishAddShowtime" />
+                    app:layout_constraintTop_toBottomOf="@+id/finishAddShow" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

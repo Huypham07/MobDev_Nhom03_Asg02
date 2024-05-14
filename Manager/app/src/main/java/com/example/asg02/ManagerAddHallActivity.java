@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class ManagerAddHallActivity extends AppCompatActivity {
     ImageButton back;
-    EditText enterHallNameEditText, enterTypeEditText, enterNumberOfSeatEditText;
+    EditText enterHallNameEditText, enterSeatsPerRowEditText, enterSeatsPerColumnEditText;
     Button finishAddHallButton;
     Spinner chooseCinemaSpinner;
     CreateHallController createHallController;
@@ -44,8 +44,8 @@ public class ManagerAddHallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manager_add_hall);
         back = findViewById(R.id.backHall);
         enterHallNameEditText = findViewById(R.id.enterHallName);
-        enterTypeEditText = findViewById(R.id.enterType);
-        enterNumberOfSeatEditText = findViewById(R.id.enterNumberOfSeat);
+        enterSeatsPerRowEditText = findViewById(R.id.enterSeatsPerRow);
+        enterSeatsPerColumnEditText = findViewById(R.id.enterSeatsPerColumn);
         chooseCinemaSpinner = findViewById(R.id.chooseCinemaInHall);
         finishAddHallButton = findViewById(R.id.finishAddHall);
         createHallController = new CreateHallController(this);
@@ -101,9 +101,9 @@ public class ManagerAddHallActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = enterHallNameEditText.getText().toString();
-                String type = enterTypeEditText.getText().toString();
-                Integer numberOfSeat = Integer.valueOf(enterNumberOfSeatEditText.getText().toString());
-                Hall hall = new Hall(name, type, numberOfSeat, cinemaId);
+                Integer seatsPerRow = Integer.valueOf(enterSeatsPerRowEditText.getText().toString());
+                Integer seatsPerColumn = Integer.valueOf(enterSeatsPerColumnEditText.getText().toString());
+                Hall hall = new Hall(name, seatsPerRow, seatsPerColumn, cinemaId);
                 createHallController.createHall(hall);
                 Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
                 startActivity(intent);

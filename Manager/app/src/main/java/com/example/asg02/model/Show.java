@@ -1,6 +1,6 @@
 package com.example.asg02.model;
 
-public class Showtime {
+public class Show {
     private int id;
     private int cinemaId;
     private int hallId;
@@ -9,7 +9,7 @@ public class Showtime {
     private String endTime;
     private String date;
 
-    public Showtime(int cinemaId, int hallId, int movieId, String startTime, String endTime, String date) {
+    public Show(int cinemaId, int hallId, int movieId, String startTime, String endTime, String date) {
         this.cinemaId = cinemaId;
         this.hallId = hallId;
         this.movieId = movieId;

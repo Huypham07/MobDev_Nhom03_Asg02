@@ -15,8 +15,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.asg02.controller.CreateShowtimeController;
-import com.example.asg02.model.Showtime;
+import com.example.asg02.controller.CreateShowController;
+import com.example.asg02.model.Show;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,11 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerAddShowtimeActivity extends AppCompatActivity {
+public class ManagerAddShowActivity extends AppCompatActivity {
     ImageButton back;
     Spinner chooseCinemaSpinner, chooseHallSpinner, chooseMovieSpinner;
     EditText enterStartTimeEditText, enterEndTimeEditText, enterDateEditText;
-    Button finishAddShowtimeButton;
+    Button finishAddShowButton;
     List<String> cinemaNamesList;
     List<Integer> cinemaIdList;
     List<String> hallNamesList;
@@ -39,20 +39,20 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
     Integer finalCinemaId;
     Integer finalHallId;
     Integer finalMovieId;
-    CreateShowtimeController createShowtimeController;
+    CreateShowController createShowController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_add_showtime);
-        back = findViewById(R.id.backShowtime);
-        chooseCinemaSpinner = findViewById(R.id.chooseCinemaInShowtime);
-        chooseHallSpinner = findViewById(R.id.chooseHallInShowtime);
-        chooseMovieSpinner = findViewById(R.id.chooseMovieInShowtime);
+        setContentView(R.layout.activity_manager_add_show);
+        back = findViewById(R.id.backShow);
+        chooseCinemaSpinner = findViewById(R.id.chooseCinemaInShow);
+        chooseHallSpinner = findViewById(R.id.chooseHallInShow);
+        chooseMovieSpinner = findViewById(R.id.chooseMovieInShow);
         enterStartTimeEditText = findViewById(R.id.enterStartTime);
         enterEndTimeEditText = findViewById(R.id.enterEndTime);
         enterDateEditText = findViewById(R.id.enterDate);
-        finishAddShowtimeButton = findViewById(R.id.finishAddShowtime);
-        createShowtimeController = new CreateShowtimeController(this);
+        finishAddShowButton = findViewById(R.id.finishAddShow);
+        createShowController = new CreateShowController(this);
         cinemaNamesList = new ArrayList<>();
         cinemaIdList = new ArrayList<>();
         hallNamesList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ManagerAddShowtimeActivity.this, ManagerActivity.class);
+                Intent intent = new Intent(ManagerAddShowActivity.this, ManagerActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +79,7 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
                         cinemaIdList.add(cinemaId);
                     }
                     // Create an ArrayAdapter and set it to the Spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowtimeActivity.this, android.R.layout.simple_spinner_item, cinemaNamesList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowActivity.this, android.R.layout.simple_spinner_item, cinemaNamesList);
                     chooseCinemaSpinner.setAdapter(adapter);
                 } else {
                     // Handle the case where "Cinemas" node doesn't exist
@@ -113,11 +113,11 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
                                     hallIdList.add(hallId);
                                 }
                                 else {
-                                    Toast.makeText(ManagerAddShowtimeActivity.this, "Error", Toast.LENGTH_SHORT);
+                                    Toast.makeText(ManagerAddShowActivity.this, "Error", Toast.LENGTH_SHORT);
                                 }
                             }
                             // Create an ArrayAdapter and set it to the Spinner
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowtimeActivity.this, android.R.layout.simple_spinner_item, hallNamesList);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowActivity.this, android.R.layout.simple_spinner_item, hallNamesList);
                             chooseHallSpinner.setAdapter(adapter);
                         } else {
                             // Handle the case where "Cinemas" node doesn't exist
@@ -160,7 +160,7 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
                         movieIdList.add(movieId);
                     }
                     // Create an ArrayAdapter and set it to the Spinner
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowtimeActivity.this, android.R.layout.simple_spinner_item, movieNamesList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerAddShowActivity.this, android.R.layout.simple_spinner_item, movieNamesList);
                     chooseMovieSpinner.setAdapter(adapter);
                 } else {
 
@@ -185,15 +185,15 @@ public class ManagerAddShowtimeActivity extends AppCompatActivity {
                 Log.d("Spinner", "No item selected");
             }
         });
-        finishAddShowtimeButton.setOnClickListener(new View.OnClickListener() {
+        finishAddShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String date = enterDateEditText.getText().toString();
                 String startTime = enterStartTimeEditText.getText().toString();
                 String endTime = enterEndTimeEditText.getText().toString();
-                Showtime showtime = new Showtime(finalCinemaId, finalHallId, finalMovieId, startTime, endTime, date);
-                createShowtimeController.createShowtime(showtime);
-                Intent intent = new Intent(ManagerAddShowtimeActivity.this, ManagerActivity.class);
+                Show show = new Show(finalCinemaId, finalHallId, finalMovieId, startTime, endTime, date);
+                createShowController.createShow(show);
+                Intent intent = new Intent(ManagerAddShowActivity.this, ManagerActivity.class);
                 startActivity(intent);
             }
         });

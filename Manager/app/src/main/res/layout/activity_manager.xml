@@ -7,119 +7,17 @@
         android:layout_height="match_parent"
         tools:context=".ManagerActivity">
 
-    <Button
-        android:id="@+id/addNewHall"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="548dp"
-        android:background="@drawable/roundstyle"
-        android:text="Thêm phòng chiếu"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/editInfo"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="148dp"
-        android:background="@drawable/roundstyle"
-        android:text="Chỉnh sửa thông tin"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:elevation="5dp"
-        android:translationZ="5dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/moviesInMyCinema"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="148dp"
-        android:background="@drawable/roundstyle"
-        android:text="Phim tại rạp"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/cinemaSystem"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="284dp"
-        android:background="@drawable/roundstyle"
-        android:text="Hệ thống các rạp"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addNewCinema"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="284dp"
-        android:background="@drawable/roundstyle"
-        android:text="Thêm rạp chiếu phim mới"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addNewMovie"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="412dp"
-        android:background="@drawable/roundstyle"
-        android:text="Thêm phim mới"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addNewShowtime"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="412dp"
-        android:background="@drawable/roundstyle"
-        android:text="Thêm suất chiếu mới"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/logOut"
-        android:layout_width="161dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="548dp"
-        android:background="@drawable/roundstyle"
-        android:text="Đăng xuất"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:backgroundTint="@color/opacity_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView14">
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView14"
