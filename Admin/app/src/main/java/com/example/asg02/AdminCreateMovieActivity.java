@@ -40,7 +40,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
     private CreateMovieController createMovieController;
     private String movieName = "";
     private String poster = "";
-    private String releaseDate = "";
+    private String releaseDate;
     private int durationMins = 0;
     private String description = "";
     private String censor = "";
@@ -108,8 +108,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 censor = enterCensor.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -124,8 +124,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 movieName = enterMovieName.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -141,7 +141,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 trailerLink = enterTrailerLink.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                        durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -157,7 +157,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 releaseDate = enterReleasedDate.getText().toString();
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                        durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -173,7 +173,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 durationMins = Integer.parseInt((enterDurationMins.getText().toString()));
                 addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                        durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -188,8 +188,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 description = enterDescription.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -204,8 +204,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 genre = enterGenre.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -220,8 +220,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 director = enterDirector.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -236,8 +236,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 actors = enterActors.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
@@ -252,8 +252,8 @@ public class AdminCreateMovieActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 language = enterLanguage.getText().toString();
-                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty() &&
-                        !releaseDate.isEmpty() && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
+                addMovieBtn.setEnabled(!movieName.isEmpty() && !poster.isEmpty() && !trailerLink.isEmpty()
+                        && durationMins != 0 && !description.isEmpty() &&!censor.isEmpty() &&
                         !genre.isEmpty() && !director.isEmpty() && !actors.isEmpty() && !language.isEmpty());
             }
         });
