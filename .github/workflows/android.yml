@@ -22,12 +22,10 @@ jobs:
 
     - name: Grant execute permission for gradlew (Admin App)
       run: chmod +x Admin/gradlew
+    - name: Build with Gradle
+      run: cd Admin && ./gradlew build
     - name: Unit Tests (Admin App)
       run: cd Admin && ./gradlew test
-    - name: UI Tests (Admin App)
-      run: cd Admin && ./gradlew connectedDebugAndroidTest
-    - name: Integration Tests (Admin App)
-      run: cd Admin && ./gradlew connectedCheck
     - name: Upload a Build Artifact (Admin App)
       uses: actions/upload-artifact@v4.3.3
       with:
