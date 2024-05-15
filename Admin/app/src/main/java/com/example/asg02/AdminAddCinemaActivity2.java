@@ -38,8 +38,18 @@ public class AdminAddCinemaActivity2 extends BaseActivity {
         password = findViewById(R.id.password);
         finishBtn = findViewById(R.id.finishBtn);
 
-        String extra = getIntent().getExtras().getString("CinemaName", "cinema name");
-        cinemaName = extra;
+//        String extra = getIntent().getExtras().getString("CinemaName", "cinema name");
+//        cinemaName = extra;
+        Bundle extras = getIntent().getExtras();
+        String extra;
+        if (extras != null) {
+            extra = extras.getString("CinemaName", "cinema name");
+            cinemaName = extra;
+        } else {
+            extra = null;
+            cinemaName = "cinemaname"; // Giá trị mặc định nếu không có extra
+        }
+
         emailNameText = cinemaName.replaceAll(" ", "") + emailNameText;
         passwordText = passwordText + cinemaName.toLowerCase();
 

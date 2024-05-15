@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AdminAddCinemaActivityTest {
+public class AdminAddCinemaActivityUITest {
 
     @Rule
     public ActivityScenarioRule<AdminAddCinemaActivity> activityScenarioRule =
@@ -48,8 +48,7 @@ public class AdminAddCinemaActivityTest {
 
     @Test
     public void testContinueButtonEnabledAfterEnteringCinemaName() {
-        String cinemaName = "Cinema XYZ";
-
+        String cinemaName = "CGV";
         // Type cinema name into EditText
         Espresso.onView(ViewMatchers.withId(R.id.enterCinemaName))
                 .perform(ViewActions.typeText(cinemaName), ViewActions.closeSoftKeyboard());
