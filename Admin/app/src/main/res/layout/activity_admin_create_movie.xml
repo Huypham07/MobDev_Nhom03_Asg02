@@ -207,7 +207,8 @@
                     android:layout_marginEnd="25dp"
                     android:hint="Ngày công chiếu"
                     android:textSize="18sp"
-                    android:inputType="none"
+                    android:inputType="datetime"
+                    android:focusable="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
