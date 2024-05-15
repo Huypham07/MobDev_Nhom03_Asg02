@@ -38,6 +38,7 @@ public class AdminAddEventActivityUITest {
 
     @Test
     public void testEnterEventName() {
+        Espresso.onView(withId(R.id.enterEventName)).perform(ViewActions.scrollTo());
         String eventName = "Event Name";
         Espresso.onView(withId(R.id.enterEventName))
                 .perform(ViewActions.typeText(eventName), ViewActions.closeSoftKeyboard());
@@ -48,6 +49,7 @@ public class AdminAddEventActivityUITest {
 
     @Test
     public void testImageView() {
+        Espresso.onView(withId(R.id.selectPoster)).perform(ViewActions.scrollTo());
         Espresso.onView(withId(R.id.selectPoster))
                 .check(ViewAssertions.matches(isDisplayed()));
 
@@ -70,11 +72,9 @@ public class AdminAddEventActivityUITest {
 
     @Test
     public void testEnterEventInfo() {
-        // Cuộn xuống đến EditText enterEventInfo
         Espresso.onView(withId(R.id.enterEventInfo))
                 .perform(ViewActions.scrollTo(), ViewActions.click());
 
-        // Nhập văn bản vào EditText enterEventInfo
         String textToEnter = "Detailed information about the event...";
         Espresso.onView(withId(R.id.enterEventInfo))
                 .perform(ViewActions.typeText(textToEnter), ViewActions.closeSoftKeyboard());
