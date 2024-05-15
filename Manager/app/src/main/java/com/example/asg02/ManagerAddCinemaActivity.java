@@ -14,7 +14,6 @@ import android.widget.ImageView;
 
 import com.example.asg02.controller.CreateCinemaController;
 import com.example.asg02.model.Cinema;
-import com.example.asg02.model.Movie;
 
 public class ManagerAddCinemaActivity extends AppCompatActivity {
     ImageButton back;
@@ -41,7 +40,6 @@ public class ManagerAddCinemaActivity extends AppCompatActivity {
                 Intent intent = new Intent(ManagerAddCinemaActivity.this, ManagerActivity.class);
                 startActivity(intent);
             }
-
         });
         finishAddCinemaButton.setOnClickListener(new View.OnClickListener() {
             @Override

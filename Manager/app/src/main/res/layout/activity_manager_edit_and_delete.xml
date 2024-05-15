@@ -39,7 +39,7 @@
             android:layout_marginLeft="40dp"
             android:gravity="top"
             android:text="Chỉnh sửa thông tin/ Xóa"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </FrameLayout>
     <ScrollView
@@ -202,43 +202,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                <EditText
-                    android:id="@+id/enterDate"
+                <TextView
+                    android:id="@+id/showInfoOfCinemaHallShow"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Ngày chiếu"
-                    android:inputType="datetime"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/enterStartTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Giờ chiếu"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterDate" />
-                <EditText
-                    android:id="@+id/enterEndTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:hint="Giờ kết thức"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterStartTime" />
-
-
+                    android:layout_height="300dp"
+                    android:text="TextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="69dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
                 android:id="@+id/edit"
@@ -272,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/finishAddShow" />
+                app:layout_constraintTop_toBottomOf="@+id/delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

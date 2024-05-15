@@ -15,6 +15,14 @@ public class Hall {
         id = hashCode();
     }
 
+    public Hall(int id, String name, int seatPerColumn, int seatsPerRow, int cinemaId) {
+        this.id = id;
+        this.name = name;
+        this.seatPerColumn = seatPerColumn;
+        this.seatsPerRow = seatsPerRow;
+        this.cinemaId = cinemaId;
+    }
+
     public int getId() {
         return id;
     }

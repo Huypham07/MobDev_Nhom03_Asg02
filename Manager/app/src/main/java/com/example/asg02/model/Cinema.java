@@ -19,6 +19,16 @@ public class Cinema {
         this.manager = manager;
     }
 
+    public Cinema(int id, String name, String province, String district, String commune, String detailAddress, String manager) {
+        this.id = id;
+        this.name = name;
+        this.province = province;
+        this.district = district;
+        this.commune = commune;
+        this.detailAddress = detailAddress;
+        this.manager = manager;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

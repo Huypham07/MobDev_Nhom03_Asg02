@@ -19,6 +19,16 @@ public class Show {
         id = hashCode();
     }
 
+    public Show(int id, int cinemaId, int hallId, int movieId, String startTime, String endTime, String date) {
+        this.id = id;
+        this.cinemaId = cinemaId;
+        this.hallId = hallId;
+        this.movieId = movieId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }
