@@ -27,7 +27,17 @@ public class AdminAddCinemaActivity extends BaseActivity {
         continueBtn = findViewById(R.id.continueBtn);
         enterCinemaName = findViewById(R.id.enterCinemaName);
 
-        cinemaName = getIntent().getExtras().getString("CinemaName", "");
+//        cinemaName = getIntent().getExtras().getString("CinemaName", "");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // Kiểm tra xem Bundle có chứa key "CinemaName" không
+            if (extras.containsKey("CinemaName")) {
+                // Lấy giá trị của key "CinemaName" từ Bundle
+                cinemaName = extras.getString("CinemaName", "");
+                // Sử dụng giá trị cinemaName ở đây
+            }
+        }
+
         if (!cinemaName.isEmpty()) {
             enterCinemaName.setText(cinemaName);
             continueBtn.setEnabled(true);
