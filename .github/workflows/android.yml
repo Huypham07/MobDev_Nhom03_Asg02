@@ -36,6 +36,8 @@ jobs:
       run: chmod +x Manager/gradlew
     - name: Build with Gradle
       run: cd Manager && ./gradlew build
+    - name: Run Tests (Manager App)
+      run: cd Manager && ./gradlew test
     - name: Upload a Build Artifact (Manager App)
       uses: actions/upload-artifact@v4.3.3
       with:
@@ -48,6 +50,8 @@ jobs:
       run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
     - name: Build with Gradle
       run: cd User && ./gradlew build
+    - name: Run Tests (User App)
+      run: cd User && ./gradlew test
     - name: Upload a Build Artifact (User App)
       uses: actions/upload-artifact@v4.3.3
       with:
