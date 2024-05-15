@@ -82,12 +82,7 @@ public class AdminCreateMovieActivity extends BaseActivity {
         enterReleasedDate.setOnClickListener(v -> {
             Calendar myCalendar = Calendar.getInstance();
             new DatePickerDialog(AdminCreateMovieActivity.this,
-                    new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            enterReleasedDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
-                        }
-                    },
+                    (datePicker, i, i1, i2) -> enterReleasedDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i)),
                     myCalendar.get(Calendar.YEAR),
                     myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();

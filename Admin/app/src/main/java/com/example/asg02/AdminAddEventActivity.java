@@ -158,12 +158,7 @@ public class AdminAddEventActivity extends BaseActivity {
         enterEDate.setOnClickListener(v -> {
             Calendar myCalendar = Calendar.getInstance();
             new DatePickerDialog(AdminAddEventActivity.this,
-                    new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            enterEDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
-                        }
-                    },
+                    (datePicker, i, i1, i2) -> enterEDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i)),
                     myCalendar.get(Calendar.YEAR),
                     myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH)).show();
