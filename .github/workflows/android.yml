@@ -38,6 +38,13 @@ jobs:
       run: cd Manager && ./gradlew build
     - name: Run Tests (Manager App)
       run: cd Manager && ./gradlew test
+    - name: Run UI Tests (Admin App)
+      run: cd Admin && ./gradlew connectedDebugAndroidTest
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: Admin/app/build/reports
     - name: Upload a Build Artifact (Manager App)
       uses: actions/upload-artifact@v4.3.3
       with:
