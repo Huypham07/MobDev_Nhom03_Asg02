@@ -13,19 +13,24 @@ public class User extends Account {
     private String region;
     private String favouriteCinema;
     private long point;
+    private double expense;
+    private String avatar;
 
     public User() {
     }
 
     public User(String email, String password, String name, String birthDate
-            , String sex, String phone, String region, String favouriteCinema, long point) {
+            , String sex, String phone, String region, String favouriteCinema, String avatar) {
         super(email, password);
         this.name = name;
         this.birthDate = birthDate;
         this.sex = sex;
         this.phone = phone;
         this.region = region;
-        this.point = point;
+        this.favouriteCinema = favouriteCinema;
+        this.avatar = avatar;
+        this.point = 0;
+        this.expense = 0;
     }
 
     public String getName() {
@@ -82,5 +87,21 @@ public class User extends Account {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public double getExpense() {
+        return expense;
+    }
+
+    public void setExpense(double expense) {
+        this.expense = expense;
     }
 }

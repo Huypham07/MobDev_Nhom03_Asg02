@@ -1,5 +1,6 @@
 package com.example.asg02.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -27,7 +28,10 @@ public class SettingsActivity extends BaseActivity {
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             if (!controller.navigateUp()) {
-                onBackPressed();
+                Intent intent = getIntent();
+                intent.putExtra("user", (User) intent.getSerializableExtra("user"));
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

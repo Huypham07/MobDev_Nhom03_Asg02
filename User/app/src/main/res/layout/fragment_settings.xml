@@ -55,20 +55,7 @@
                     android:layout_height="wrap_content" android:id="@+id/checkBox2"
                     android:layout_alignParentEnd="true" android:layout_marginEnd="0dp"/>
         </RelativeLayout>
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:background="@drawable/border_rectangle">
-            <TextView
-                    android:text="Vị trí"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView26"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:layout_marginStart="16dp"/>
-            <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/checkBox3"
-                    android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp" android:background="@drawable/border_rectangle">

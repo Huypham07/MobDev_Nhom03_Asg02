@@ -1,38 +1,42 @@
 package com.example.asg02.view.ui.setting.account;
 
-import androidx.lifecycle.ViewModelProvider;
+import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.asg02.R;
-import com.example.asg02.controller.DeleteAccountController;
+import com.example.asg02.controller.account.DeleteAccountController;
 import com.example.asg02.controller.GetProvinceController;
-import com.example.asg02.controller.UpdateAccountController;
+import com.example.asg02.controller.account.UpdateAccountController;
 import com.example.asg02.databinding.FragmentAccountEditingBinding;
 import com.example.asg02.model.User;
-import com.example.asg02.view.BaseActivity;
 import com.example.asg02.view.LoginActivity;
-import com.example.asg02.view.RegisterActivity;
 import com.example.asg02.view.SettingsActivity;
 import com.example.asg02.view.Utils;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,6 +55,9 @@ public class AccountEditingFragment extends Fragment {
     private AutoCompleteTextView editSex;
     private AutoCompleteTextView editRegion;
     private AutoCompleteTextView editFavorite;
+    private Button changeAvatar;
+    private ImageView avatar;
+    private String avtUri;
     private boolean isHidePassword = true;
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -69,6 +76,9 @@ public class AccountEditingFragment extends Fragment {
         editSex = binding.editSex;
         editRegion = binding.editRegion;
         editFavorite = binding.editFavorite;
+        changeAvatar = binding.changeAvt;
+        avatar = binding.avatar;
+
         updateAccountController = new UpdateAccountController();
         deleteAccountController = new DeleteAccountController();
 
@@ -82,6 +92,13 @@ public class AccountEditingFragment extends Fragment {
             editBirthDate.setText(user.getBirthDate());
             editSex.setText(user.getSex());
             editRegion.setText(user.getRegion());
+            avtUri = user.getAvatar();
+            if (avtUri != null) {
+                binding.avatar.setImageBitmap(Utils.cropToCircleWithBorder(Utils.decodeBitmap(avtUri), 20, Color.parseColor("#59351A")));
+            } else {
+                binding.avatar.setImageResource(R.drawable.choosing_avatar);
+            }
+
 
 
             //-----------add eventListener--------------
@@ -167,6 +184,10 @@ public class AccountEditingFragment extends Fragment {
                 }
             }));
 
+            changeAvatar.setOnClickListener(v -> {
+                selectImage();
+            });
+
             changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
             passwordIcon.setOnClickListener(v -> {
                 isHidePassword = !isHidePassword;
@@ -184,6 +205,7 @@ public class AccountEditingFragment extends Fragment {
                             user.setBirthDate(binding.editBirthDate.getText().toString());
                             user.setSex(binding.editSex.getText().toString());
                             user.setRegion(binding.editRegion.getText().toString());
+                            user.setAvatar(avtUri);
                             change = false;
                             updateAccountController.updateCurrentAccount(user);
                         }).show();
@@ -251,6 +273,34 @@ public class AccountEditingFragment extends Fragment {
         } else {
             imageView.setImageResource(R.drawable.show_password_icon);
             editText.setTransformationMethod(null);
+        }
+    }
+
+    private static final int PICK_IMAGE = 1;
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Chọn ảnh"), PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                Bitmap avatarBitmap = Utils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
+                avatar.setImageBitmap(avatarBitmap);
+                avtUri = Utils.encodeImage(bitmap);
+                user.setAvatar(avtUri);
+                change = true;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

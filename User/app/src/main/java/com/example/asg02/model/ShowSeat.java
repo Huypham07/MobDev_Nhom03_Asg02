@@ -6,7 +6,6 @@ public class ShowSeat extends Seat {
     private Show show;
 
     public ShowSeat(String seatRow, String seatNumber, String seatType, String seatStatus, double price, Show show) {
-        super(seatRow, seatNumber, seatType);
         this.seatStatus = seatStatus;
         this.price = price;
         this.show = show;

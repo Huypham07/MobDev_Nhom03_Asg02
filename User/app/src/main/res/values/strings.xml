@@ -9,10 +9,15 @@
     <string name="action_settings">Settings</string>
 
     <string name="title_fragment_movie">Phim</string>
-    <string name="title_fragment_news">Tin mới &amp; Ưu đãi</string>
+    <string name="title_fragment_event">Tin mới &amp; Ưu đãi</string>
+    <string name="title_fragment_listBooking">Vé của tôi</string>
+    <string name="title_fragment_choose_complex">Chọn cụm rạp</string>
+    <string name="title_fragment_choose_cinema">Chọn rạp chiếu</string>
+    <string name="title_fragment_choose_seat">Chọn ghế</string>
 
     <!-- API KEY -->
     <string name="googleMap_key">AIzaSyB7040OPgEBUXuw8_O595nxb7cYaAzOYWQ</string>
+
 
     <!-- Login -->
     <string name="title_activity_login">Đăng nhập</string>
@@ -36,6 +41,9 @@
 
     <!-- Order -->
     <string name="order_button">Đặt vé</string>
+
+    <!-- review -->
+    <string name="send_review_button">Gửi đánh giá</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

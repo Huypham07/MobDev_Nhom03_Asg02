@@ -4,34 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Booking {
-    private int bookingNumber;
-    private String userEmail;
+    private int id;
+    private String userID;
     private Show show;
     private List<ShowSeat> seats = new ArrayList<>();
     private List<CarryItem> carryItems = new ArrayList<>();
-    private String bookingStatus;
+    private int bookingStatus;
     private Payment payment;
 
-    public Booking(int bookingNumber, String userEmail, Show show) {
-        this.bookingNumber = bookingNumber;
-        this.userEmail = userEmail;
-        this.show = show;
+    public static final int PENDING = 0;
+    public static final int EXPIRED = 2;
+    public static final int PAID = 1;
+
+    public Booking() {
     }
 
-    public int getBookingNumber() {
-        return bookingNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setBookingNumber(int bookingNumber) {
-        this.bookingNumber = bookingNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public Show getShow() {
@@ -58,11 +59,11 @@ public class Booking {
         this.carryItems = carryItems;
     }
 
-    public String getBookingStatus() {
+    public int getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(String bookingStatus) {
+    public void setBookingStatus(int bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
 

@@ -17,6 +17,21 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/scroll_view">
 
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp" android:id="@+id/avatar"
+                android:src="@drawable/choosing_avatar"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:text="Thay ảnh đại diện"
+                android:backgroundTint="@color/softPink"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/change_avt" android:layout_gravity="center_horizontal"/>
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:paddingEnd="40dp" android:paddingStart="40dp"

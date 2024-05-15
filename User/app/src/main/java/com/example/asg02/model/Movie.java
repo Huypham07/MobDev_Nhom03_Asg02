@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Movie implements Serializable {
+    private int id;
     private String name;
     private String poster;
     private String genre;
@@ -16,8 +17,8 @@ public class Movie implements Serializable {
     private String actors;
     private String language;
     private float rating;
-    private List<Review> reviews = new ArrayList<>();
-    private List<Show> shows = new ArrayList<>();
+    private String censor;
+    private String trailerLink;
 
     public Movie() {
     }
@@ -142,19 +143,27 @@ public class Movie implements Serializable {
         this.rating = rating;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
+    public int getId() {
+        return id;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<Show> getShows() {
-        return shows;
+    public String getCensor() {
+        return censor;
     }
 
-    public void setShows(List<Show> shows) {
-        this.shows = shows;
+    public void setCensor(String censor) {
+        this.censor = censor;
+    }
+
+    public String getTrailerLink() {
+        return trailerLink;
+    }
+
+    public void setTrailerLink(String trailerLink) {
+        this.trailerLink = trailerLink;
     }
 }

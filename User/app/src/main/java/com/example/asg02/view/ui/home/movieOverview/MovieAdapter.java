@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asg02.model.Movie;
 import org.jetbrains.annotations.NotNull;
 import com.example.asg02.R;
+import com.example.asg02.view.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +35,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
         ImageView poster;
         TextView name;
         TextView duration;
+        TextView censor;
         public MovieHolder(View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.poster);
             name = itemView.findViewById(R.id.movie_name);
             duration = itemView.findViewById(R.id.movie_duration);
+            censor = itemView.findViewById(R.id.movie_censor);
         }
 
     }
@@ -61,9 +65,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             }
 
         });
-        holder.duration.setText(String.valueOf(movieList.get(position).getDurationMins()));
-        holder.name.setText(String.valueOf(movieList.get(position).getName()));
-
+        holder.duration.setText(" " + Utils.convertIntTimeToString(movieList.get(position).getDurationMins()));
+        holder.name.setText(movieList.get(position).getName().toUpperCase());
+//        String cens = movieList.get(position).getCensor();
+//        holder.censor.setText(cens.substring(0, cens.indexOf(" ")));
     }
 
     @Override

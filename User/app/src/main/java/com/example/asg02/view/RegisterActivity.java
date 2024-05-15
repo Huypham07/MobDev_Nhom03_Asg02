@@ -3,11 +3,16 @@ package com.example.asg02.view;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,15 +21,19 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
+
 import com.example.asg02.R;
 import com.example.asg02.controller.GetProvinceController;
-import com.example.asg02.controller.RegisterController;
+import com.example.asg02.controller.account.RegisterController;
 import com.example.asg02.databinding.ActivityRegisterBinding;
 import com.example.asg02.model.User;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 public class RegisterActivity extends BaseActivity {
@@ -40,6 +49,9 @@ public class RegisterActivity extends BaseActivity {
     private AutoCompleteTextView editRegion;
     private AutoCompleteTextView editFavorite;
     private ProgressBar progressBar;
+    private Button changeAvatar;
+    private ImageView avatar;
+    private String avtUri;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -47,7 +59,6 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         // assign
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setNavigationOnClickListener(v -> {
@@ -64,6 +75,8 @@ public class RegisterActivity extends BaseActivity {
         editRegion = binding.editRegion;
         editFavorite = binding.editFavorite;
         progressBar = binding.progressBar;
+        changeAvatar = binding.changeAvt;
+        avatar = binding.avatar;
         registerController = new RegisterController();
 
         editBirthDate.setOnClickListener(v -> {
@@ -138,6 +151,10 @@ public class RegisterActivity extends BaseActivity {
             editPassword.setError(null);
         }));
 
+        changeAvatar.setOnClickListener(v -> {
+            selectImage();
+        });
+
         binding.register.setOnClickListener(v -> {
             User user = getUserFromInput();
             CheckBox checkBox = binding.checkBox;
@@ -193,7 +210,7 @@ public class RegisterActivity extends BaseActivity {
         String region = editRegion.getText().toString();
         String favorite = editFavorite.getText().toString();
 
-        return new User(email, password, name, birthDate, sex, phone, region, favorite, 0);
+        return new User(email, password, name, birthDate, sex, phone, region, favorite, avtUri);
     }
 
     private static final String ERROR_MESSAGE = "Mục này không được để trống";
@@ -240,6 +257,32 @@ public class RegisterActivity extends BaseActivity {
         } else {
             imageView.setImageResource(R.drawable.show_password_icon);
             editText.setTransformationMethod(null);
+        }
+    }
+
+    private static final int PICK_IMAGE = 1;
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Chọn ảnh"), PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                Bitmap avatarBitmap = Utils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
+                avatar.setImageBitmap(avatarBitmap);
+                avtUri = Utils.encodeImage(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

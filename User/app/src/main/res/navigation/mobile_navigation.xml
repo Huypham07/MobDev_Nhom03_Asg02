@@ -14,8 +14,11 @@
             app:destination="@id/nav_movie_details" >
         </action>
         <action
-            android:id="@+id/action_nav_home_to_nav_news_detail"
-            app:destination="@id/nav_news_detail" />
+            android:id="@+id/action_nav_home_to_nav_events_detail"
+            app:destination="@id/nav_events_detail" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_listBooking"
+            app:destination="@id/nav_listBooking" />
     </fragment>
 
     <fragment android:id="@+id/nav_notification"
@@ -28,8 +31,36 @@
         android:label="@string/title_fragment_movie"
         tools:layout="@layout/fragment_movie_details" />
     <fragment
-        android:id="@+id/nav_news_detail"
-        android:name="com.example.asg02.view.ui.news.NewsDetailsFragment"
-        android:label="@string/title_fragment_news"
-        tools:layout="@layout/fragment_news_details" />
+        android:id="@+id/nav_events_detail"
+        android:name="com.example.asg02.view.ui.event.EventDetailsFragment"
+        android:label="@string/title_fragment_event"
+        tools:layout="@layout/fragment_events_details" />
+    <fragment
+        android:id="@+id/nav_listBooking"
+        android:name="com.example.asg02.view.ui.booking.ListBookingFragment"
+        android:label="@string/title_fragment_listBooking"
+        tools:layout="@layout/fragment_list_booking" />
+    <fragment
+        android:id="@+id/nav_choose_complex"
+        android:name="com.example.asg02.view.ui.booking.process.ChooseComplexFragment"
+        android:label="@string/title_fragment_choose_complex"
+        tools:layout="@layout/fragment_choose_complex" >
+        <action
+            android:id="@+id/action_nav_choose_complex_to_nav_choose_cinema"
+            app:destination="@id/nav_choose_cinema" />
+        <action
+            android:id="@+id/action_nav_choose_complex_to_nav_choose_seat"
+            app:destination="@id/nav_choose_seat" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_choose_cinema"
+        android:name="com.example.asg02.view.ui.booking.process.ChooseCinemaFragment"
+        android:label="@string/title_fragment_choose_cinema"
+        tools:layout="@layout/fragment_choose_cinema" />
+    <fragment
+        android:id="@+id/nav_choose_seat"
+        android:name="com.example.asg02.view.ui.booking.process.ChooseSeatFragment"
+        android:label="@string/title_fragment_choose_seat"
+        tools:layout="@layout/fragment_choose_seat" />
+
 </navigation>
