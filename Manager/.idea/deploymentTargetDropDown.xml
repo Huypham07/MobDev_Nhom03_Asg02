@@ -2,22 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ManagerActivityUITest">
-        <State />
-      </entry>
-      <entry key="ManagerAddCinemaActivityUITest">
-        <State />
-      </entry>
       <entry key="ManagerAddHallActivityUITest">
         <State />
       </entry>
       <entry key="ManagerAddShowActivityUITest">
         <State />
       </entry>
+      <entry key="ManagerEditAndDeleteActivityUITest">
+        <State />
+      </entry>
+      <entry key="MoviesInCinemaActivityUITest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="testClickOnChildItem()">
+      <entry key="testImageViewDisplay()">
         <State />
       </entry>
     </value>

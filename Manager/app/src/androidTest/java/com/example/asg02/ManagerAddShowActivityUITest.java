@@ -42,4 +42,18 @@ public class ManagerAddShowActivityUITest {
     }
 
     // Cần viết thêm ui test cho spinner
+    @Test
+    public void testChooseCinemaInShowSpinner() {
+        Espresso.onView(withId(R.id.chooseCinemaInShow)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void testChooseHallInShowSpinner() {
+        Espresso.onView(withId(R.id.chooseHallInShow)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void testChooseMovieInShowSpinner() {
+        Espresso.onView(withId(R.id.chooseMovieInShow)).perform(ViewActions.click());
+    }
 }

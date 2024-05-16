@@ -3,6 +3,7 @@ package com.example.asg02;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
@@ -13,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -24,6 +26,12 @@ public class ManagerAddHallActivityUITest {
     @Rule
     public ActivityScenarioRule<ManagerAddHallActivity> activityScenarioRule =
             new ActivityScenarioRule<>(ManagerAddHallActivity.class);
+
+    @Test
+    public void testBackHallButton() {
+        onView(withId(R.id.backHall)).perform(ViewActions.click());
+        onView(withId(R.id.managerActivity)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
 
     @Test
     public void testEnterHallName() {
@@ -50,4 +58,8 @@ public class ManagerAddHallActivityUITest {
     }
 
     // Viết ui test cho spinner và addButton
+    @Test
+    public void testChooseCinemaInHallSpinner() {
+        Espresso.onView(withId(R.id.chooseCinemaInHall)).perform(ViewActions.click());
+    }
 }
