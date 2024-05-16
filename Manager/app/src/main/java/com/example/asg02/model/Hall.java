@@ -3,22 +3,22 @@ package com.example.asg02.model;
 public class Hall {
     private int id;
     private String name;
-    private int seatPerColumn;
+    private int seatsPerColumn;
     private int seatsPerRow;
     private int cinemaId;
 
-    public Hall(String name, int seatPerRow, int seatsPerColumn, int cinemaId) {
+    public Hall(String name, int seatsPerRow, int seatsPerColumn, int cinemaId) {
         this.name = name;
-        this.seatPerColumn = seatPerColumn;
+        this.seatsPerColumn = seatsPerColumn;
         this.seatsPerRow = seatsPerRow;
         this.cinemaId = cinemaId;
         id = hashCode();
     }
 
-    public Hall(int id, String name, int seatPerColumn, int seatsPerRow, int cinemaId) {
+    public Hall(int id, String name, int seatsPerRow, int seatsPerColumn, int cinemaId) {
         this.id = id;
         this.name = name;
-        this.seatPerColumn = seatPerColumn;
+        this.seatsPerColumn = seatsPerColumn;
         this.seatsPerRow = seatsPerRow;
         this.cinemaId = cinemaId;
     }
@@ -39,12 +39,12 @@ public class Hall {
         this.name = name;
     }
 
-    public int getSeatPerColumn() {
-        return seatPerColumn;
+    public int getSeatsPerColumn() {
+        return seatsPerColumn;
     }
 
     public void setSeatPerColumn(int seatPerColumn) {
-        this.seatPerColumn = seatPerColumn;
+        this.seatsPerColumn = seatPerColumn;
     }
 
     public int getSeatsPerRow() {

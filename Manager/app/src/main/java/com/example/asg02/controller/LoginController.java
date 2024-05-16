@@ -29,12 +29,6 @@ public class LoginController implements AccountReader {
         if (id == null || password == null) {
             return null;
         }
-//        if (idIsEmail(id)) {
-//
-//        }
-//        else {
-//            return getAccountWithPhone(id, password);
-//        }
         return getAccountWithEmail(id, password);
     }
 
