@@ -1,5 +1,8 @@
 package com.example.asg02;
 
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -19,6 +22,12 @@ public class ManagerAddCinemaActivityUITest {
     @Rule
     public ActivityScenarioRule<ManagerAddCinemaActivity> activityScenarioRule
             = new ActivityScenarioRule<>(ManagerAddCinemaActivity.class);
+
+    @Test
+    public void testBackCinemaButton() {
+        onView(withId(R.id.backCinema)).perform(ViewActions.click());
+        onView(withId(R.id.managerActivity)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
 
     @Test
     public void testAddCinemaTitleDisplayed() {

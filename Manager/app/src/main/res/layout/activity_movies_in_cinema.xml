@@ -59,7 +59,8 @@
         android:layout_marginTop="84dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="...">
+        android:contentDescription="..."
+        android:id="@+id/horizontalScrollView">
 
         <LinearLayout
             android:layout_width="match_parent"

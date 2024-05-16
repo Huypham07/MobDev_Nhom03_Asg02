@@ -23,8 +23,6 @@ public class InfoActivityUITest {
     @Test
     public void testBackButton() {
         Espresso.onView(ViewMatchers.withId(R.id.backInfo)).perform(ViewActions.click());
-
-        // Kiểm tra xem có quay về màn hình trước đó hay không (dùng id của view trên màn hình trước để kiểm tra)
         Espresso.onView(ViewMatchers.withId(R.id.managerActivity)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
