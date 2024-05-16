@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asg02.R;
+import com.example.asg02.controller.booking.CreateBookingController;
 import com.example.asg02.databinding.FragmentPayBinding;
 import com.example.asg02.model.Booking;
 import com.example.asg02.model.Cinema;
@@ -27,11 +28,13 @@ import com.example.asg02.model.Payment;
 import com.example.asg02.model.Show;
 import com.example.asg02.model.User;
 import com.example.asg02.view.Utils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
@@ -109,18 +112,17 @@ public class PayFragment extends Fragment {
             updateBill();
         });
 
-
-        // zalopay
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        // ZaloPay SDK Init
-        ZaloPaySDK.init(2553, Environment.SANDBOX);
-        // bind components with ids
-
         binding.payByZaloPay.setOnClickListener(v -> {
             // Pay by ZaloPay
-            requestOrderZalo(String.valueOf(10000));
+//            requestOrderZalo(String.valueOf(10000));
+            String date = String.format("%02d/%02d/%04d"
+                    , Utils.currentDate.getDayOfMonth(), Utils.currentDate.getMonthValue(), Utils.currentDate.getYear());
+            Booking booking = new Booking(userId, show, new ArrayList<>(), seats
+                    , new Payment(show.getId() + show.getDate() + new Random().nextInt(), totalPrice, date));
+            new CreateBookingController().createBooking(booking);
+            Snackbar.make(binding.payByZaloPay, "Đặt vé thành công", Snackbar.LENGTH_LONG).show();
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            controller.navigate(R.id.nav_home);
         });
 
         return root;

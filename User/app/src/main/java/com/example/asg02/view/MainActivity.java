@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
+import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPaySDK;
 
 public class MainActivity extends BaseActivity {
@@ -44,6 +46,14 @@ public class MainActivity extends BaseActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // zalopay
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, Environment.SANDBOX);
+        // bind components with ids
 
         sharedPreferences = getSharedPreferences("LoginSharedPrefs", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -87,7 +97,10 @@ public class MainActivity extends BaseActivity {
         // open setting
         binding.navViewLayout.settings.setOnClickListener(v -> {
             closeDrawer();
-            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
 
         // logout
@@ -127,6 +140,9 @@ public class MainActivity extends BaseActivity {
             closeDrawer();
         });
 
+        binding.appBarMain.ticket.setOnClickListener(v -> {
+            controller.navigate(R.id.action_nav_home_to_nav_listBooking);
+        });
     }
 
     private void closeDrawer() {

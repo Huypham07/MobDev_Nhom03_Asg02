@@ -72,5 +72,10 @@
         android:name="com.example.asg02.view.ui.booking.process.PayFragment"
         android:label="@string/title_fragment_pay"
         tools:layout="@layout/fragment_pay" />
+    <fragment
+        android:id="@+id/listBookingDetailsFragment"
+        android:name="com.example.asg02.view.ui.booking.ListBookingDetailsFragment"
+        android:label="fragment_list_booking_details"
+        tools:layout="@layout/fragment_list_booking_details" />
 
 </navigation>

@@ -4,24 +4,23 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.asg02.R;
+import com.example.asg02.controller.booking.GetBookingController;
 import com.example.asg02.databinding.FragmentListBookingDetailsBinding;
 import com.example.asg02.model.Booking;
+import com.example.asg02.view.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListBookingDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListBookingDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -29,39 +28,13 @@ public class ListBookingDetailsFragment extends Fragment {
     private static final String ARG_PARAM = "isExpired";
 
     // TODO: Rename and change types of parameters
-    private boolean mParam;
+    private boolean isExpired = true;
     private FragmentListBookingDetailsBinding binding;
 
-    public ListBookingDetailsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param Parameter .
-     * @return A new instance of fragment ListBookingDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListBookingDetailsFragment newInstance(boolean param) {
-        ListBookingDetailsFragment fragment = new ListBookingDetailsFragment();
-        Bundle args = new Bundle();
-        args.putBoolean(ARG_PARAM, param);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam = getArguments().getBoolean(ARG_PARAM);
-        }
-    }
-
-    private List<Booking> bookingList;
+    private List<Booking> bookingList = new ArrayList<>();
     private BookingAdapter bookingAdapter;
+
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,21 +42,38 @@ public class ListBookingDetailsFragment extends Fragment {
         binding = FragmentListBookingDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        if (mParam) {
-            if (bookingList == null) {
-                bookingList = new ArrayList<>();
-            }
-        } else {
-            if (bookingList == null) {
-                bookingList = new ArrayList<>();
-            }
+        if (getArguments() != null) {
+            isExpired = getArguments().getBoolean("isExpired");
         }
-
+        recyclerView = binding.recyclerview;
         bookingAdapter = new BookingAdapter(bookingList);
-        binding.recyclerview.setAdapter(bookingAdapter);
+        recyclerView.setAdapter(bookingAdapter);
 
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(binding.recyclerview);
+        String userId = getActivity().getIntent().getStringExtra("userId");
+
+        new GetBookingController().getAllBookings(userId).thenAccept(bookings -> {
+           if (bookings != null) {
+               bookingList.clear();
+               for (Booking b : bookings) {
+                   if (isExpired) {
+                       if  (Utils.isCurrentMovie(b.getShow().getDate())) {
+                           bookingList.add(b);
+                       }
+                   } else {
+                       if  (!Utils.isCurrentMovie(b.getShow().getDate())) {
+                           bookingList.add(b);
+                       }
+                   }
+               }
+
+               for (Booking b : bookingList) {
+                   Log.d("Booking", String.valueOf(b.getShow().getMovieId()));
+               }
+               bookingAdapter.notifyDataSetChanged();
+               bookingAdapter = new BookingAdapter(bookingList);
+               recyclerView.setAdapter(bookingAdapter);
+           }
+        });
 
         return root;
     }

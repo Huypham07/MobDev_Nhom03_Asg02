@@ -11,7 +11,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asg02.R;
+import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.model.Booking;
+import com.example.asg02.model.Movie;
+import com.example.asg02.model.Show;
+import com.example.asg02.view.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +68,18 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
                 listener.onItemClick(position);
             }
         });
-        //set data
+        new GetMovieController().getAllMovies().thenAccept(movies -> {
+            for (Movie m : movies) {
+                if (m.getId() == bookingList.get(position).getShow().getMovieId()) {
+                    holder.imageView.setImageBitmap(Utils.decodeBitmap(m.getPoster()));
+                    holder.name.setText(m.getName());
+                    holder.duration.setText(Utils.convertIntTimeToString(m.getDurationMins()));
+                    Show sh = bookingList.get(position).getShow();
+                    holder.expiredDate.setText(sh.getStartTime() + " - " + sh.getEndTime() + ", " + sh.getDate());
+                    break;
+                }
+            }
+        });
     }
 
     @Override
