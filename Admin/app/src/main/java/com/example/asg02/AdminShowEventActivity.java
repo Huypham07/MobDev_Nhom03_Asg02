@@ -33,11 +33,50 @@ public class AdminShowEventActivity extends BaseActivity {
         TextView infoTextView = findViewById(R.id.eventInfoTextView);
         ImageButton editBtn = findViewById(R.id.editBtn);
 
-        nameTextView.setText(event.getEventName());
-        Bitmap posterBitmap = Event.decodeBitmap(event.getPoster());
-        posterImageView.setImageBitmap(posterBitmap);
-        dateTextView.setText(event.getStartDate() + " - " + event.getEndDate());
-        infoTextView.setText(event.getEventInfo());
+//        nameTextView.setText(event.getEventName());
+//        Bitmap posterBitmap = Event.decodeBitmap(event.getPoster());
+//        posterImageView.setImageBitmap(posterBitmap);
+//        dateTextView.setText(event.getStartDate() + " - " + event.getEndDate());
+//        infoTextView.setText(event.getEventInfo());
+
+        if (event != null) {
+            // Set event name
+            String eventName = event.getEventName();
+            if (eventName != null) {
+                nameTextView.setText(eventName);
+            } else {
+                nameTextView.setText("");
+            }
+
+            // Set poster image
+            Bitmap posterBitmap = null;
+            if (posterBitmap != null) {
+                posterBitmap = Event.decodeBitmap(event.getPoster());
+            }
+            posterImageView.setImageBitmap(posterBitmap);
+
+            // Set date
+            String startDate = event.getStartDate();
+            String endDate = event.getEndDate();
+            if (startDate != null && endDate != null) {
+                dateTextView.setText(startDate + " - " + endDate);
+            } else {
+                dateTextView.setText("");
+            }
+
+            String eventInfo = event.getEventInfo();
+            if (eventInfo != null) {
+                infoTextView.setText(eventInfo);
+            } else {
+                infoTextView.setText("");
+            }
+        } else {
+            nameTextView.setText("");
+            posterImageView.setImageBitmap(null); // Clear image
+            dateTextView.setText("");
+            infoTextView.setText("");
+        }
+
 
         backBtn.setOnClickListener(v -> {
             Intent intent = new Intent(this, AdminManageEventActivity.class);

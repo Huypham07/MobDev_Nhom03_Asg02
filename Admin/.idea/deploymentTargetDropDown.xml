@@ -2,13 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AdminAddCinemaActivity2UITest">
+      <entry key="ActivityTestSuite">
         <State />
       </entry>
-      <entry key="AdminAddCinemaActivityTest">
+      <entry key="AdminMainActivityUITest">
         <State />
       </entry>
-      <entry key="AdminMainActivityTest">
+      <entry key="AdminManageEventActivityUITest">
+        <State />
+      </entry>
+      <entry key="AdminMessageActivityUITest">
+        <State />
+      </entry>
+      <entry key="AdminShowEventActivityUITest">
         <State />
       </entry>
       <entry key="app">

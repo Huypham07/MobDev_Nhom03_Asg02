@@ -38,28 +38,23 @@ public class AdminAddCinemaActivityUITest {
     public void testEnterCinemaName() {
         String cinemaName = "Cinema XYZ";
 
-        // Type cinema name into EditText
         Espresso.onView(ViewMatchers.withId(R.id.enterCinemaName))
                 .perform(ViewActions.typeText(cinemaName), ViewActions.closeSoftKeyboard());
 
-        // Check if the entered cinema name matches
         Espresso.onView(ViewMatchers.withId(R.id.enterCinemaName)).check(matches(withText(cinemaName)));
     }
 
     @Test
     public void testContinueButtonEnabledAfterEnteringCinemaName() {
         String cinemaName = "CGV";
-        // Type cinema name into EditText
         Espresso.onView(ViewMatchers.withId(R.id.enterCinemaName))
                 .perform(ViewActions.typeText(cinemaName), ViewActions.closeSoftKeyboard());
 
-        // Check if continue button is enabled
         Espresso.onView(ViewMatchers.withId(R.id.continueBtn)).check(matches(isEnabled()));
     }
 
     @Test
     public void testContinueButtonDisabledWithoutEnteringCinemaName() {
-        // Check if continue button is disabled initially
         Espresso.onView(ViewMatchers.withId(R.id.continueBtn)).check(matches(not(isEnabled())));
     }
 }
