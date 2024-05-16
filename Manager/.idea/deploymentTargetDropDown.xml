@@ -8,7 +8,7 @@
       <entry key="ManagerAddShowActivityUITest">
         <State />
       </entry>
-      <entry key="ManagerEditAndDeleteActivityUITest">
+      <entry key="ManagerChangePasswordUITest">
         <State />
       </entry>
       <entry key="MoviesInCinemaActivityUITest">
@@ -17,7 +17,7 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="testImageViewDisplay()">
+      <entry key="testHorizontalScrollViewScroll()">
         <State />
       </entry>
     </value>
