@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="opacity_back">#99000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="opacity_white">#D2D2D2</color>
+    <color name="red">#FF0909</color>
+    <color name="blue">#23A8F3</color>
+    <color name="no_color">#00000000</color>
+    <color name="orange">#FFA500</color>
 </resources>

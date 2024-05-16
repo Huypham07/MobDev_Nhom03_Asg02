@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <value>
+      <entry key="ManagerActivityUITest">
+        <State />
+      </entry>
+      <entry key="ManagerAddCinemaActivityUITest">
+        <State />
+      </entry>
+      <entry key="ManagerAddHallActivityUITest">
+        <State />
+      </entry>
+      <entry key="ManagerAddShowActivityUITest">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+      <entry key="testClickOnChildItem()">
+        <State />
+      </entry>
+    </value>
+  </component>
+</project>
