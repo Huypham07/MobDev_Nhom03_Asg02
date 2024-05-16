@@ -103,7 +103,7 @@ public class ManagerAddHallActivity extends AppCompatActivity {
                 String name = enterHallNameEditText.getText().toString();
                 Integer seatsPerRow = Integer.valueOf(enterSeatsPerRowEditText.getText().toString());
                 Integer seatsPerColumn = Integer.valueOf(enterSeatsPerColumnEditText.getText().toString());
-                Hall hall = new Hall(name, seatsPerRow, seatsPerColumn, cinemaId);
+                Hall hall = new Hall(name, seatsPerRow.intValue(), seatsPerColumn.intValue(), cinemaId.intValue());
                 createHallController.createHall(hall);
                 Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
                 startActivity(intent);

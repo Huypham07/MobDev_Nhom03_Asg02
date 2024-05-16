@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.asg02.controller.LoginController;
 import com.example.asg02.model.Manager;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 Manager manager = (Manager) account;
                 if (manager != null) {
                     Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
+                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     SharedPreferences preferences = getSharedPreferences("account_info", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("email", manager.getEmail());
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-
+                    Toast.makeText(this, "Tài khoản, mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                 }
                 return null;
             });

@@ -62,6 +62,9 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
         hallList = new ArrayList<>();
         showTimeList = new ArrayList<>();
         showList = new ArrayList<>();
+        cinemaNamesList.add("Choose a cinema");
+        hallNamesList.add("Choose a hall");
+        showTimeList.add("Choose a show");
         editAndDeleteController = new EditAndDeleteController(this);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,56 +107,59 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
         chooseCinemaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected cinema name from the Spinner
-                finalCinemaId = (Integer) cinemaList.get(position).getId();
-                deleteId = finalCinemaId;
-                deleteType = "Cinemas";
-                showInforCinemaHallShowTextView.setText("Cinema info: "
-                        + "\nname: " + cinemaList.get(position).getName()
-                        + "\nprovince: " + cinemaList.get(position).getProvince()
-                        + "\ndistrict: " + cinemaList.get(position).getDistrict()
-                        + "\ncommune: " + cinemaList.get(position).getCommune()
-                        + "\ndetailAddress: " + cinemaList.get(position).getDetailAddress());
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                database.getReference("Halls").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            hallNamesList.clear();
-                            hallList.clear();
-                            showTimeList.clear();
-                            showList.clear();
-                            ArrayAdapter<String> adapter1 = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, showTimeList);
-                            chooseShowSpinner.setAdapter(adapter1);
-                            for (DataSnapshot hallSnapshot : dataSnapshot.getChildren()) {
-                                // Extract cinema name
-                                Integer cinemaIdInHall = hallSnapshot.child("cinemaId").getValue(Integer.class);
-                                if (cinemaIdInHall.equals(finalCinemaId) ) {
-                                    String name = hallSnapshot.child("name").getValue(String.class);
-                                    Integer id = hallSnapshot.child("id").getValue(Integer.class);
-                                    Integer seatsPerRow = hallSnapshot.child("seatsPerRow").getValue(Integer.class);
-                                    Integer seatsPerColumn = hallSnapshot.child("seatsPerColumn").getValue(Integer.class);
-                                    Integer cinemaId = hallSnapshot.child("cinemaId").getValue(Integer.class);
-                                    hallNamesList.add(name);
-                                    hallList.add(new Hall(id.intValue(), name, seatsPerRow.intValue(), seatsPerColumn.intValue(), cinemaId.intValue()));
+                if (position > 0) {
+                    finalCinemaId = (Integer) cinemaList.get(position - 1).getId();
+                    deleteId = finalCinemaId;
+                    deleteType = "Cinemas";
+                    showInforCinemaHallShowTextView.setText("Cinema info: "
+                            + "\nname: " + cinemaList.get(position - 1).getName()
+                            + "\nprovince: " + cinemaList.get(position - 1).getProvince()
+                            + "\ndistrict: " + cinemaList.get(position - 1).getDistrict()
+                            + "\ncommune: " + cinemaList.get(position - 1).getCommune()
+                            + "\ndetailAddress: " + cinemaList.get(position - 1).getDetailAddress());
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    database.getReference("Halls").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                hallNamesList.clear();
+                                hallList.clear();
+                                showTimeList.clear();
+                                showList.clear();
+                                hallNamesList.add("Choose a Hall");
+                                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, showTimeList);
+                                chooseShowSpinner.setAdapter(adapter1);
+                                for (DataSnapshot hallSnapshot : dataSnapshot.getChildren()) {
+                                    // Extract cinema name
+                                    Integer cinemaIdInHall = hallSnapshot.child("cinemaId").getValue(Integer.class);
+                                    if (cinemaIdInHall.equals(finalCinemaId) ) {
+                                        String name = hallSnapshot.child("name").getValue(String.class);
+                                        Integer id = hallSnapshot.child("id").getValue(Integer.class);
+                                        Integer seatsPerRow = hallSnapshot.child("seatsPerRow").getValue(Integer.class);
+                                        Integer seatsPerColumn = hallSnapshot.child("seatsPerColumn").getValue(Integer.class);
+                                        Integer cinemaId = hallSnapshot.child("cinemaId").getValue(Integer.class);
+                                        hallNamesList.add(name);
+                                        hallList.add(new Hall(id.intValue(), name, seatsPerRow.intValue(), seatsPerColumn.intValue(), cinemaId.intValue()));
+                                    }
+                                    else {
+                                        Toast.makeText(ManagerEditAndDeleteActivity.this, "Error", Toast.LENGTH_SHORT);
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(ManagerEditAndDeleteActivity.this, "Error", Toast.LENGTH_SHORT);
-                                }
+                                // Create an ArrayAdapter and set it to the Spinner
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, hallNamesList);
+                                chooseHallSpinner.setAdapter(adapter);
+                            } else {
+                                // Handle the case where "Cinemas" node doesn't exist
+                                Log.d("Firebase", "Cinemas node does not exist");
                             }
-                            // Create an ArrayAdapter and set it to the Spinner
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, hallNamesList);
-                            chooseHallSpinner.setAdapter(adapter);
-                        } else {
-                            // Handle the case where "Cinemas" node doesn't exist
-                            Log.d("Firebase", "Cinemas node does not exist");
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.e("Firebase", "Error reading data:", databaseError.toException());
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e("Firebase", "Error reading data:", databaseError.toException());
+                        }
+                    });
+                }
+                // Get the selected cinema name from the Spinner
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -165,51 +171,55 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected cinema name from the Spinner
-                finalHallId = (Integer) hallList.get(position).getId();
-                deleteId = finalHallId;
-                deleteType = "Halls";
-                showInforCinemaHallShowTextView.setText("Hall info: "
-                        + "\nname: " + hallList.get(position).getName()
-                        + "\nseatsPerRow: " + hallList.get(position).getSeatsPerRow()
-                        + "\nseatsPerColumn: " + hallList.get(position).getSeatPerColumn());
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                database.getReference("Shows").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            showTimeList.clear();
-                            showList.clear();
-                            for (DataSnapshot showSnapshot : dataSnapshot.getChildren()) {
-                                // Extract cinema name
-                                Integer hallIdInShow = showSnapshot.child("hallId").getValue(Integer.class);
-                                if (hallIdInShow.equals(finalHallId) ) {
-                                    Integer id = showSnapshot.child("id").getValue(Integer.class);
-                                    Integer cinemaId = showSnapshot.child("cinemaId").getValue(Integer.class);
-                                    Integer hallId = showSnapshot.child("hallId").getValue(Integer.class);
-                                    Integer movieId = showSnapshot.child("movieId").getValue(Integer.class);
-                                    String startTime = showSnapshot.child("startTime").getValue(String.class);
-                                    String endTime = showSnapshot.child("endTime").getValue(String.class);
-                                    String date = showSnapshot.child("date").getValue(String.class);
-                                    showTimeList.add(startTime + ":" + endTime + " " + date);
-                                    showList.add(new Show(id.intValue(), cinemaId.intValue(), hallId.intValue(), movieId.intValue(), startTime, endTime, date));
+                if (position > 0) {
+                    finalHallId = (Integer) hallList.get(position - 1).getId();
+                    deleteId = finalHallId;
+                    deleteType = "Halls";
+                    showInforCinemaHallShowTextView.setText("Hall info: "
+                            + "\nname: " + hallList.get(position - 1).getName()
+                            + "\nseatsPerRow: " + hallList.get(position - 1).getSeatsPerRow()
+                            + "\nseatsPerColumn: " + hallList.get(position - 1).getSeatsPerColumn());
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    database.getReference("Shows").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                showTimeList.clear();
+                                showList.clear();
+                                showTimeList.add("Choose a show");
+                                for (DataSnapshot showSnapshot : dataSnapshot.getChildren()) {
+                                    // Extract cinema name
+                                    Integer hallIdInShow = showSnapshot.child("hallId").getValue(Integer.class);
+                                    if (hallIdInShow.equals(finalHallId) ) {
+                                        Integer id = showSnapshot.child("id").getValue(Integer.class);
+                                        Integer cinemaId = showSnapshot.child("cinemaId").getValue(Integer.class);
+                                        Integer hallId = showSnapshot.child("hallId").getValue(Integer.class);
+                                        Integer movieId = showSnapshot.child("movieId").getValue(Integer.class);
+                                        String startTime = showSnapshot.child("startTime").getValue(String.class);
+                                        String endTime = showSnapshot.child("endTime").getValue(String.class);
+                                        String date = showSnapshot.child("date").getValue(String.class);
+                                        showTimeList.add(startTime + ":" + endTime + " " + date);
+                                        showList.add(new Show(id.intValue(), cinemaId.intValue(), hallId.intValue(), movieId.intValue(), startTime, endTime, date));
+                                    }
+                                    else {
+                                        Toast.makeText(ManagerEditAndDeleteActivity.this, "Error", Toast.LENGTH_SHORT);
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(ManagerEditAndDeleteActivity.this, "Error", Toast.LENGTH_SHORT);
-                                }
+                                // Create an ArrayAdapter and set it to the Spinner
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, showTimeList);
+                                chooseShowSpinner.setAdapter(adapter);
+                            } else {
+                                // Handle the case where "Cinemas" node doesn't exist
+                                Log.d("Firebase", "Cinemas node does not exist");
                             }
-                            // Create an ArrayAdapter and set it to the Spinner
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(ManagerEditAndDeleteActivity.this, android.R.layout.simple_spinner_item, showTimeList);
-                            chooseShowSpinner.setAdapter(adapter);
-                        } else {
-                            // Handle the case where "Cinemas" node doesn't exist
-                            Log.d("Firebase", "Cinemas node does not exist");
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.e("Firebase", "Error reading data:", databaseError.toException());
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e("Firebase", "Error reading data:", databaseError.toException());
+                        }
+                    });
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -220,16 +230,19 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
         chooseShowSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    finalShowId = showList.get(position - 1).getId();
+                    deleteId = finalShowId;
+                    deleteType = "Shows";
+                    showInforCinemaHallShowTextView.setText("Show info: "
+                            + "\nstartTime: " + showList.get(position - 1).getStartTime()
+                            + "\nendTime: " + showList.get(position - 1).getEndTime()
+                            + "\ndate: " + showList.get(position - 1).getDate()
+                            + "\nmovieId: " + showList.get(position - 1).getMovieId()
+                            + "\nhallId: " + showList.get(position - 1).getHallId());
+                }
                 // Get the selected cinema name from the Spinner
-                finalShowId = showList.get(position).getId();
-                deleteId = finalShowId;
-                deleteType = "Shows";
-                showInforCinemaHallShowTextView.setText("Show info: "
-                        + "\nstartTime: " + showList.get(position).getStartTime()
-                        + "\nendTime: " + showList.get(position).getEndTime()
-                        + "\ndate: " + showList.get(position).getDate()
-                        + "\nmovieId: " + showList.get(position).getMovieId()
-                        + "\nhallId: " + showList.get(position).getHallId());
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -241,6 +254,8 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 editAndDeleteController.delete(deleteId, deleteType);
+                Intent intent = new Intent(ManagerEditAndDeleteActivity.this, ManagerActivity.class);
+                startActivity(intent);
             }
         });
     }

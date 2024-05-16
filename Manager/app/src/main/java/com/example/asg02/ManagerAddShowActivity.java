@@ -191,7 +191,7 @@ public class ManagerAddShowActivity extends AppCompatActivity {
                 String date = enterDateEditText.getText().toString();
                 String startTime = enterStartTimeEditText.getText().toString();
                 String endTime = enterEndTimeEditText.getText().toString();
-                Show show = new Show(finalCinemaId, finalHallId, finalMovieId, startTime, endTime, date);
+                Show show = new Show(finalCinemaId.intValue(), finalHallId.intValue(), finalMovieId.intValue(), startTime, endTime, date);
                 createShowController.createShow(show);
                 Intent intent = new Intent(ManagerAddShowActivity.this, ManagerActivity.class);
                 startActivity(intent);
