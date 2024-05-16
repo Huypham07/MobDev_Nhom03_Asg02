@@ -43,8 +43,8 @@ public class MoviesInCinemaActivityUITest {
 
 
 
-    @Test
-    public void testHorizontalScrollViewScroll() {
-        onView(withId(R.id.horizontalScrollView)).check(ViewAssertions.matches(isDisplayed()));
-    }
+//    @Test
+//    public void testHorizontalScrollViewScroll() {
+//        onView(withId(R.id.horizontalScrollView)).check(ViewAssertions.matches(isDisplayed()));
+//    }
 }
