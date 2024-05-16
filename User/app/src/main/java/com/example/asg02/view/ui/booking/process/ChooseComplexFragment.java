@@ -59,7 +59,7 @@ public class ChooseComplexFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("manager", manager);
                     bundle.putSerializable("movie", movie);
-                    navController.navigate(R.id.action_nav_choose_complex_to_nav_choose_seat, bundle);
+                    navController.navigate(R.id.action_nav_choose_complex_to_nav_choose_cinema, bundle);
                 });
             } else {
 //                Log.e("Manager", "null");
@@ -67,5 +67,11 @@ public class ChooseComplexFragment extends Fragment {
         });
         return root;
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

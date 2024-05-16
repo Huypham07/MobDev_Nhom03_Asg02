@@ -1,63 +1,71 @@
 package com.example.asg02.view.ui.home.movieOverview;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.asg02.R;
+import com.example.asg02.controller.movie.GetMovieController;
+import com.example.asg02.databinding.FragmentUpcomingMovieBinding;
+import com.example.asg02.model.Movie;
+import com.example.asg02.view.Utils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpcomingMovieFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class UpcomingMovieFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public UpcomingMovieFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UpcomingMovieFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpcomingMovieFragment newInstance(String param1, String param2) {
-        UpcomingMovieFragment fragment = new UpcomingMovieFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    private FragmentUpcomingMovieBinding binding;
+    private RecyclerView recyclerView;
+    private List<Movie> movieList = new ArrayList<>();
+    private MovieAdapter movieAdapter;
+    private GetMovieController movieController;
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upcoming_movie, container, false);
+        binding = FragmentUpcomingMovieBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        movieAdapter = new MovieAdapter(movieList);
+
+        recyclerView = binding.recyclerview;
+        recyclerView.setAdapter(movieAdapter);
+
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
+
+        movieAdapter.setOnItemClickListener(pos -> {
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("movie", movieList.get(pos));
+            controller.navigate(R.id.action_nav_home_to_nav_movie_details, bundle);
+
+        });
+
+        movieController = new GetMovieController();
+
+        movieController.getAllMovies().thenAccept(movies -> {
+            if (movies == null) {
+                movies = new ArrayList<>();
+            }
+
+            for (Movie movie : movies) {
+                if (!Utils.isCurrentMovie(movie.getReleaseDate())) {
+                    movieList.add(movie);
+                }
+            }
+
+            movieAdapter.notifyDataSetChanged();
+        });
+
+        return root;
     }
 }

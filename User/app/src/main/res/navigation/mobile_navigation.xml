@@ -48,19 +48,29 @@
         <action
             android:id="@+id/action_nav_choose_complex_to_nav_choose_cinema"
             app:destination="@id/nav_choose_cinema" />
-        <action
-            android:id="@+id/action_nav_choose_complex_to_nav_choose_seat"
-            app:destination="@id/nav_choose_seat" />
-    </fragment>
+     </fragment>
     <fragment
         android:id="@+id/nav_choose_cinema"
         android:name="com.example.asg02.view.ui.booking.process.ChooseCinemaFragment"
         android:label="@string/title_fragment_choose_cinema"
-        tools:layout="@layout/fragment_choose_cinema" />
+        tools:layout="@layout/fragment_choose_cinema" >
+        <action
+            android:id="@+id/action_nav_choose_cinema_to_nav_choose_seat"
+            app:destination="@id/nav_choose_seat" />
+    </fragment>
     <fragment
         android:id="@+id/nav_choose_seat"
         android:name="com.example.asg02.view.ui.booking.process.ChooseSeatFragment"
         android:label="@string/title_fragment_choose_seat"
-        tools:layout="@layout/fragment_choose_seat" />
+        tools:layout="@layout/fragment_choose_seat" >
+        <action
+            android:id="@+id/action_nav_choose_seat_to_nav_pay"
+            app:destination="@id/nav_pay" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_pay"
+        android:name="com.example.asg02.view.ui.booking.process.PayFragment"
+        android:label="@string/title_fragment_pay"
+        tools:layout="@layout/fragment_pay" />
 
 </navigation>

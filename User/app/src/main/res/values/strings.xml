@@ -12,8 +12,9 @@
     <string name="title_fragment_event">Tin mới &amp; Ưu đãi</string>
     <string name="title_fragment_listBooking">Vé của tôi</string>
     <string name="title_fragment_choose_complex">Chọn cụm rạp</string>
-    <string name="title_fragment_choose_cinema">Chọn rạp chiếu</string>
+    <string name="title_fragment_choose_cinema">Chọn rạp &amp; suất chiếu</string>
     <string name="title_fragment_choose_seat">Chọn ghế</string>
+    <string name="title_fragment_pay">Thanh toán</string>
 
     <!-- API KEY -->
     <string name="googleMap_key">AIzaSyB7040OPgEBUXuw8_O595nxb7cYaAzOYWQ</string>

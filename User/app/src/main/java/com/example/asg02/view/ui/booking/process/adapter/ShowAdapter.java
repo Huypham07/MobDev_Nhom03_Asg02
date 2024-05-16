@@ -26,6 +26,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
         this.listener = listener;
     }
 
+    public List<Show> getShowList() {
+        return showList;
+    }
+
     public ShowAdapter(List<Show> showList) {
         this.showList = showList;
     }

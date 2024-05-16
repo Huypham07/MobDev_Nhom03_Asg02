@@ -58,8 +58,12 @@ dependencies {
     implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
     implementation("joda-time:joda-time:2.10.1")
     implementation("com.google.zxing:core:3.2.1")
+    //zalo
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
     implementation(files("libs/rcalenderlib_v2.6.0.aar"))
     implementation(files("libs/zpdk-release-v3.1.aar"))
+    implementation("androidx.activity:activity:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

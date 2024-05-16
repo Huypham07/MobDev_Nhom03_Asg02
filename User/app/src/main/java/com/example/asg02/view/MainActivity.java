@@ -25,6 +25,8 @@ import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
+import vn.zalopay.sdk.ZaloPaySDK;
+
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private NavController controller;
@@ -70,15 +72,11 @@ public class MainActivity extends BaseActivity {
             if (ctr.getCurrentDestination().getId() == R.id.nav_home) {
                 binding.appBarMain.toolbar.setNavigationIcon(R.drawable.account_icon);
                 binding.appBarMain.ticket.setVisibility(View.VISIBLE);
+                binding.appBarMain.navigationToggle.setVisibility(View.VISIBLE);
             } else {
                 binding.appBarMain.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_ios_new_24);
                 binding.appBarMain.ticket.setVisibility(View.GONE);
-            }
-
-            if (ctr.getCurrentDestination().getId() == R.id.nav_notification) {
                 binding.appBarMain.navigationToggle.setVisibility(View.GONE);
-            } else {
-                binding.appBarMain.navigationToggle.setVisibility(View.VISIBLE);
             }
         });
 
@@ -145,7 +143,6 @@ public class MainActivity extends BaseActivity {
 
     private void moveToAccountInfo() {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-
         Bundle bundle = new Bundle();
         bundle.putInt("fragmentID", R.id.nav_account);
         intent.putExtras(bundle);
@@ -179,6 +176,12 @@ public class MainActivity extends BaseActivity {
                 binding.navViewLayout.imageView.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.greyBackground)));
             }
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
     }
 
 }

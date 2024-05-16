@@ -1,5 +1,6 @@
 package com.example.asg02.view.ui.movie;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.example.asg02.R;
+import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.databinding.FragmentMovieDetailsBinding;
 import com.example.asg02.model.Movie;
 import com.example.asg02.view.MainActivity;
@@ -26,6 +28,7 @@ public class MovieDetailFragment extends Fragment {
     private Movie movie;
     private FragmentMovieDetailsBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -38,37 +41,32 @@ public class MovieDetailFragment extends Fragment {
         binding.movieRating.setOnTouchListener((v, event) -> true);
         binding.movieDuration.setText(Utils.convertIntTimeToString(movie.getDurationMins()));
         binding.releaseDate.setText(movie.getReleaseDate());
-//        binding.genre.setText(movie.getGenre());
+        binding.genre.setText(movie.getGenre());
         binding.language.setText(movie.getLanguage());
         binding.description.setText(movie.getDescription());
-//        binding.actors.setText(movie.getActors());
-//        binding.director.setText(movie.getDirector());
+        binding.actors.setText(movie.getActors());
+        binding.director.setText(movie.getDirector());
+        binding.censor.setText(movie.getCensor() + " - " + Utils.generateDetailsOfCensor(movie.getCensor()));
+        binding.poster.setImageBitmap(Utils.decodeBitmap(movie.getPoster()));
 
-        if (movie.getPoster() != null) {
-            String trailerLink = movie.getTrailerLink();
-            String embedLink = Utils.createEmbedLinkFromYoutube(trailerLink);
-            WebView webView = binding.trailerVideo;
-            webView.loadData(embedLink, "text/html", "utf-8");
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.setWebChromeClient(new WebChromeClient());
-        }
+        String trailerLink = movie.getTrailerLink();
+        String embedLink = Utils.createEmbedLinkFromYoutube(trailerLink);
+        WebView webView = binding.trailerVideo;
+        webView.loadData(embedLink, "text/html", "utf-8");
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
 
-        //test
-        else {
-            String trailerLink = "https://www.youtube.com/watch?v=dEyB00oEA04";
-            String embedLink = Utils.createEmbedLinkFromYoutube(trailerLink);
-            WebView webView = binding.trailerVideo;
-            webView.loadData(embedLink, "text/html", "utf-8");
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.setWebChromeClient(new WebChromeClient());
-        }
 
         binding.bookingButton.setOnClickListener(v -> {
             NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
             Bundle bundle = new Bundle();
-            bundle.putInt("movieId", movie.getId());
+            bundle.putSerializable("movie", movie);
             controller.navigate(R.id.nav_choose_complex, bundle);
         });
+
+        binding.bookingButton.setVisibility(
+                Utils.isCurrentMovie(movie.getReleaseDate()) ? View.VISIBLE : View.GONE
+        );
 
         binding.linearLayout.setOnTouchListener((v, event) -> {
             ((MainActivity) getActivity()).hideKeyboard();

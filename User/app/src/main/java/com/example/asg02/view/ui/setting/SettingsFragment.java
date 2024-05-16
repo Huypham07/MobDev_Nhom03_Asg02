@@ -12,9 +12,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.example.asg02.R;
 import com.example.asg02.databinding.FragmentSettingsBinding;
+import com.example.asg02.model.User;
 
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
+    private User user;
 //    private NavController controller;
 
     @Override
@@ -24,6 +26,8 @@ public class SettingsFragment extends Fragment {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        user = (User) getActivity().getIntent().getSerializableExtra("user");
+        binding.name.setText(user.getName());
         binding.moveToAccountSettings.setOnClickListener(v -> {
             // move to account settings
             navigate(R.id.action_nav_settings_to_nav_account);

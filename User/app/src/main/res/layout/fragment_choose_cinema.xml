@@ -15,15 +15,17 @@
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/baby"/>
-    <com.rezwan.rcalenderlib.views.YearRangeCalendarView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/days_calendar_layout"
-            app:calendar_mode="week"
-            app:start_year="2024"
-            app:end_year="2025"
-            app:show_month="true"
-    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/chooseDate"
+        android:padding="22dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/calendar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -31,7 +33,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

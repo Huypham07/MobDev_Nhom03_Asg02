@@ -1,22 +1,27 @@
 package com.example.asg02.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Booking {
+public class Booking implements Serializable {
     private int id;
     private String userID;
     private Show show;
-    private List<ShowSeat> seats = new ArrayList<>();
     private List<CarryItem> carryItems = new ArrayList<>();
-    private int bookingStatus;
+    private List<String> seats = new ArrayList<>();
     private Payment payment;
 
-    public static final int PENDING = 0;
-    public static final int EXPIRED = 2;
-    public static final int PAID = 1;
-
     public Booking() {
+    }
+
+    public Booking(String userID, Show show, List<CarryItem> carryItems, List<String> seats, Payment payment) {
+        this.userID = userID;
+        this.show = show;
+        this.carryItems = carryItems;
+        this.seats = seats;
+        this.payment = payment;
+        id = hashCode();
     }
 
     public int getId() {
@@ -43,14 +48,6 @@ public class Booking {
         this.show = show;
     }
 
-    public List<ShowSeat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<ShowSeat> seats) {
-        this.seats = seats;
-    }
-
     public List<CarryItem> getCarryItems() {
         return carryItems;
     }
@@ -59,19 +56,19 @@ public class Booking {
         this.carryItems = carryItems;
     }
 
-    public int getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(int bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
     public Payment getPayment() {
         return payment;
     }
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<String> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<String> seats) {
+        this.seats = seats;
     }
 }

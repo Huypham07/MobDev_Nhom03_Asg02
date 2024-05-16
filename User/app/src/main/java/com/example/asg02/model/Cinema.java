@@ -1,17 +1,36 @@
 package com.example.asg02.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Cinema {
+public class Cinema implements Serializable {
+    private int id;
     private String name;
-    private int totalHall;
-    private Address location;
-    private List<CinemaHall> cinemaHalls;
+    private String manager;
+    private String province;
+    private String district;
+    private String commune;
+    private String detailAddress;
 
-    public Cinema(String name, int totalHall, Address location) {
+    public Cinema() {
+    }
+
+    public Cinema(int id, String name, String manager, String province, String district, String commune, String detailAddress) {
+        this.id = id;
         this.name = name;
-        this.totalHall = totalHall;
-        this.location = location;
+        this.manager = manager;
+        this.province = province;
+        this.district = district;
+        this.commune = commune;
+        this.detailAddress = detailAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -22,27 +41,43 @@ public class Cinema {
         this.name = name;
     }
 
-    public int getTotalHall() {
-        return totalHall;
+    public String getManager() {
+        return manager;
     }
 
-    public void setTotalHall(int totalHall) {
-        this.totalHall = totalHall;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
-    public Address getLocation() {
-        return location;
+    public String getProvince() {
+        return province;
     }
 
-    public void setLocation(Address location) {
-        this.location = location;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public List<CinemaHall> getCinemaHalls() {
-        return cinemaHalls;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setCinemaHalls(List<CinemaHall> cinemaHalls) {
-        this.cinemaHalls = cinemaHalls;
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getCommune() {
+        return commune;
+    }
+
+    public void setCommune(String commune) {
+        this.commune = commune;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 }

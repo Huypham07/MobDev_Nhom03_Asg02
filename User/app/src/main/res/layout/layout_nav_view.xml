@@ -94,32 +94,6 @@
                     android:textSize="18sp" android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </LinearLayout>
-    
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/greyDarker"/>
-
-    <TextView
-            android:id="@+id/orderByMovie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đặt vé theo Phim"
-            android:textSize="16sp" android:textColor="@color/greyBackground"
-            android:padding="8dp" android:layout_gravity="center_horizontal"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/greyDarker"/>
-
-    <TextView
-            android:id="@+id/orderByCinema"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đặt vé theo Rạp"
-            android:textSize="16sp" android:textColor="@color/greyBackground"
-            android:padding="8dp" android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
             android:layout_width="match_parent"

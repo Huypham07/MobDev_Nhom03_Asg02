@@ -1,16 +1,21 @@
 package com.example.asg02.model;
 
-import java.util.List;
-
 public class CinemaHall {
     private String name;
-    private int totalSeats;
-    private List<Seat> seats;
+    private int id;
+    private int cinemaId;
+    private int seatsPerRow;
+    private int seatsPerColumn;
 
-    public CinemaHall(String name, int totalSeats, List<Seat> seats) {
+    public CinemaHall() {
+    }
+
+    public CinemaHall(String name, int cinemaId, int seatsPerRow, int seatsPerCol) {
         this.name = name;
-        this.totalSeats = totalSeats;
-        this.seats = seats;
+        this.cinemaId = cinemaId;
+        this.seatsPerRow = seatsPerRow;
+        this.seatsPerColumn = seatsPerCol;
+        id = hashCode();
     }
 
     public String getName() {
@@ -21,19 +26,35 @@ public class CinemaHall {
         this.name = name;
     }
 
-    public int getTotalSeats() {
-        return totalSeats;
+    public int getId() {
+        return id;
     }
 
-    public void setTotalSeats(int totalSeats) {
-        this.totalSeats = totalSeats;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<Seat> getSeats() {
-        return seats;
+    public int getCinemaId() {
+        return cinemaId;
     }
 
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
+    public void setCinemaId(int cinemaId) {
+        this.cinemaId = cinemaId;
+    }
+
+    public int getSeatsPerRow() {
+        return seatsPerRow;
+    }
+
+    public void setSeatsPerRow(int seatsPerRow) {
+        this.seatsPerRow = seatsPerRow;
+    }
+
+    public int getSeatsPerColumn() {
+        return seatsPerColumn;
+    }
+
+    public void setSeatsPerColumn(int seatsPerColumn) {
+        this.seatsPerColumn = seatsPerColumn;
     }
 }
