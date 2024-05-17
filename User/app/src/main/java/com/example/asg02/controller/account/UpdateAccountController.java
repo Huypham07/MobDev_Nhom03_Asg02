@@ -2,22 +2,20 @@ package com.example.asg02.controller.account;
 
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.CompletableFuture;
 
 public class UpdateAccountController implements AccountUpdater, AccountCreator {
     private FirebaseAuth auth;
-    private FirebaseDatabase database;
     private boolean emailExists = false;
     private boolean phoneExists = false;
 
     public UpdateAccountController() {
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
     }
 
     @Override
@@ -31,7 +29,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
         if (currentUser == null) {
             return FAIL;
         }
-        database.getReference().child("Users").child(currentUser.getUid()).get().addOnCompleteListener(task -> {
+        FirebaseUtils.getDatabaseReference("Users").child(currentUser.getUid()).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 User oldUser = task.getResult().getValue(User.class);
                 if (oldUser == null) {
@@ -62,7 +60,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
         } else {
             currentUser.updateEmail(user.getEmail());
             auth.updateCurrentUser(currentUser);
-            database.getReference("Users").child(currentUser.getUid()).setValue(user);
+            FirebaseUtils.getDatabaseReference("Users").child(currentUser.getUid()).setValue(user);
             return SUCCESS;
         }
     }
@@ -71,7 +69,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
     public CompletableFuture<Boolean> checkExistEmail(String email) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        database.getReference("Users").get().addOnCompleteListener(task -> {
+        FirebaseUtils.getDatabaseReference("Users").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 emailExists = false;
                 for (DataSnapshot data : task.getResult().getChildren()) {
@@ -92,7 +90,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
     public CompletableFuture<Boolean> checkExistPhone(String phone) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        database.getReference("Users").get().addOnCompleteListener(task -> {
+        FirebaseUtils.getDatabaseReference("Users").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 phoneExists = false;
                 for (DataSnapshot data : task.getResult().getChildren()) {

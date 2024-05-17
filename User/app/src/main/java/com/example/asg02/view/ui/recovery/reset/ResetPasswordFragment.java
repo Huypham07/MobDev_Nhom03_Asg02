@@ -19,8 +19,8 @@ import com.example.asg02.controller.account.UpdateAccountController;
 import com.example.asg02.databinding.FragmentResetPasswordBinding;
 import com.example.asg02.model.User;
 import com.example.asg02.R;
+import com.example.asg02.utils.ViewUtils;
 import com.example.asg02.view.MainActivity;
-import com.example.asg02.view.Utils;
 
 public class ResetPasswordFragment extends Fragment {
     private FragmentResetPasswordBinding binding;
@@ -63,7 +63,7 @@ public class ResetPasswordFragment extends Fragment {
             return false;
         });
 
-        editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, v -> {
+        editPassword.addTextChangedListener(ViewUtils.afterEditTextChanged(editPassword, v -> {
             if (isEnableLoginButton()) {
                 binding.finishResetPassword.setEnabled(true);
             } else {

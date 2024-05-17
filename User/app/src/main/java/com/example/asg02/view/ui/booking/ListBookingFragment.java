@@ -2,6 +2,7 @@ package com.example.asg02.view.ui.booking;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -19,7 +20,7 @@ public class ListBookingFragment extends Fragment {
     private TabLayoutMediator mediator;
     private ListBookingFragmentAdapter fragmentAdapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentListBookingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

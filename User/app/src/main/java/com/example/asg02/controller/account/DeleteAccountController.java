@@ -1,16 +1,14 @@
 package com.example.asg02.controller.account;
 
+import com.example.asg02.utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class DeleteAccountController implements AccountDeleter {
-    private FirebaseDatabase database;
     private FirebaseAuth auth;
     private boolean deleted = false;
 
     public DeleteAccountController() {
-        database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
     }
 
@@ -25,7 +23,7 @@ public class DeleteAccountController implements AccountDeleter {
             }
         });
 
-        database.getReference("Users").child(Uid.toString()).
+        FirebaseUtils.getDatabaseReference("Users").child(Uid.toString()).
                 removeValue().addOnSuccessListener(aVoid -> {
             deleted = true;
         });

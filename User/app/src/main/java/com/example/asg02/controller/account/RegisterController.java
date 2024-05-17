@@ -2,22 +2,19 @@ package com.example.asg02.controller.account;
 
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.CompletableFuture;
 
 public class RegisterController implements AccountCreator {
-    private FirebaseDatabase database;
     private FirebaseAuth auth;
-    private boolean createSuccess = false;
     private boolean emailExists = false;
     private boolean phoneExists = false;
 
     public RegisterController() {
-        database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
     }
 
@@ -25,7 +22,7 @@ public class RegisterController implements AccountCreator {
     public CompletableFuture<Boolean> checkExistEmail(String email) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        database.getReference("Users").get().addOnCompleteListener(task -> {
+        FirebaseUtils.getDatabaseReference("Users").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 emailExists = false;
                 for (DataSnapshot data : task.getResult().getChildren()) {
@@ -46,7 +43,7 @@ public class RegisterController implements AccountCreator {
     public CompletableFuture<Boolean> checkExistPhone(String phone) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        database.getReference("Users").get().addOnCompleteListener(task -> {
+        FirebaseUtils.getDatabaseReference("Users").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 phoneExists = false;
                 for (DataSnapshot data : task.getResult().getChildren()) {
@@ -81,7 +78,7 @@ public class RegisterController implements AccountCreator {
                         auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                                 .addOnSuccessListener(authResult -> {
                                     FirebaseUser currentUser = auth.getCurrentUser();
-                                    database.getReference("Users")
+                                    FirebaseUtils.getDatabaseReference("Users")
                                             .child(currentUser.getUid()).setValue(user)
                                             .addOnSuccessListener(aVoid -> future.complete(SUCCESS))
                                             .addOnFailureListener(e -> future.complete(FAIL));

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asg02.R;
 import com.example.asg02.model.Event;
-import com.example.asg02.view.Utils;
+import com.example.asg02.utils.ImageUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -51,7 +51,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
     @Override
     public void onBindViewHolder(@NonNull EventHolder holder, int position) {
-        holder.imageView.setImageBitmap(Utils.decodeBitmap(newsList.get(position).getPoster()));
+        holder.imageView.setImageBitmap(ImageUtils.decodeBitmap(newsList.get(position).getPoster()));
         holder.imageView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(position);

@@ -28,6 +28,8 @@ import com.example.asg02.controller.GetProvinceController;
 import com.example.asg02.controller.account.RegisterController;
 import com.example.asg02.databinding.ActivityRegisterBinding;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.ImageUtils;
+import com.example.asg02.utils.ViewUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileNotFoundException;
@@ -100,14 +102,14 @@ public class RegisterActivity extends BaseActivity {
                         }
                     }, iDate[2], iDate[1] - 1, iDate[0]).show();
         });
-        editBirthDate.addTextChangedListener(Utils.afterEditTextChanged(editBirthDate, v -> {
+        editBirthDate.addTextChangedListener(ViewUtils.afterEditTextChanged(editBirthDate, v -> {
             if (!editBirthDate.getText().toString().isEmpty()) {
                 editBirthDate.setError(null);
             }
         }));
 
         editSex.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{"Nam", "Nữ", "Khác"}));
-        editSex.addTextChangedListener(Utils.afterEditTextChanged(editSex, v -> {
+        editSex.addTextChangedListener(ViewUtils.afterEditTextChanged(editSex, v -> {
             if (!editSex.getText().toString().isEmpty()) {
                 editSex.setError(null);
             }
@@ -115,7 +117,7 @@ public class RegisterActivity extends BaseActivity {
 
         editRegion.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item
                 , new GetProvinceController().getAllProvinces()));
-        editRegion.addTextChangedListener(Utils.afterEditTextChanged(editRegion, v -> {
+        editRegion.addTextChangedListener(ViewUtils.afterEditTextChanged(editRegion, v -> {
             if (!editRegion.getText().toString().isEmpty()) {
                 editRegion.setError(null);
             }
@@ -132,7 +134,7 @@ public class RegisterActivity extends BaseActivity {
             changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
         });
 
-        editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, v -> {
+        editPassword.addTextChangedListener(ViewUtils.afterEditTextChanged(editPassword, v -> {
             if (editPassword.getText().toString().length() < 8) {
                 editPassword.setError("Mật khẩu cần dai ít nhất 8 ký tự");
                 return;
@@ -277,9 +279,9 @@ public class RegisterActivity extends BaseActivity {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                Bitmap avatarBitmap = Utils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
+                Bitmap avatarBitmap = ImageUtils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
                 avatar.setImageBitmap(avatarBitmap);
-                avtUri = Utils.encodeImage(bitmap);
+                avtUri = ImageUtils.encodeImage(bitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

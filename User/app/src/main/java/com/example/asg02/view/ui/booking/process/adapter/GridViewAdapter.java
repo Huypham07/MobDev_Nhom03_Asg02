@@ -13,10 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.asg02.R;
 import com.example.asg02.model.Manager;
-import com.example.asg02.view.Utils;
-import com.squareup.okhttp.internal.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GridViewAdapter extends ArrayAdapter<Manager> {

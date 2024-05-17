@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.example.asg02.R;
 import com.example.asg02.controller.account.LoginController;
 import com.example.asg02.databinding.ActivityLoginBinding;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.ViewUtils;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends BaseActivity {
@@ -45,7 +47,7 @@ public class LoginActivity extends BaseActivity {
         loginButton = binding.loginButton;
         ImageView passwordIcon = binding.hidePasswordButton;
 
-        editId.addTextChangedListener(Utils.afterEditTextChanged(editId, new View.OnClickListener() {
+        editId.addTextChangedListener(ViewUtils.afterEditTextChanged(editId, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editId.getText().toString().isEmpty()) {
@@ -62,7 +64,7 @@ public class LoginActivity extends BaseActivity {
         }));
 
         changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
-        editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, new View.OnClickListener() {
+        editPassword.addTextChangedListener(ViewUtils.afterEditTextChanged(editPassword, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editPassword.getText().toString().isEmpty()) {

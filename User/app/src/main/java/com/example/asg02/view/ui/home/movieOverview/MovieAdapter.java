@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asg02.model.Movie;
 import org.jetbrains.annotations.NotNull;
 import com.example.asg02.R;
-import com.example.asg02.view.Utils;
+import com.example.asg02.utils.DateTimeUtils;
+import com.example.asg02.utils.ImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,14 +59,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull MovieAdapter.MovieHolder holder, int position) {
-        holder.poster.setImageBitmap(Utils.decodeBitmap(movieList.get(position).getPoster()));
+        holder.poster.setImageBitmap(ImageUtils.decodeBitmap(movieList.get(position).getPoster()));
         holder.poster.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(position);
             }
 
         });
-        holder.duration.setText(" " + Utils.convertIntTimeToString(movieList.get(position).getDurationMins()));
+        holder.duration.setText(" " + DateTimeUtils.convertMinsToStringTime(movieList.get(position).getDurationMins()));
         holder.name.setText(movieList.get(position).getName().toUpperCase());
         holder.censor.setText(movieList.get(position).getCensor());
     }

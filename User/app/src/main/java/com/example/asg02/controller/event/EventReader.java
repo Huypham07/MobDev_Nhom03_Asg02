@@ -1,4 +1,4 @@
-package com.example.asg02.event;
+package com.example.asg02.controller.event;
 
 import com.example.asg02.model.Event;
 

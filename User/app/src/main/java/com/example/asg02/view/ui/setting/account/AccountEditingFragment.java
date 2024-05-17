@@ -31,9 +31,10 @@ import com.example.asg02.controller.GetProvinceController;
 import com.example.asg02.controller.account.UpdateAccountController;
 import com.example.asg02.databinding.FragmentAccountEditingBinding;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.ImageUtils;
+import com.example.asg02.utils.ViewUtils;
 import com.example.asg02.view.LoginActivity;
 import com.example.asg02.view.SettingsActivity;
-import com.example.asg02.view.Utils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -94,7 +95,7 @@ public class AccountEditingFragment extends Fragment {
             editRegion.setText(user.getRegion());
             avtUri = user.getAvatar();
             if (avtUri != null) {
-                binding.avatar.setImageBitmap(Utils.cropToCircleWithBorder(Utils.decodeBitmap(avtUri), 20, Color.parseColor("#59351A")));
+                binding.avatar.setImageBitmap(ImageUtils.cropToCircleWithBorder(ImageUtils.decodeBitmap(avtUri), 20, Color.parseColor("#59351A")));
             } else {
                 binding.avatar.setImageResource(R.drawable.choosing_avatar);
             }
@@ -102,13 +103,13 @@ public class AccountEditingFragment extends Fragment {
 
 
             //-----------add eventListener--------------
-            editName.addTextChangedListener(Utils.afterEditTextChanged(editName, v -> {
+            editName.addTextChangedListener(ViewUtils.afterEditTextChanged(editName, v -> {
                 if (!user.getName().equals(editName.getText().toString())) {
                     change = true;
                 }
             }));
 
-            editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, v -> {
+            editPassword.addTextChangedListener(ViewUtils.afterEditTextChanged(editPassword, v -> {
                 if (editPassword.getText().toString().length() < 8) {
                     editPassword.setError("Mật khẩu cần dai ít nhất 8 ký tự");
                     return;
@@ -146,7 +147,7 @@ public class AccountEditingFragment extends Fragment {
                             }
                         }, iDate[2], iDate[1] - 1, iDate[0]).show();
             });
-            editBirthDate.addTextChangedListener(Utils.afterEditTextChanged(editBirthDate, v -> {
+            editBirthDate.addTextChangedListener(ViewUtils.afterEditTextChanged(editBirthDate, v -> {
                 if (!editBirthDate.getText().toString().isEmpty()) {
                     editBirthDate.setError(null);
                 }
@@ -157,7 +158,7 @@ public class AccountEditingFragment extends Fragment {
             }));
 
             editSex.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, new String[]{"Nam", "Nữ", "Khác"}));
-            editSex.addTextChangedListener(Utils.afterEditTextChanged(editSex, v -> {
+            editSex.addTextChangedListener(ViewUtils.afterEditTextChanged(editSex, v -> {
                 if (!editSex.getText().toString().isEmpty()) {
                     editSex.setError(null);
                 }
@@ -168,7 +169,7 @@ public class AccountEditingFragment extends Fragment {
 
             editRegion.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item
                     , new GetProvinceController().getAllProvinces()));
-            editRegion.addTextChangedListener(Utils.afterEditTextChanged(editRegion, v -> {
+            editRegion.addTextChangedListener(ViewUtils.afterEditTextChanged(editRegion, v -> {
                 if (!user.getRegion().equals(editRegion.getText().toString())) {
                     change = true;
                 }
@@ -178,7 +179,7 @@ public class AccountEditingFragment extends Fragment {
                 // do nothing
 
             });
-            editFavorite.addTextChangedListener(Utils.afterEditTextChanged(editFavorite, v -> {
+            editFavorite.addTextChangedListener(ViewUtils.afterEditTextChanged(editFavorite, v -> {
                 if (!user.getFavouriteCinema().equals(editFavorite.getText().toString())) {
                     change = true;
                 }
@@ -198,7 +199,7 @@ public class AccountEditingFragment extends Fragment {
                 if (change) {
                     if (isFilledEditTexts()) {
                         String message = "Bạn có muốn lưu thông tin đã thay đổi không?";
-                        Utils.createAskingDialog(message, getContext(), v1 -> {
+                        ViewUtils.createAskingDialog(message, getContext(), v1 -> {
                             // save change
                             user.setName(binding.editName.getText().toString());
                             user.setPassword(binding.editPassword.getText().toString());
@@ -215,7 +216,7 @@ public class AccountEditingFragment extends Fragment {
 
             binding.deleteAccount.setOnClickListener(v -> {
                 String message = "Bạn có chắc chắn muốn xóa tài khoản không?";
-                Utils.createAskingDialog(message, getContext(), v1 -> {
+                ViewUtils.createAskingDialog(message, getContext(), v1 -> {
                     deleteAccountController.deleteAccount();
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }).show();
@@ -293,9 +294,9 @@ public class AccountEditingFragment extends Fragment {
             try {
                 InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                Bitmap avatarBitmap = Utils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
+                Bitmap avatarBitmap = ImageUtils.cropToCircleWithBorder(bitmap, 40, Color.parseColor("#59351A"));
                 avatar.setImageBitmap(avatarBitmap);
-                avtUri = Utils.encodeImage(bitmap);
+                avtUri = ImageUtils.encodeImage(bitmap);
                 user.setAvatar(avtUri);
                 change = true;
             } catch (FileNotFoundException e) {

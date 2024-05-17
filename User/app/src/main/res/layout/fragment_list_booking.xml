@@ -28,9 +28,9 @@
 
 
     <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:id="@+id/viewPaper2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="10dp" />
 
 </LinearLayout>

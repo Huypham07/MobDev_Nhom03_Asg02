@@ -12,10 +12,10 @@ import com.example.asg02.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ChooseCarryItemFragment#newInstance} factory method to
+ * Use the {@link SelectCarryItemFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChooseCarryItemFragment extends Fragment {
+public class SelectCarryItemFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class ChooseCarryItemFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ChooseCarryItemFragment() {
+    public SelectCarryItemFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class ChooseCarryItemFragment extends Fragment {
      * @return A new instance of fragment ChooseCarryItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChooseCarryItemFragment newInstance(String param1, String param2) {
-        ChooseCarryItemFragment fragment = new ChooseCarryItemFragment();
+    public static SelectCarryItemFragment newInstance(String param1, String param2) {
+        SelectCarryItemFragment fragment = new SelectCarryItemFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class ChooseCarryItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_carry_item, container, false);
+        return inflater.inflate(R.layout.fragment_select_carry_item, container, false);
     }
 }

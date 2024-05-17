@@ -11,6 +11,11 @@ public class Booking implements Serializable {
     private List<CarryItem> carryItems = new ArrayList<>();
     private List<String> seats = new ArrayList<>();
     private Payment payment;
+    private int status = 0;
+
+    public static final int STATUS_AVAILABLE = 0;
+    public static final int STATUS_EXPIRED = 1;
+    public static final int STATUS_USED = 2;
 
     public Booking() {
     }
@@ -70,5 +75,13 @@ public class Booking implements Serializable {
 
     public void setSeats(List<String> seats) {
         this.seats = seats;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

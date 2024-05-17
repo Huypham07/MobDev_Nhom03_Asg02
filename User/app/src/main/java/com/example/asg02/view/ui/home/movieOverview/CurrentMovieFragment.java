@@ -2,13 +2,13 @@ package com.example.asg02.view.ui.home.movieOverview;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -19,7 +19,9 @@ import com.example.asg02.R;
 import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.databinding.FragmentCurrentMovieBinding;
 import com.example.asg02.model.Movie;
-import com.example.asg02.view.Utils;
+import com.example.asg02.utils.DateTimeUtils;
+import com.example.asg02.vm.BaseViewModel;
+import com.example.asg02.vm.BookingViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.List;
 public class CurrentMovieFragment extends Fragment {
 
     private FragmentCurrentMovieBinding binding;
+    private BookingViewModel bookingViewModel;
+    private BaseViewModel baseViewModel;
     private RecyclerView recyclerView;
     private List<Movie> movieList = new ArrayList<>();
     private MovieAdapter movieAdapter;
@@ -37,7 +41,8 @@ public class CurrentMovieFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        bookingViewModel = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+        baseViewModel = new ViewModelProvider(requireActivity()).get(BaseViewModel.class);
         binding = FragmentCurrentMovieBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -66,35 +71,29 @@ public class CurrentMovieFragment extends Fragment {
 
         movieAdapter.setOnItemClickListener(pos -> {
             NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("movie", movieList.get(pos));
-            controller.navigate(R.id.action_nav_home_to_nav_movie_details, bundle);
+            bookingViewModel.setMovie(movieList.get(pos));
+            controller.navigate(R.id.action_nav_home_to_nav_movie_details);
         });
 
+        baseViewModel.getMovieList().observe(
+                getViewLifecycleOwner(),
+                movies -> {
+                    movieList.clear();
+                    for (Movie movie : movies) {
+                        if (!DateTimeUtils.isAfterToday(movie.getReleaseDate())) {
+                            movieList.add(movie);
+                        }
+                    }
+                    movieAdapter.notifyDataSetChanged();
 
-        movieController = new GetMovieController();
-
-        movieController.getAllMovies().thenAccept(movies -> {
-            if (movies == null) {
-                movies = new ArrayList<>();
-            }
-
-            for (Movie movie : movies) {
-                if (Utils.isCurrentMovie(movie.getReleaseDate())) {
-                    movieList.add(movie);
+                    binding.bookingButton.setOnClickListener(v -> {
+                        NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                        bookingViewModel.setMovie(movieList.get(currPos));
+                        controller.navigate(R.id.nav_select_complex);
+                    });
                 }
-            }
+        );
 
-            movieAdapter.notifyDataSetChanged();
-
-            binding.bookingButton.setOnClickListener(v -> {
-                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("movie", movieList.get(currPos));
-                controller.navigate(R.id.nav_choose_complex, bundle);
-            });
-
-        });
         return root;
     }
 

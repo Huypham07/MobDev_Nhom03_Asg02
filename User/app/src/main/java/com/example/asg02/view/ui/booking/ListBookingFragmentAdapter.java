@@ -21,9 +21,9 @@ public class ListBookingFragmentAdapter extends FragmentStateAdapter {
     }
 
     private void init() {
-        fragments.add(new ListBookingDetailsFragment());
+        fragments.add(new ListBookingDetailsFragment(false));
         headers.add("Vé còn hiệu lưc");
-        fragments.add(new ListBookingDetailsFragment());
+        fragments.add(new ListBookingDetailsFragment(true));
         headers.add("Vé hết hiệu lực");
     }
     @NonNull
