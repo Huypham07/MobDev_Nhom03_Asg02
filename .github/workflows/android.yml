@@ -32,7 +32,7 @@ jobs:
     #     name: Cinecomplex_Admin
     #     path: Admin/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (Admin)
-      run: cd Admin && ./gradlew assembleRelease
+      run: ./gradlew assembleRelease
     - name: Publish APK (Admin)
       uses: alsrb968/action-release-apk@master
       env:
@@ -51,7 +51,7 @@ jobs:
     #     name: Cinecomplex_Manager
     #     path: Manager/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (Manager)
-      run: cd Manager && ./gradlew assembleRelease
+      run: ./gradlew assembleRelease
     - name: Publish APK (Manager)
       uses: alsrb968/action-release-apk@master
       env:
@@ -72,7 +72,7 @@ jobs:
     #     name: Cinecomplex_User
     #     path: User/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (User)
-      run: cd User && ./gradlew assembleRelease
+      run: ./gradlew assembleRelease
     - name: Publish APK (User)
       uses: alsrb968/action-release-apk@master
       env:
