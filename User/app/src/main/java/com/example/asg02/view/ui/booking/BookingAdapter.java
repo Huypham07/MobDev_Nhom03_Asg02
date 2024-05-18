@@ -24,6 +24,7 @@ import com.example.asg02.model.Manager;
 import com.example.asg02.model.Movie;
 import com.example.asg02.model.Show;
 import com.example.asg02.utils.DateTimeUtils;
+import com.example.asg02.utils.FirebaseUtils;
 import com.example.asg02.utils.ImageUtils;
 import com.example.asg02.vm.BaseViewModel;
 
@@ -37,6 +38,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
     private List<Movie> movieList = new ArrayList<>();
     private List<Cinema> cinemaList = new ArrayList<>();
     private List<CinemaHall> cinemaHallList = new ArrayList<>();
+
     private OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -64,6 +66,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
         TextView status;
         Button useButton;
         LinearLayout layout;
+
+
         public BookingHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.movie_image);
@@ -89,30 +93,22 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
 
     @Override
     public void onBindViewHolder(@NonNull BookingHolder holder, int position) {
-        if (movieList.size() != bookingList.size()
-                || cinemaList.size() != bookingList.size()
-                || cinemaHallList.size() != bookingList.size()) {
-            holder.layout.setVisibility(View.GONE);
-            return;
-        }
-
-
         Booking booking = bookingList.get(position);
         Show show = booking.getShow();
         Movie movie = movieList.get(position);
         Cinema cinema = cinemaList.get(position);
-        CinemaHall hall = cinemaHallList.get(position);
+        CinemaHall cinemaHall = cinemaHallList.get(position);
 
-//
         holder.imageView.setImageBitmap(ImageUtils.decodeBitmap(movie.getPoster()));
         holder.name.setText(movie.getName());
         holder.duration.setText(DateTimeUtils.convertMinsToStringTime(movie.getDurationMins()));
-        holder.hall.setText(hall.getName() + " - " + cinema.getName());
-        StringBuilder sb = new StringBuilder();
+
+        holder.hall.setText(cinema.getName() + " - " + cinemaHall.getName());
+        StringBuilder sb1 = new StringBuilder();
         for (String s : booking.getSeats()) {
-            sb.append(s).append(", ");
+            sb1.append(s).append(", ");
         }
-        holder.seats.setText(sb.toString().substring(0, sb.length() - 2));
+        holder.seats.setText(sb1.toString().substring(0, sb1.length() - 2));
 
         holder.expiredDate.setText(show.getStartTime() + " - " + show.getEndTime() + ", " + show.getDate());
         switch (booking.getStatus()) {
@@ -134,7 +130,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
                 listener.onItemClick(position);
             }
         });
-        holder.layout.setVisibility(View.VISIBLE);
+
+//        holder.layout.setVisibility(View.VISIBLE);
     }
 
     @Override

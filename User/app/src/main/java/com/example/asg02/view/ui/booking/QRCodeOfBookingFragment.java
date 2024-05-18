@@ -14,19 +14,21 @@ import com.example.asg02.databinding.FragmentQRCodeOfBookingBinding;
 import com.example.asg02.model.Booking;
 import com.example.asg02.utils.ImageUtils;
 import com.example.asg02.vm.BaseViewModel;
+import com.example.asg02.vm.ListBookingViewModel;
+
 public class QRCodeOfBookingFragment extends Fragment {
     private Booking booking;
-    private BaseViewModel baseViewModel;
+    private ListBookingViewModel listBookingViewModel;
     private FragmentQRCodeOfBookingBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        baseViewModel = new ViewModelProvider(requireActivity()).get(BaseViewModel.class);
+        listBookingViewModel = new ViewModelProvider(requireActivity()).get(ListBookingViewModel.class);
         binding = FragmentQRCodeOfBookingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        baseViewModel.getSelectedBooking().observe(
+        listBookingViewModel.getSelectedBooking().observe(
             getViewLifecycleOwner(),
             booking -> {
                 this.booking = booking;
@@ -35,7 +37,7 @@ public class QRCodeOfBookingFragment extends Fragment {
         );
 
         binding.finish.setOnClickListener(v -> {
-            baseViewModel.setSelectedBooking(null);
+            listBookingViewModel.setSelectedBooking(null);
             getParentFragmentManager().popBackStack();
         });
 

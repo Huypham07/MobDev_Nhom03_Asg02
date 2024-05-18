@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.databinding.ActivityMainBinding;
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;

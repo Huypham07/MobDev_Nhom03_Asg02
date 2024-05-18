@@ -4,8 +4,9 @@ import com.example.asg02.model.Booking;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public interface BookingReader {
     CompletableFuture<List<Booking>> getAllBookings();
-    CompletableFuture<List<Booking>> getAllBookings(String UserId);
+    void getBookings(String userId, Consumer<Booking> onBookingAdded);
 }

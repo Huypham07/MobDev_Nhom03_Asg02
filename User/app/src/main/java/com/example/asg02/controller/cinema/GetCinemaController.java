@@ -31,6 +31,16 @@ public class GetCinemaController implements CinemaReader {
     }
 
     @Override
+    public CompletableFuture<Cinema> getCinema(int cinemaId) {
+        CompletableFuture<Cinema> future = new CompletableFuture<>();
+        FirebaseUtils.getDatabaseReference("Cinemas").child(String.valueOf(cinemaId)).get().addOnSuccessListener(dataSnapshot -> {
+            Cinema cinema = dataSnapshot.getValue(Cinema.class);
+            future.complete(cinema);
+        });
+        return future;
+    }
+
+    @Override
     public CompletableFuture<CinemaHall> getCinemaHall(int hallId) {
         CompletableFuture<CinemaHall> future = new CompletableFuture<>();
         FirebaseUtils.getDatabaseReference("Halls").child(String.valueOf(hallId)).get().addOnSuccessListener(dataSnapshot -> {

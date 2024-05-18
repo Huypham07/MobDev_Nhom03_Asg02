@@ -4,7 +4,9 @@ import com.example.asg02.model.Movie;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public interface MovieReader {
-    CompletableFuture<List<Movie>> getAllMovies();
+    void getAllMovies(Consumer<Movie> onBookingAdded);
+    CompletableFuture<Movie> getMovie(int movieId);
 }

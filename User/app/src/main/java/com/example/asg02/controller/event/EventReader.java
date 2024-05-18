@@ -4,7 +4,8 @@ import com.example.asg02.model.Event;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public interface EventReader {
-    CompletableFuture<List<Event>> getAllEvents();
+    void getAllEvents(Consumer<Event> onEventAdded);
 }

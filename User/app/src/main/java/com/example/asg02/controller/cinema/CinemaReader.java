@@ -9,6 +9,7 @@ import java.util.concurrent.CompletableFuture;
 public interface CinemaReader {
     CompletableFuture<List<Cinema>> getAllCinemas(String managerId);
     CompletableFuture<CinemaHall> getCinemaHall(int hallId);
+    CompletableFuture<Cinema> getCinema(int cinemaId);
     CompletableFuture<List<Cinema>> getAllCinemas();
     CompletableFuture<List<CinemaHall>> getAllCinemaHalls();
 }
