@@ -32,9 +32,9 @@ jobs:
     #     name: Cinecomplex_Admin
     #     path: Admin/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (Admin)
-      run: ./gradlew assembleRelease
+      run: cd Admin && ./gradlew assembleRelease
     - name: Publish APK (Admin)
-      uses: alsrb968/action-release-apk@master
+      uses: huypham07/action-release-apk@master
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         APP_FOLDER: app
@@ -51,9 +51,9 @@ jobs:
     #     name: Cinecomplex_Manager
     #     path: Manager/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (Manager)
-      run: ./gradlew assembleRelease
+      run: cd Manager && ./gradlew assembleRelease
     - name: Publish APK (Manager)
-      uses: alsrb968/action-release-apk@master
+      uses: huypham07/action-release-apk@master
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         APP_FOLDER: app
@@ -72,9 +72,9 @@ jobs:
     #     name: Cinecomplex_User
     #     path: User/app/build/outputs/apk/debug/app-debug.apk
     - name: Build Release APK (User)
-      run: ./gradlew assembleRelease
-    - name: Publish APK (User)
-      uses: alsrb968/action-release-apk@master
+      run: cd User && ./gradlew assembleRelease
+    - name: Publish APK (Manager)
+      uses: huypham07/action-release-apk@master
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
         APP_FOLDER: app
