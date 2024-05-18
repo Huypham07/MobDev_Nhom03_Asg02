@@ -1,8 +1,9 @@
 package com.example.asg02.view.ui.recovery.auth;
 
 import android.os.CountDownTimer;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.widget.TextView;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,36 +13,42 @@ import android.view.ViewGroup;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.example.asg02.R;
+import com.example.asg02.controller.account.AuthenticaionController;
 import com.example.asg02.databinding.FragmentAuthenticationBinding;
 
 public class AuthenticationFragment extends Fragment {
-
-    private AuthenticationViewModel mViewModel;
     private FragmentAuthenticationBinding binding;
     private CountDownTimer countDownTimer;
     TextView countdown;
-    TextView validityPeriod;
+    private static final String ARG_PARAM = "id";
+    private String id;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(AuthenticationViewModel.class);
+        id = getArguments().getString(ARG_PARAM);
 
         binding = FragmentAuthenticationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         // assign
         countdown = binding.countdown;
-        validityPeriod = binding.validityPeriod;
+
+        binding.noti.setText("Chúng tôi sẽ gửi tin nhắn đến email của bạn:\n" + id + ".\nHãy kiểm tra email để đặt lại mật khẩu.");
 
 //        sendcode()
-        setCountdown(30000);
+        setCountdown(60000);
         countdown.setOnClickListener(v -> {
-            setCountdown(30000);
+            if (!countdown.getText().toString().contains("Gửi lại trong")) {
+                new AuthenticaionController().sendVerificationCode(id);
+                setCountdown(60000);
+            }
         });
 
         binding.resetPasswordButton.setOnClickListener(v -> {
             NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_recovery);
-            controller.navigate(R.id.action_nav_auth_to_nav_reset);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            controller.navigate(R.id.action_nav_auth_to_nav_reset, bundle);
         });
         return root;
     }
@@ -53,13 +60,15 @@ public class AuthenticationFragment extends Fragment {
         }
         countDownTimer = new CountDownTimer(duration, 1000) {
             public void onTick(long millisUntilFinished) {
-                countdown.setText("Gửi lai trong " + millisUntilFinished / 1000);
-                validityPeriod.setText("Hiệu lực: " + millisUntilFinished / 1000);
+                countdown.setText("Gửi lại trong " + millisUntilFinished / 1000 + "s");
+                countdown.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
             }
 
             public void onFinish() {
-                countdown.setText("Gửi lại mã");
-                validityPeriod.setText("Mã hết hạn");
+                SpannableString spannableString = new SpannableString("Gửi lại mã");
+                spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+                countdown.setText(spannableString);
+                countdown.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_autorenew_24, 0);
             }
         }.start();
     }
@@ -69,5 +78,4 @@ public class AuthenticationFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

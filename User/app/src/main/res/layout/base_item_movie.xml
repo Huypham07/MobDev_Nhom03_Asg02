@@ -11,7 +11,9 @@
         card_view:contentPadding="8dp">
 
     <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent" android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="225dp"
@@ -27,15 +29,35 @@
                 android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/movie_name"
-                  android:layout_gravity="center_horizontal"
-                  android:layout_marginTop="12dp"
-                  android:text="Movie Name"
-                  android:textSize="18sp"
-                  android:textColor="@color/black"
-                  android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/movie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="300dp"
+                android:maxLines="1"
+                android:text="Matrix"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/movie_censor"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_line"
+                android:text="K"
+                android:textSize="10sp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"

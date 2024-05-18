@@ -1,5 +1,6 @@
 package com.example.asg02.view;
 
+import android.content.Intent;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,14 +29,13 @@ public class PasswordRecoveryActivity extends AppCompatActivity {
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             if (!controller.navigateUp()) {
-                onBackPressed();
+                startActivity(new Intent(this, LoginActivity.class));
             }
         });
     }
 
     @Override
     protected void onDestroy() {
-        Log.e("abc", "des");
         super.onDestroy();
     }
 }

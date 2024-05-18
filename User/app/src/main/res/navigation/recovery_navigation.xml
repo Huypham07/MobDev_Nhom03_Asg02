@@ -15,7 +15,7 @@
 
     <fragment
             android:id="@+id/nav_auth"
-            android:name="com.example.asg02.ui.recovery.auth.AuthenticationFragment"
+            android:name="com.example.asg02.view.ui.recovery.auth.AuthenticationFragment"
             android:label="@string/authentication"
             tools:layout="@layout/fragment_authentication">
         <action android:id="@+id/action_nav_auth_to_nav_reset" app:destination="@id/nav_reset"/>

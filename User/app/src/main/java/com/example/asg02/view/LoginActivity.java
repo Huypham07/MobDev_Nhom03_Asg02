@@ -1,21 +1,21 @@
 package com.example.asg02.view;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.os.Bundle;
 import com.example.asg02.R;
-import com.example.asg02.controller.LoginController;
+import com.example.asg02.controller.account.LoginController;
 import com.example.asg02.databinding.ActivityLoginBinding;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.ViewUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends BaseActivity {
     private boolean isHidePassword = true;
@@ -25,6 +25,9 @@ public class LoginActivity extends BaseActivity {
     private EditText editId;
     private Button loginButton;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class LoginActivity extends BaseActivity {
         // use binding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        sharedPreferences = getSharedPreferences("LoginSharedPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         // assign
         setSupportActionBar(binding.toolbar);
@@ -41,7 +47,7 @@ public class LoginActivity extends BaseActivity {
         loginButton = binding.loginButton;
         ImageView passwordIcon = binding.hidePasswordButton;
 
-        editId.addTextChangedListener(Utils.afterEditTextChanged(editId, new View.OnClickListener() {
+        editId.addTextChangedListener(ViewUtils.afterEditTextChanged(editId, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editId.getText().toString().isEmpty()) {
@@ -58,7 +64,7 @@ public class LoginActivity extends BaseActivity {
         }));
 
         changePasswordVisibility(passwordIcon, editPassword, isHidePassword);
-        editPassword.addTextChangedListener(Utils.afterEditTextChanged(editPassword, new View.OnClickListener() {
+        editPassword.addTextChangedListener(ViewUtils.afterEditTextChanged(editPassword, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editPassword.getText().toString().isEmpty()) {
@@ -82,19 +88,24 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(v -> {
             String id = editId.getText().toString();
             String password = editPassword.getText().toString();
-            loginController.login(id, password).thenApply(account -> {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            loginController.login(id, password).thenAccept(account -> {
                 User user = (User) account;
                 if (user != null) {
                     binding.errorLogin.setVisibility(View.GONE);
+                    editor.putString("id", id);
+                    editor.putString("password", password);
+                    editor.apply();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user", user);
-                    Log.e("a", user.getEmail());
+                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    intent.putExtra("userId", userID);
                     startActivity(intent);
                     finish();
                 } else {
                     binding.errorLogin.setVisibility(View.VISIBLE);
                 }
-                return null;
+                binding.progressBar.setVisibility(View.GONE);
             });
         });
 
@@ -107,6 +118,18 @@ public class LoginActivity extends BaseActivity {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String i = sharedPreferences.getString("id", "");
+        String p = sharedPreferences.getString("password", "");
+        if (!i.isEmpty() || !p.isEmpty()) {
+            editId.setText(i);
+            editPassword.setText(p);
+            loginButton.callOnClick();
+        }
     }
 
     private boolean isEnableLoginButton() {

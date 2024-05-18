@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -35,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -51,12 +51,21 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
     implementation("androidx.preference:preference:1.2.1")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
-    implementation ("com.google.android.gms:play-services-maps:18.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.2.0")
-    implementation ("com.google.android.gms:play-services-places:17.0.0")
-    implementation ("com.google.android.libraries.places:places:3.4.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation("com.google.android.gms:play-services-places:17.0.0")
+    implementation("com.google.android.libraries.places:places:3.4.0")
     implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
+    implementation("joda-time:joda-time:2.10.1")
+    implementation("com.google.zxing:core:3.2.1")
+    //zalo
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
+    implementation(files("libs/rcalenderlib_v2.6.0.aar"))
+    implementation(files("libs/zpdk-release-v3.1.aar"))
+    implementation("androidx.activity:activity:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }

@@ -9,25 +9,18 @@
 
     <ImageView
             android:layout_width="100dp"
-            android:layout_height="100dp" android:id="@+id/imageView"
+            android:layout_height="100dp" android:id="@+id/avatar"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/choosing_avatar" android:layout_marginBottom="8dp"
             android:layout_gravity="center_horizontal"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginEnd="40dp" android:layout_marginStart="40dp"
-            android:layout_marginBottom="8dp">
-        <TextView
-                android:text="Mã số thẻ" android:textSize="12sp" android:textColor="#FF0000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView31" android:layout_weight="1"
-                android:gravity="right|center_horizontal"/>
-        <TextView
-                android:text="992447104121176"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView32" android:layout_weight="1"
-                android:textSize="18sp" android:layout_marginStart="16dp"/>
-    </LinearLayout>
+    <include layout="@layout/layout_barcode"
+        android:id="@+id/layout_barcode"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="20dp"/>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -37,14 +30,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="1">
             <TextView
-                    android:text="Tổng chi tiêu 2024"
+                    android:text="Tổng chi tiêu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView34" android:textSize="13sp"
                     android:gravity="center_horizontal"/>
             <TextView
                     android:text="0 đ"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/textView35" android:textSize="22sp"
+                    android:layout_height="wrap_content" android:id="@+id/expense" android:textSize="22sp"
                     android:gravity="center_horizontal"/>
         </LinearLayout>
         <LinearLayout
@@ -59,7 +52,7 @@
             <TextView
                     android:text="0"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/textView37" android:textSize="22sp"
+                    android:layout_height="wrap_content" android:id="@+id/point" android:textSize="22sp"
                     android:gravity="center_horizontal"/>
         </LinearLayout>
     </LinearLayout>
@@ -160,7 +153,7 @@
                     android:textSize="15sp" android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     android:textColor="@color/black"
-                    android:text="Rạp yêu thích: Idochina Plaza Hà Nội"
+                    android:text="Rạp yêu thích:"
                     android:layout_width="match_parent"
                     android:layout_height="40dp" android:id="@+id/textView44" android:gravity="center_vertical"/>
         </LinearLayout>

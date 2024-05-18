@@ -15,28 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.asg02.R;
-import com.example.asg02.controller.GetNewsController;
 import com.example.asg02.databinding.FragmentHomeBinding;
+import com.example.asg02.model.Event;
 import com.example.asg02.view.ui.home.movieOverview.CustomFragmentAdapter;
+import com.example.asg02.vm.BaseViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
+    private BaseViewModel baseViewModel;
     private FragmentHomeBinding binding;
     private TabLayoutMediator mediator;
     private CustomFragmentAdapter fragmentAdapter;
-    private NewsAdapter newsAdapter;
+    private EventAdapter eventAdapter;
     private RecyclerView recyclerView;
-    private List<String> newsList;
-    private GetNewsController getNewsController;
+    private List<Event> eventList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
+        baseViewModel = new ViewModelProvider(requireActivity()).get(BaseViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -54,18 +53,28 @@ public class HomeFragment extends Fragment {
             mediator.attach();
         }
 
-        getNewsController = new GetNewsController();
-        newsList = getNewsController.getAllNews();
-        newsAdapter = new NewsAdapter(newsList);
-        newsAdapter.setOnClickListener(v -> {
-            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-            controller.navigate(R.id.nav_news_detail);
-        });
+        eventAdapter = new EventAdapter(eventList);
         recyclerView = binding.recyclerview;
-        recyclerView.setAdapter(newsAdapter);
+        recyclerView.setAdapter(eventAdapter);
 
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+        eventAdapter.setOnItemClickListener(position -> {
+            baseViewModel.setSelectedEvent(eventList.get(position));
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            controller.navigate(R.id.nav_events_detail);
+        });
+
+        baseViewModel.getEventList().observe(
+            getViewLifecycleOwner(),
+            events -> {
+                eventList.clear();
+                eventList.addAll(events);
+                eventAdapter.notifyDataSetChanged();
+            }
+
+        );
 
         return root;
     }

@@ -12,8 +12,6 @@ import com.example.asg02.R;
 
 public class PrivacyPolicyFragment extends Fragment {
 
-    private PrivacyPolicyViewModel mViewModel;
-
     public static PrivacyPolicyFragment newInstance() {
         return new PrivacyPolicyFragment();
     }
@@ -27,7 +25,6 @@ public class PrivacyPolicyFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PrivacyPolicyViewModel.class);
         // TODO: Use the ViewModel
     }
 

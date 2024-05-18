@@ -3,7 +3,6 @@ package com.example.asg02.view.ui.recovery.findAccount;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,21 +12,20 @@ import android.view.ViewGroup;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.example.asg02.R;
+import com.example.asg02.controller.account.AuthenticaionController;
+import com.example.asg02.controller.account.RegisterController;
 import com.example.asg02.databinding.FragmentFindAccountBinding;
 
 public class FindAccountFragment extends Fragment {
-
-    private FindAccountViewModel mViewModel;
     private FragmentFindAccountBinding binding;
     private boolean isFindByPhoneNumber = true;
 
     private TextView instruction;
     private EditText input;
     private TextView changeInputTypeText;
-
+    private AuthenticaionController authenticaionController;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(FindAccountViewModel.class);
 
         binding = FragmentFindAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -36,16 +34,7 @@ public class FindAccountFragment extends Fragment {
         instruction = binding.instruction;
         input = binding.input;
         changeInputTypeText = binding.changeInputType;
-
-        // continue to authentication step
-        binding.authenticateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_recovery);
-                controller.navigate(R.id.action_nav_find_to_nav_auth);
-            }
-        });
-        //----end--------
+        authenticaionController = new AuthenticaionController();
 
         // change input Type
         changeInputType(isFindByPhoneNumber);
@@ -54,7 +43,39 @@ public class FindAccountFragment extends Fragment {
             isFindByPhoneNumber = !isFindByPhoneNumber;
             changeInputType(isFindByPhoneNumber);
         });
-        //----end--------
+
+        // continue to authentication step
+        binding.authenticateButton.setOnClickListener(v -> {
+            binding.wrongInput.setVisibility(View.GONE);
+            if (isFindByPhoneNumber) {
+                new RegisterController().checkExistPhone(input.getText().toString()).thenAccept(exists -> {
+                    if (exists) {
+                        authenticaionController.getEmailFromPhone(input.getText().toString()).thenAccept(email -> {
+                            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_recovery);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id", email);
+                            controller.navigate(R.id.action_nav_find_to_nav_auth, bundle);
+                            authenticaionController.sendVerificationCode(email);
+                        });
+                    } else {
+                        binding.wrongInput.setVisibility(View.VISIBLE);
+                    }
+                });
+            } else {
+                new RegisterController().checkExistEmail(input.getText().toString()).thenAccept(exists -> {
+                    if (exists) {
+                        NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_recovery);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", input.getText().toString());
+                        controller.navigate(R.id.action_nav_find_to_nav_auth, bundle);
+                        authenticaionController.sendVerificationCode(input.getText().toString());
+                    } else {
+                        binding.wrongInput.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+
+        });
 
         return root;
     }

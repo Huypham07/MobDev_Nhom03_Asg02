@@ -1,37 +1,48 @@
 package com.example.asg02.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Booking {
-    private int bookingNumber;
-    private String userEmail;
+public class Booking implements Serializable {
+    private int id;
+    private String userID;
     private Show show;
-    private List<ShowSeat> seats = new ArrayList<>();
     private List<CarryItem> carryItems = new ArrayList<>();
-    private String bookingStatus;
+    private List<String> seats = new ArrayList<>();
     private Payment payment;
+    private int status = 0;
 
-    public Booking(int bookingNumber, String userEmail, Show show) {
-        this.bookingNumber = bookingNumber;
-        this.userEmail = userEmail;
+    public static final int STATUS_AVAILABLE = 0;
+    public static final int STATUS_EXPIRED = 1;
+    public static final int STATUS_USED = 2;
+
+    public Booking() {
+    }
+
+    public Booking(String userID, Show show, List<CarryItem> carryItems, List<String> seats, Payment payment) {
+        this.userID = userID;
         this.show = show;
+        this.carryItems = carryItems;
+        this.seats = seats;
+        this.payment = payment;
+        id = hashCode();
     }
 
-    public int getBookingNumber() {
-        return bookingNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setBookingNumber(int bookingNumber) {
-        this.bookingNumber = bookingNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public Show getShow() {
@@ -42,14 +53,6 @@ public class Booking {
         this.show = show;
     }
 
-    public List<ShowSeat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<ShowSeat> seats) {
-        this.seats = seats;
-    }
-
     public List<CarryItem> getCarryItems() {
         return carryItems;
     }
@@ -58,19 +61,27 @@ public class Booking {
         this.carryItems = carryItems;
     }
 
-    public String getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(String bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
     public Payment getPayment() {
         return payment;
     }
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public List<String> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<String> seats) {
+        this.seats = seats;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
