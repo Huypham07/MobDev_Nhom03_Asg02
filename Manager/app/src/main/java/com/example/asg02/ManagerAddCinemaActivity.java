@@ -17,7 +17,7 @@ import com.example.asg02.model.Cinema;
 
 public class ManagerAddCinemaActivity extends AppCompatActivity {
     ImageButton back;
-    EditText enterCinemaNameEditText, enterProvinceEditText, enterDistrictEditText, enterCommuneEditText,
+    EditText enterCinemaNameEditText, enterLatitudeEditText, enterLongtitudeEditText,
             enterDetailAddressEditText;
     Button finishAddCinemaButton;
     CreateCinemaController createCinemaController;
@@ -27,9 +27,8 @@ public class ManagerAddCinemaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manager_add_cinema);
         back = findViewById(R.id.backCinema);
         enterCinemaNameEditText = findViewById(R.id.enterCinemaName);
-        enterProvinceEditText = findViewById(R.id.enterProvince);
-        enterDistrictEditText = findViewById(R.id.enterDistrict);
-        enterCommuneEditText = findViewById(R.id.enterCommune);
+        enterLatitudeEditText = findViewById(R.id.enterLatitude);
+        enterLongtitudeEditText = findViewById(R.id.enterLongtitude);
         enterDetailAddressEditText = findViewById(R.id.enterDetailAddress);
         finishAddCinemaButton = findViewById(R.id.finishAddCinema);
         createCinemaController = new CreateCinemaController(this);
@@ -45,9 +44,8 @@ public class ManagerAddCinemaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = enterCinemaNameEditText.getText().toString();
-                String province = enterProvinceEditText.getText().toString();
-                String district = enterDistrictEditText.getText().toString();
-                String commune = enterCommuneEditText.getText().toString();
+                Double latitude = Double.valueOf(enterLatitudeEditText.getText().toString());
+                Double longitude = Double.valueOf(enterLongtitudeEditText.getText().toString());
                 String detailAddress = enterDetailAddressEditText.getText().toString();
                 SharedPreferences preferences = getSharedPreferences("account_info", MODE_PRIVATE);
                 String email = preferences.getString("email", "error"); // Provide a default value if email is not found
@@ -60,7 +58,7 @@ public class ManagerAddCinemaActivity extends AppCompatActivity {
                     Log.d("SharedPrefs", "Email not found in SharedPreferences");
                     // Handle the case where email is not available (e.g., prompt user to log in)
                 }
-                Cinema cinema = new Cinema(name, province, district, commune, detailAddress, email);
+                Cinema cinema = new Cinema(name, latitude.doubleValue(), longitude.doubleValue(), detailAddress, email);
                 createCinemaController.createCinema(cinema);
                 Intent intent = new Intent(ManagerAddCinemaActivity.this, ManagerActivity.class);
                 startActivity(intent);
