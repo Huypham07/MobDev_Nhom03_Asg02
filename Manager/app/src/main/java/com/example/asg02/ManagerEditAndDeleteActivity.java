@@ -561,7 +561,7 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                             updates.put("endTime", endTimeInShowDialog.getText().toString());
                             updates.put("date", dateInShowDialog.getText().toString());
                             updates.put("movieId", (Integer) movieIdInShowDialog);
-                            updates.put("hallid", (Integer) hallIdInShowDialog);
+                            updates.put("hallId", (Integer) hallIdInShowDialog);
                             // Đường dẫn đến nút của bộ phim cần cập nhật
                             DatabaseReference showToUpdateRef = showsRef.child(deleteId.toString());
                             // Thực hiện cập nhật
