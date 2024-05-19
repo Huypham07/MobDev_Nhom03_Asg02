@@ -56,7 +56,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-places:17.0.0")
     implementation("com.google.android.libraries.places:places:3.4.0")
     implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
-    implementation("joda-time:joda-time:2.10.1")
     implementation("com.google.zxing:core:3.2.1")
     //zalo
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
@@ -64,7 +63,15 @@ dependencies {
     implementation(files("libs/rcalenderlib_v2.6.0.aar"))
     implementation(files("libs/zpdk-release-v3.1.aar"))
     implementation("androidx.activity:activity:1.8.0")
+
+    //test
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.12.0")
+    testImplementation("org.powermock:powermock:1.6.5")
+    testImplementation("org.robolectric:robolectric:4.8")
+    testImplementation("org.mockito:mockito-inline:4.8.0")
+    testImplementation("org.powermock:powermock-api-mockito2:2.0.9")
+    testImplementation("org.powermock:powermock-module-junit4:2.0.9")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 

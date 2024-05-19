@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaHold
 
     public interface OnItemClickListener {
         void onItemClick(int cinemaPos, int showPos);
+        void inItemCLick(int cinemaPos);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -53,11 +55,13 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaHold
         LinearLayout layout;
         TextView cinemaName;
         RecyclerView showLayout;
+        ImageView location;
         public CinemaHolder(View itemView) {
             super(itemView);
             cinemaName = itemView.findViewById(R.id.name_cinema);
             layout = itemView.findViewById(R.id.cinema_layout);
             showLayout = itemView.findViewById(R.id.show_layout);
+            location = itemView.findViewById(R.id.locate);
         }
     }
 
@@ -81,6 +85,11 @@ public class CinemaAdapter extends RecyclerView.Adapter<CinemaAdapter.CinemaHold
         }
         String name = cinemas.get(position).getName();
         holder.cinemaName.setText(name);
+        holder.location.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.inItemCLick(position);
+            }
+        });
         ShowAdapter showAdt = showAdapters.get(position);
         holder.showLayout.setAdapter(showAdt);
         showAdt.setOnItemClickListener(showPos -> {

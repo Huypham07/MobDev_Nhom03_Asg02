@@ -104,14 +104,25 @@ public class SelectCinemaFragment extends Fragment {
         cinemaAdapter = new CinemaAdapter(cinemas, movie.getId(), date);
         recyclerView.setAdapter(cinemaAdapter);
 
-        cinemaAdapter.setOnItemClickListener((cinemaPos, showPos) -> {
-            Cinema cinema = cinemas.get(cinemaPos);
-            List<Show> shows = cinemaAdapter.getShowAdapters().get(cinemaPos).getShowList();
-            Show show = shows.get(showPos);
-            bookingViewModel.setCinema(cinema);
-            bookingViewModel.setShow(show);
-            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-            controller.navigate(R.id.action_nav_select_cinema_to_nav_select_seat);
+        cinemaAdapter.setOnItemClickListener(new CinemaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int cinemaPos, int showPos) {
+                Cinema cinema = cinemas.get(cinemaPos);
+                List<Show> shows = cinemaAdapter.getShowAdapters().get(cinemaPos).getShowList();
+                Show show = shows.get(showPos);
+                bookingViewModel.setCinema(cinema);
+                bookingViewModel.setShow(show);
+                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                controller.navigate(R.id.action_nav_select_cinema_to_nav_select_seat);
+            }
+
+            @Override
+            public void inItemCLick(int cinemaPos) {
+                Cinema cinema = cinemas.get(cinemaPos);
+                bookingViewModel.setCinema(cinema);
+                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                controller.navigate(R.id.nav_maps);
+            }
         });
         getCinemaController.getAllCinemas(manager.getEmail()).thenAccept(cinemas -> {
             if (cinemas != null) {

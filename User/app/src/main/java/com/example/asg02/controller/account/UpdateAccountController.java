@@ -3,19 +3,16 @@ package com.example.asg02.controller.account;
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
 import com.example.asg02.utils.FirebaseUtils;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.concurrent.CompletableFuture;
 
 public class UpdateAccountController implements AccountUpdater, AccountCreator {
-    private FirebaseAuth auth;
     private boolean emailExists = false;
     private boolean phoneExists = false;
 
     public UpdateAccountController() {
-        auth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -25,7 +22,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
         }
 
         User user = (User) newAccount;
-        FirebaseUser currentUser = auth.getCurrentUser();
+        FirebaseUser currentUser = FirebaseUtils.getAuth().getCurrentUser();
         if (currentUser == null) {
             return FAIL;
         }
@@ -59,7 +56,7 @@ public class UpdateAccountController implements AccountUpdater, AccountCreator {
             return PHONE_EXISTS;
         } else {
             currentUser.updateEmail(user.getEmail());
-            auth.updateCurrentUser(currentUser);
+            FirebaseUtils.getAuth().updateCurrentUser(currentUser);
             FirebaseUtils.getDatabaseReference("Users").child(currentUser.getUid()).setValue(user);
             return SUCCESS;
         }

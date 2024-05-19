@@ -9,7 +9,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,10 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.CompletableFuture;
 
 public class LoginController implements AccountReader {
-    private FirebaseAuth auth;
-
-public LoginController() {
-        auth = FirebaseAuth.getInstance();
+    public LoginController() {
     }
 
     public CompletableFuture<Account> login(String id, String password) {
@@ -48,7 +44,7 @@ public LoginController() {
                     User u = data.getValue(User.class);
                     if (u.getPhone().equals(phone)) {
                         // return account
-                        auth.signInWithEmailAndPassword(u.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        FirebaseUtils.getAuth().signInWithEmailAndPassword(u.getEmail(), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -68,19 +64,19 @@ public LoginController() {
     @Override
     public CompletableFuture<Account> getAccountWithEmail(String email, String password) {
         CompletableFuture<Account> future = new CompletableFuture<>();
-            auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                String uID = auth.getCurrentUser().getUid();
-                                FirebaseUtils.getDatabaseReference("Users").child(uID).get()
-                                        .addOnCompleteListener(task_ -> future.complete(task_.getResult().getValue(User.class)));
-                            } else {
-                                future.complete(null);
-                            }
+        FirebaseUtils.getAuth().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            String uID = FirebaseUtils.getAuth().getCurrentUser().getUid();
+                            FirebaseUtils.getDatabaseReference("Users").child(uID).get()
+                                    .addOnCompleteListener(task_ -> future.complete(task_.getResult().getValue(User.class)));
+                        } else {
+                            future.complete(null);
                         }
-                    });
-            return future;
+                    }
+                });
+        return future;
     }
 }

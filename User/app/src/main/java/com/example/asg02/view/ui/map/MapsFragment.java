@@ -1,4 +1,4 @@
-package com.example.asg02.view.ui.booking.process;
+package com.example.asg02.view.ui.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

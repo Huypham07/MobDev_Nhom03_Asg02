@@ -27,12 +27,12 @@ import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.databinding.ActivityMainBinding;
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.FirebaseUtils;
 import com.example.asg02.utils.ImageUtils;
 import com.example.asg02.utils.ViewUtils;
 import com.example.asg02.vm.AccountViewModel;
 import com.example.asg02.vm.BaseViewModel;
 import com.example.asg02.vm.BookingViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPaySDK;
@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity {
             Dialog dialog = ViewUtils.createAskingDialog(message, MainActivity.this, v1 -> {
                 closeDrawer();
                 // logout
-                FirebaseAuth.getInstance().signOut();
+                FirebaseUtils.getAuth().signOut();
                 editor.clear().apply();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
@@ -184,6 +184,11 @@ public class MainActivity extends BaseActivity {
                 return;
             }
             controller.navigate(R.id.nav_listBooking);
+        });
+
+        binding.navViewLayout.cinemas.setOnClickListener(v -> {
+            controller.navigate(R.id.nav_select_complex_map);
+            closeDrawer();
         });
     }
 

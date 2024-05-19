@@ -14,8 +14,8 @@ import com.example.asg02.R;
 import com.example.asg02.controller.account.LoginController;
 import com.example.asg02.databinding.ActivityLoginBinding;
 import com.example.asg02.model.User;
+import com.example.asg02.utils.FirebaseUtils;
 import com.example.asg02.utils.ViewUtils;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends BaseActivity {
     private boolean isHidePassword = true;
@@ -98,7 +98,7 @@ public class LoginActivity extends BaseActivity {
                     editor.apply();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user", user);
-                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String userID = FirebaseUtils.getAuth().getCurrentUser().getUid();
                     intent.putExtra("userId", userID);
                     startActivity(intent);
                     finish();
