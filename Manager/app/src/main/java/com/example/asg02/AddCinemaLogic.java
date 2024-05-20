@@ -16,6 +16,9 @@ public class AddCinemaLogic {
 
     public void handleAddCinema(String name, double latitude, double longitude, String detailAddress) {
         String email = preferences.getString("email", "error");
+        if (email == null) {
+            email = "error";
+        }
         Cinema cinema = new Cinema(name, latitude, longitude, detailAddress, email);
         createCinemaController.createCinema(cinema);
     }

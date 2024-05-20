@@ -35,9 +35,15 @@ dependencies {
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
     testImplementation("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:4.3.1")
+    testImplementation ("androidx.test.ext:junit:1.1.5")
+    testImplementation ("androidx.test:core:1.5.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation ("org.mockito:mockito-android:3.12.4")
+
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
