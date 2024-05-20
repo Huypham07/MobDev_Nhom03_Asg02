@@ -17,7 +17,6 @@ import com.example.asg02.model.Manager;
 public class LoginActivity extends AppCompatActivity {
     private boolean isHidePassword = true;
     private LoginController loginController;
-
     private EditText editPassword;
     private EditText editEmail;
     private Button loginButton;
@@ -32,26 +31,31 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             String email = editEmail.getText().toString();
             String password = editPassword.getText().toString();
-            loginController.login(email, password).thenApply(account -> {
-                Manager manager = (Manager) account;
-                if (manager != null) {
-                    Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
-                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    SharedPreferences preferences = getSharedPreferences("account_info", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("email", manager.getEmail());
-                    editor.putString("password", manager.getPassword());
-                    editor.putString("name", manager.getName());
-                    editor.commit();
-                    intent.putExtra("managers", manager);
-                    Log.e("a", manager.getEmail());
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(this, "Tài khoản, mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-                }
-                return null;
-            });
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Vui lòng điền đầy đủ tài khoản và mật khẩu", Toast.LENGTH_SHORT).show();
+            } else {
+                loginController.login(email, password).thenApply(account -> {
+                    Manager manager = (Manager) account;
+                    if (manager != null) {
+                        Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
+                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        SharedPreferences preferences = getSharedPreferences("account_info", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("email", manager.getEmail());
+                        editor.putString("password", manager.getPassword());
+                        editor.putString("name", manager.getName());
+                        editor.commit();
+                        intent.putExtra("managers", manager);
+                        Log.e("a", manager.getEmail());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Tài khoản, mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                    }
+                    return null;
+                });
+            }
+
         });
     }
 }

@@ -2,7 +2,9 @@ package com.example.asg02;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -29,10 +31,8 @@ public class ManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
-
         expandableListView = findViewById(R.id.expandableListView);
         expandableListDetail = getData();
-
         adapter = new BaseExpandableListAdapter() {
             @Override
             public int getGroupCount() {
@@ -93,9 +93,8 @@ public class ManagerActivity extends AppCompatActivity {
             }
         };
 
-        expandableListView.setAdapter(adapter);
 
-        // Set listener for group items click
+        expandableListView.setAdapter(adapter);
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -125,8 +124,13 @@ public class ManagerActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (selectedItem.equals("Đăng xuất")) {
                     // Gọi intent để mở AddCinemaActivity
+                    SharedPreferences sharedPreferences = getSharedPreferences("account_info", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(ManagerActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
-                // Thêm các điều kiện xử lý cho các tùy chọn khác nếu cần
                 return true;
             }
         });
