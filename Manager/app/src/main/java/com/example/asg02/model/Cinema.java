@@ -3,30 +3,27 @@ package com.example.asg02.model;
 public class Cinema {
     private int id;
     private String name;
-    private String province;
-    private String district;
-    private String commune;
+    private double longitude;
+    private double latitude;
     private String detailAddress;
     private String manager;
 
-    public Cinema(String name, String province, String district, String commune, String detailAddress, String manager) {
+    public Cinema(int id, String name, double latitude, double longitude, String detailAddress, String manager) {
+        this.id = id;
         this.name = name;
-        this.province = province;
-        this.district = district;
-        this.commune = commune;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.detailAddress = detailAddress;
-        id = hashCode();
         this.manager = manager;
     }
 
-    public Cinema(int id, String name, String province, String district, String commune, String detailAddress, String manager) {
-        this.id = id;
+    public Cinema(String name, double latitude, double longitude, String detailAddress, String manager) {
         this.name = name;
-        this.province = province;
-        this.district = district;
-        this.commune = commune;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.detailAddress = detailAddress;
         this.manager = manager;
+        id = hashCode();
     }
 
     @Override
@@ -38,6 +35,21 @@ public class Cinema {
         return id;
     }
 
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
     public String getName() {
         return name;
@@ -45,30 +57,6 @@ public class Cinema {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getCommune() {
-        return commune;
-    }
-
-    public void setCommune(String commune) {
-        this.commune = commune;
     }
 
     public String getDetailAddress() {

@@ -149,44 +149,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                 <EditText
-                    android:id="@+id/enterProvince"
+                    android:id="@+id/enterLatitude"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:hint="Tỉnh/ Thành phố"
+                    android:hint="Kinh độ"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/enterDistrict"
+                    android:id="@+id/enterLongtitude"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    android:hint="Quận/ Huyện"
+                    android:hint="Vĩ độ"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterProvince" />
-
-                <EditText
-                    android:id="@+id/enterCommune"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="25dp"
-
-                    android:layout_marginEnd="25dp"
-
-                    android:hint="Phường/ Xã"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterDistrict" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/enterLatitude" />
                 <EditText
                     android:id="@+id/enterDetailAddress"
                     android:layout_width="match_parent"
@@ -198,7 +182,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/enterCommune" />
+                    app:layout_constraintTop_toBottomOf="@+id/enterLongtitude" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <Button
                 android:id="@+id/finishAddCinema"

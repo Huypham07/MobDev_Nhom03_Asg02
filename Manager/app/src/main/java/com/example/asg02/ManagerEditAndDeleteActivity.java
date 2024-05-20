@@ -102,12 +102,12 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                         // Extract cinema name
                         Integer id = cinemaSnapshot.child("id").getValue(Integer.class);
                         String name = cinemaSnapshot.child("name").getValue(String.class);
-                        String province = cinemaSnapshot.child("province").getValue(String.class);
-                        String district = cinemaSnapshot.child("district").getValue(String.class);
+                        Double latitdue = cinemaSnapshot.child("latitude").getValue(Double.class);
+                        Double longtidue = cinemaSnapshot.child("longitude").getValue(Double.class);
                         String commune = cinemaSnapshot.child("commune").getValue(String.class);
                         String detailAddress = cinemaSnapshot.child("detailAddress").getValue(String.class);
                         String manager = cinemaSnapshot.child("manager").getValue(String.class);
-                        Cinema cinema = new Cinema(id.intValue(), name, province, district, commune, detailAddress, manager);
+                        Cinema cinema = new Cinema(id.intValue(), name, latitdue, longtidue, detailAddress, manager);
                         cinemaNamesList.add(name);
                         cinemaList.add(cinema);
                     }
@@ -133,9 +133,8 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                     deleteType = "Cinemas";
                     showInforCinemaHallShowTextView.setText("Cinema info: "
                             + "\nname: " + cinemaList.get(position - 1).getName()
-                            + "\nprovince: " + cinemaList.get(position - 1).getProvince()
-                            + "\ndistrict: " + cinemaList.get(position - 1).getDistrict()
-                            + "\ncommune: " + cinemaList.get(position - 1).getCommune()
+                            + "\nlatitude: " + cinemaList.get(position - 1).getLatitude()
+                            + "\nlongitude: " + cinemaList.get(position - 1).getLongitude()
                             + "\ndetailAddress: " + cinemaList.get(position - 1).getDetailAddress());
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     database.getReference("Halls").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -293,15 +292,12 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                     districtInCinemaDialog = cinemaDialog.findViewById(R.id.districtInCinemaDialog);
                     communeInCinemaDialog = cinemaDialog.findViewById(R.id.communeInCinemaDialog);
                     detailAddressInCinemaDialog = cinemaDialog.findViewById(R.id.detailAddressInCinemaDialog);
-                    List<String> cinemaNamesListInHallDialog = new ArrayList<>();
-                    List<Integer> cinemaIdListInHallDialog = new ArrayList<>();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     database.getReference("Cinemas").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 for (DataSnapshot cinemaSnapshot : dataSnapshot.getChildren()) {
-                                    // Extract cinema name
                                     Integer cinemaId = cinemaSnapshot.child("id").getValue(Integer.class);
                                     if (deleteId.equals(cinemaId) ) {
                                         nameInCinemaDialog.setText(cinemaSnapshot.child("name").getValue(String.class));
@@ -372,7 +368,6 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                     nameInHallDialog = hallDialog.findViewById(R.id.nameInHallDialog);
                     seatsPerRowInHallDialog = hallDialog.findViewById(R.id.seatsPerRowInHallDialog);
                     seatsPerColumnInHallDialog = hallDialog.findViewById(R.id.seatsPerColumninHallDialog);
-
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     database.getReference("Halls").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -566,7 +561,7 @@ public class ManagerEditAndDeleteActivity extends AppCompatActivity {
                             updates.put("endTime", endTimeInShowDialog.getText().toString());
                             updates.put("date", dateInShowDialog.getText().toString());
                             updates.put("movieId", (Integer) movieIdInShowDialog);
-                            updates.put("hallid", (Integer) hallIdInShowDialog);
+                            updates.put("hallId", (Integer) hallIdInShowDialog);
                             // Đường dẫn đến nút của bộ phim cần cập nhật
                             DatabaseReference showToUpdateRef = showsRef.child(deleteId.toString());
                             // Thực hiện cập nhật
