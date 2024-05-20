@@ -66,10 +66,10 @@ dependencies {
 
     //test
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:5.12.0")
+    testImplementation("org.mockito:mockito-core:4.0.0")
+    testImplementation("org.mockito:mockito-inline:4.0.0")
     testImplementation("org.powermock:powermock:1.6.5")
     testImplementation("org.robolectric:robolectric:4.8")
-    testImplementation("org.mockito:mockito-inline:4.8.0")
     testImplementation("org.powermock:powermock-api-mockito2:2.0.9")
     testImplementation("org.powermock:powermock-module-junit4:2.0.9")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
