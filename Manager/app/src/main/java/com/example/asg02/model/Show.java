@@ -8,6 +8,9 @@ public class Show {
     private String startTime;
     private String endTime;
     private String date;
+    public Show() {
+
+    }
 
     public Show(int cinemaId, int hallId, int movieId, String startTime, String endTime, String date) {
         this.cinemaId = cinemaId;
