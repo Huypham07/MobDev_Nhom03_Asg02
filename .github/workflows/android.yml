@@ -31,6 +31,11 @@ jobs:
       with:
         name: Cinecomplex_Admin
         path: Admin/app/build/outputs/apk/debug/app-debug.apk
+    - name: Upload html test report (Admin)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+          name: index.html
+          path: Admin/app/build/reports/tests/testDebugUnitTest/index.html
         
     - name: Grant execute permission for gradlew (Manager App)
       run: chmod +x Manager/gradlew
@@ -43,7 +48,12 @@ jobs:
       with:
         name: Cinecomplex_Manager
         path: Manager/app/build/outputs/apk/debug/app-debug.apk
-
+    - name: Upload html test report (Manager)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+          name: index.html
+          path: Manager/app/build/reports/tests/testDebugUnitTest/index.html
+          
     - name: Grant execute permission for gradlew (User App)
       run: chmod +x User/gradlew
     - name: Create local.properties with SDK location
@@ -57,4 +67,8 @@ jobs:
       with:
         name: Cinecomplex_User
         path: User/app/build/outputs/apk/debug/app-debug.apk
-    
+    - name: Upload html test report (User)
+      uses: actions/upload-artifact@v4.3.3
+      with:
+          name: index.html
+          path: User/app/build/reports/tests/testDebugUnitTest/index.html
