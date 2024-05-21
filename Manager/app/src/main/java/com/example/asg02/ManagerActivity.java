@@ -134,7 +134,6 @@ public class ManagerActivity extends AppCompatActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 String selectedItem = (String) adapter.getGroup(groupPosition);
-
                 if (selectedItem.equals("Chỉnh sửa thông tin/Xóa")) {
                     Intent intent = new Intent(ManagerActivity.this, ManagerEditAndDeleteActivity.class);
                     startActivity(intent);
