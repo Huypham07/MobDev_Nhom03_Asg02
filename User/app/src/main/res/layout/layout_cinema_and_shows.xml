@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
+              android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cinema_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,11 +22,23 @@
             android:orientation="vertical" android:elevation="4dp" android:background="@color/white">
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:id="@+id/cinema_layout" android:orientation="horizontal">
+                android:orientation="horizontal">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:id="@+id/name_cinema" android:textColor="@color/black" android:layout_weight="1"
                     android:textSize="16sp" android:text="CGV abc" android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:text="0 km"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+
                 <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center_vertical"
                     android:src="@drawable/location_icon" android:layout_marginEnd="8dp" app:tint="@color/blue"
                     android:id="@+id/locate"/>
@@ -35,7 +50,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:paddingStart="10dp" android:paddingEnd="10dp"/>
+                android:layout_height="match_parent" android:paddingStart="10dp" android:paddingEnd="10dp"/>
         </LinearLayout>
     </LinearLayout>
 

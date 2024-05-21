@@ -19,6 +19,7 @@ import com.example.asg02.databinding.FragmentHomeBinding;
 import com.example.asg02.model.Event;
 import com.example.asg02.view.ui.home.movieOverview.CustomFragmentAdapter;
 import com.example.asg02.vm.BaseViewModel;
+import com.example.asg02.vm.BookingViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private BaseViewModel baseViewModel;
+    private BookingViewModel bookingViewModel;
     private FragmentHomeBinding binding;
     private TabLayoutMediator mediator;
     private CustomFragmentAdapter fragmentAdapter;
@@ -35,9 +37,13 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        bookingViewModel = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
         baseViewModel = new ViewModelProvider(requireActivity()).get(BaseViewModel.class);
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+//        bookingViewModel.clearData();
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentAdapter = new CustomFragmentAdapter(fragmentManager, getLifecycle());
@@ -75,6 +81,11 @@ public class HomeFragment extends Fragment {
             }
 
         );
+
+        binding.map.setOnClickListener(v -> {
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            controller.navigate(R.id.nav_select_complex_map);
+        });
 
         return root;
     }

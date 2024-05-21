@@ -7,24 +7,21 @@ public class Cinema implements Serializable {
     private int id;
     private String name;
     private String manager;
-    private String province;
-    private String district;
-    private String commune;
+    private double latitude;
+    private double longitude;
     private String detailAddress;
 
     public Cinema() {
     }
 
-    public Cinema(int id, String name, String manager, String province, String district, String commune, String detailAddress) {
+    public Cinema(int id, String name, String manager, double latitude, double longitude, String detailAddress) {
         this.id = id;
         this.name = name;
         this.manager = manager;
-        this.province = province;
-        this.district = district;
-        this.commune = commune;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.detailAddress = detailAddress;
     }
-
     public int getId() {
         return id;
     }
@@ -49,35 +46,27 @@ public class Cinema implements Serializable {
         this.manager = manager;
     }
 
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getCommune() {
-        return commune;
-    }
-
-    public void setCommune(String commune) {
-        this.commune = commune;
-    }
-
     public String getDetailAddress() {
         return detailAddress;
     }
 
     public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

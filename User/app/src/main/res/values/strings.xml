@@ -17,10 +17,15 @@
     <string name="title_fragment_pay">Thanh toán</string>
     <string name="title_fragment_success">Kết quả thanh toán</string>
     <string name="title_qr_code_of_booking">Mã QR vé</string>
-
+    <string name="title_fragment_select_complex_map">Chọn cụm rạp</string>
+    <string name="title_fragment_select_cinema_map">Chọn rạp cần đến</string>
+    <string name="title_fragment_maps">Chỉ đường</string>
+    <string name="title_fragment_chat">Bạn cần giúp gì?</string>
 
     <!-- API KEY -->
-    <string name="googleMap_key">AIzaSyB7040OPgEBUXuw8_O595nxb7cYaAzOYWQ</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyB_CFIFGkXj5vhc6T1Nh0BJ8eEf8cEuR8M
+    </string>
 
 
     <!-- Login -->

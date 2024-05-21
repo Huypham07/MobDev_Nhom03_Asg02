@@ -3,19 +3,16 @@ package com.example.asg02.controller.account;
 import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
 import com.example.asg02.utils.FirebaseUtils;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.concurrent.CompletableFuture;
 
 public class RegisterController implements AccountCreator {
-    private FirebaseAuth auth;
     private boolean emailExists = false;
     private boolean phoneExists = false;
 
     public RegisterController() {
-        auth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -75,9 +72,9 @@ public class RegisterController implements AccountCreator {
                     if (phoneExists_) {
                         future.complete(PHONE_EXISTS);
                     } else {
-                        auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                        FirebaseUtils.getAuth().createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                                 .addOnSuccessListener(authResult -> {
-                                    FirebaseUser currentUser = auth.getCurrentUser();
+                                    FirebaseUser currentUser = FirebaseUtils.getAuth().getCurrentUser();
                                     FirebaseUtils.getDatabaseReference("Users")
                                             .child(currentUser.getUid()).setValue(user)
                                             .addOnSuccessListener(aVoid -> future.complete(SUCCESS))

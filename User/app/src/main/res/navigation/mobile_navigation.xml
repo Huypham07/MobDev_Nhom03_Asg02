@@ -91,5 +91,16 @@
         android:name="com.example.asg02.view.ui.booking.QRCodeOfBookingFragment"
         android:label="@string/title_qr_code_of_booking"
         tools:layout="@layout/fragment_q_r_code_of_booking"/>
+    <fragment android:id="@+id/nav_maps" android:name="com.example.asg02.view.ui.map.MapsFragment"
+              android:label="@string/title_fragment_maps" tools:layout="@layout/fragment_maps"/>
+    <fragment android:id="@+id/nav_select_complex_map" android:name="com.example.asg02.view.ui.map.SelectComplexFragment"
+              android:label="@string/title_fragment_select_complex_map" tools:layout="@layout/fragment_select_complex_map">
+        <action android:id="@+id/action_nav_select_complex_map_to_nav_select_cinema_map"
+                app:destination="@id/nav_select_cinema_map"/>
+    </fragment>
+    <fragment android:id="@+id/nav_select_cinema_map" android:name="com.example.asg02.view.ui.map.SelectCinemaFragment"
+              android:label="@string/title_fragment_select_cinema_map" tools:layout="@layout/fragment_select_cinema_map">
+        <action android:id="@+id/action_nav_select_cinema_map_to_nav_maps" app:destination="@id/nav_maps"/>
+    </fragment>
 
 </navigation>

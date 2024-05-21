@@ -1,5 +1,6 @@
 package com.example.asg02.view.ui.booking.process.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
             if (listener != null) {
                 listener.onItemClick(position);
             }
-
         });
     }
 
