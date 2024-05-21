@@ -120,6 +120,9 @@ public class SelectSeatFragment extends Fragment implements View.OnClickListener
                 getBookingController.getAllBookings().thenAccept(bookings -> {
                     if (bookings != null) {
                         for (int i = 0; i < bookings.size(); i++) {
+                            if (bookings.get(i).getShow().getId() != show.getId()) {
+                                continue;
+                            }
                             List<String> bookedSeats = bookings.get(i).getSeats();
                             for (String s : bookedSeats) {
                                 for (Seat seat__ : seatList) {

@@ -17,14 +17,12 @@ public class LoginLogic {
         if (id == null || password == null) {
             return CompletableFuture.completedFuture(null);
         }
-        if (idIsEmail(id)) {
+        if (LoginController.isValidEmail(id)) {
             return loginController.getAccountWithEmail(id, password);
-        } else {
+        } else if (LoginController.isValidPhoneNumber(id)) {
             return loginController.getAccountWithPhone(id, password);
         }
-    }
-
-    private boolean idIsEmail(String id) {
-        return id.contains("@");
+//        return loginController.login(id, password);
+        return CompletableFuture.completedFuture(null);
     }
 }

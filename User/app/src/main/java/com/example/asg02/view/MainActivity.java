@@ -1,9 +1,11 @@
 package com.example.asg02.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,7 +19,10 @@ import android.widget.ImageView;
 
 import com.example.asg02.R;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,6 +38,10 @@ import com.example.asg02.utils.ViewUtils;
 import com.example.asg02.vm.AccountViewModel;
 import com.example.asg02.vm.BaseViewModel;
 import com.example.asg02.vm.BookingViewModel;
+import com.example.asg02.vm.MapViewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPaySDK;
@@ -45,8 +54,12 @@ public class MainActivity extends BaseActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    private static int REQUEST_SETTINGS_CODE = 2;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
+    private static final int REQUEST_SETTINGS_CODE = 2;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 12;
+
+    private MapViewModel mapViewModel;
     private AccountViewModel accountViewModel;
     private BookingViewModel bookingViewModel;
     private BaseViewModel baseViewModel;
@@ -76,6 +89,10 @@ public class MainActivity extends BaseActivity {
         sharedPreferences = getSharedPreferences("LoginSharedPrefs", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        //map
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
         accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         bookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
         baseViewModel = new ViewModelProvider(this).get(BaseViewModel.class);
@@ -102,6 +119,17 @@ public class MainActivity extends BaseActivity {
         ImageView img = binding.navViewLayout.layoutBarcode.barCode;
         img.setImageBitmap(ImageUtils.generateBarcode(userId, 200, 50));
         binding.navViewLayout.layoutBarcode.barCodeText.setText(userId);
+
+
+        // access permission
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
     }
 
     private void initControl() {
@@ -166,6 +194,10 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.navViewLayout.notification.setOnClickListener(v -> {
+            if (controller.getCurrentDestination().getId() == R.id.nav_notification) {
+                closeDrawer();
+                return;
+            }
             controller.navigate(R.id.nav_notification);
             closeDrawer();
         });
@@ -187,6 +219,10 @@ public class MainActivity extends BaseActivity {
         });
 
         binding.navViewLayout.cinemas.setOnClickListener(v -> {
+            if (controller.getCurrentDestination().getId() == R.id.nav_select_complex_map) {
+                closeDrawer();
+                return;
+            }
             controller.navigate(R.id.nav_select_complex_map);
             closeDrawer();
         });
@@ -248,4 +284,27 @@ public class MainActivity extends BaseActivity {
         ZaloPaySDK.getInstance().onResult(intent);
     }
 
+    private void getCurrentLocation() {
+        try {
+            fusedLocationProviderClient.getLastLocation()
+                    .addOnSuccessListener(this, location -> {
+                        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        mapViewModel.setCurrentLatLng(currentLatLng);
+                    });
+        } catch (SecurityException e) {
+            Log.e("Location permission denied", "Location permission denied");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                Log.e("Location permission denied", "Location permission denied");
+            }
+        }
+    }
 }

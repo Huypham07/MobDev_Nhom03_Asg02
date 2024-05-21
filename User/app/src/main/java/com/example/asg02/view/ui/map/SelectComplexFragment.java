@@ -52,8 +52,8 @@ public class SelectComplexFragment extends Fragment {
                 gridView.setOnItemClickListener((parent, view, position, id) -> {
                     Manager manager = managers.get(position);
                     NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                    bookingViewModel.setManager(manager);
-                    navController.navigate(R.id.action_nav_select_complex_to_nav_select_cinema);
+//                    bookingViewModel.setManager(manager);
+                    navController.navigate(R.id.action_nav_select_complex_map_to_nav_select_cinema_map);
                 });
             }
         });

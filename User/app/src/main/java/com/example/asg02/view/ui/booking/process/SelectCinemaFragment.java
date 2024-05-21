@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.example.asg02.utils.DateTimeUtils;
 import com.example.asg02.utils.ImageUtils;
 import com.example.asg02.view.ui.booking.process.adapter.CinemaAdapter;
 import com.example.asg02.vm.BookingViewModel;
+import com.example.asg02.vm.MapViewModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectCinemaFragment extends Fragment {
+    private MapViewModel mapViewModel;
     private BookingViewModel bookingViewModel;
     private FragmentSelectCinemaBinding binding;
     private Movie movie;
@@ -49,6 +52,7 @@ public class SelectCinemaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mapViewModel = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
         bookingViewModel = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
         // Inflate the layout for this fragment
         binding = FragmentSelectCinemaBinding.inflate(inflater, container, false);
@@ -95,13 +99,13 @@ public class SelectCinemaFragment extends Fragment {
 
 
     private void updateUI(String date) {
-        if (manager == null || movie == null && date.isEmpty()) {
+        if (manager == null || movie == null || date.isEmpty()) {
             return;
         }
 
         binding.poster.setImageBitmap(ImageUtils.decodeBitmap(movie.getPoster()));
 
-        cinemaAdapter = new CinemaAdapter(cinemas, movie.getId(), date);
+        cinemaAdapter = new CinemaAdapter(cinemas, movie.getId(), date, mapViewModel);
         recyclerView.setAdapter(cinemaAdapter);
 
         cinemaAdapter.setOnItemClickListener(new CinemaAdapter.OnItemClickListener() {
@@ -117,9 +121,10 @@ public class SelectCinemaFragment extends Fragment {
             }
 
             @Override
-            public void inItemCLick(int cinemaPos) {
+            public void onItemCLick(int cinemaPos) {
                 Cinema cinema = cinemas.get(cinemaPos);
-                bookingViewModel.setCinema(cinema);
+                mapViewModel.setManager(manager);
+                mapViewModel.setCinema(cinema);
                 NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
                 controller.navigate(R.id.nav_maps);
             }
@@ -128,7 +133,6 @@ public class SelectCinemaFragment extends Fragment {
             if (cinemas != null) {
                 this.cinemas.clear();
                 this.cinemas.addAll(cinemas);
-
                 cinemaAdapter.notifyDataSetChanged();
             }
         });
