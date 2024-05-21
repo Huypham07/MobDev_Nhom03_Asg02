@@ -20,7 +20,7 @@
     <string name="title_fragment_select_complex_map">Chọn cụm rạp</string>
     <string name="title_fragment_select_cinema_map">Chọn rạp cần đến</string>
     <string name="title_fragment_maps">Chỉ đường</string>
-    <string name="title_fragment_chat">Bạn cần giúp gì?</string>
+    <string name="title_activity_chat">Hỏi đáp</string>
 
     <!-- API KEY -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">

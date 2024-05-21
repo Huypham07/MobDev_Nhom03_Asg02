@@ -1,32 +1,30 @@
-package com.example.asg02.controller.message;
+package com.example.asg02.controller.review;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.asg02.model.Message;
+import com.example.asg02.model.Review;
 import com.example.asg02.utils.FirebaseUtils;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class GetAllMessageController implements MessageDatabase {
-
-    public GetAllMessageController() {
-    }
-
+public class GetReviewController implements ReviewReader {
     @Override
-    public void getMessages(String uID, Consumer<Message> onMessageAdded) {
-        FirebaseUtils.getDatabaseReference("Messages").child(uID)
-                .orderByChild("timestamp").addChildEventListener(new ChildEventListener() {
+    public void getReviewsOfMovie(int movieId, Consumer<Review> onReviewAdded) {
+        FirebaseUtils.getDatabaseReference("Reviews")
+                .child(String.valueOf(movieId))
+                .orderByChild("timestamp")
+                .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        Message message = snapshot.getValue(Message.class);
-                        if (message != null) {
-                            onMessageAdded.accept(message);
+                        Review review = snapshot.getValue(Review.class);
+                        if (review != null) {
+                            onReviewAdded.accept(review);
                         }
                     }
 
@@ -50,13 +48,5 @@ public class GetAllMessageController implements MessageDatabase {
 
                     }
                 });
-    }
-
-
-    @Override
-    public void addMessage(Message message) {
-        if (message == null) return;
-        FirebaseUtils.getDatabaseReference("Messages")
-                .child(message.getSenderId()).push().setValue(message);
     }
 }

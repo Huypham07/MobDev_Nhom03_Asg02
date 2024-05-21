@@ -60,6 +60,30 @@ public class SelectCinemaFragment extends Fragment {
 
         recyclerView = binding.recyclerview;
 
+        cinemaAdapter = new CinemaAdapter(cinemas, mapViewModel);
+        recyclerView.setAdapter(cinemaAdapter);
+
+        cinemaAdapter.setOnItemClickListener(new CinemaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int cinemaPos, int showPos) {
+                Cinema cinema = cinemas.get(cinemaPos);
+                List<Show> shows = cinemaAdapter.getShowAdapters().get(cinemaPos).getShowList();
+                Show show = shows.get(showPos);
+                bookingViewModel.setCinema(cinema);
+                bookingViewModel.setShow(show);
+                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                controller.navigate(R.id.action_nav_select_cinema_to_nav_select_seat);
+            }
+
+            @Override
+            public void onItemCLick(int cinemaPos) {
+                Cinema cinema = cinemas.get(cinemaPos);
+                mapViewModel.setCinema(cinema);
+                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                controller.navigate(R.id.nav_maps);
+            }
+        });
+
         chooseDate = binding.chooseDate;
         chooseDate.setText(DateTimeUtils.getToday());
 
@@ -87,6 +111,10 @@ public class SelectCinemaFragment extends Fragment {
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                            LocalDate date = LocalDate.of(i, i1 + 1, i2);
+                            if (date.isBefore(DateTimeUtils.now.toLocalDate())) {
+                                return;
+                            }
                             chooseDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));
                             updateUI(chooseDate.getText().toString());
                         }
@@ -105,30 +133,9 @@ public class SelectCinemaFragment extends Fragment {
 
         binding.poster.setImageBitmap(ImageUtils.decodeBitmap(movie.getPoster()));
 
-        cinemaAdapter = new CinemaAdapter(cinemas, movie.getId(), date, mapViewModel);
-        recyclerView.setAdapter(cinemaAdapter);
+        cinemaAdapter.setDate(date);
+        cinemaAdapter.setMovieId(movie.getId());
 
-        cinemaAdapter.setOnItemClickListener(new CinemaAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int cinemaPos, int showPos) {
-                Cinema cinema = cinemas.get(cinemaPos);
-                List<Show> shows = cinemaAdapter.getShowAdapters().get(cinemaPos).getShowList();
-                Show show = shows.get(showPos);
-                bookingViewModel.setCinema(cinema);
-                bookingViewModel.setShow(show);
-                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                controller.navigate(R.id.action_nav_select_cinema_to_nav_select_seat);
-            }
-
-            @Override
-            public void onItemCLick(int cinemaPos) {
-                Cinema cinema = cinemas.get(cinemaPos);
-                mapViewModel.setManager(manager);
-                mapViewModel.setCinema(cinema);
-                NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                controller.navigate(R.id.nav_maps);
-            }
-        });
         getCinemaController.getAllCinemas(manager.getEmail()).thenAccept(cinemas -> {
             if (cinemas != null) {
                 this.cinemas.clear();

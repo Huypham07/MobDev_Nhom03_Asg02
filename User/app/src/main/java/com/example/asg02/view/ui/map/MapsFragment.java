@@ -67,17 +67,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         binding = FragmentMapsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        mapViewModel.isMapDataReady().observe(getViewLifecycleOwner(), isReady -> {
-            if (isReady) {
-                cinema = mapViewModel.getCinema().getValue();
-                mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-                if (mapFragment != null) {
-                    mapFragment.getMapAsync(this);
-                }
+        mapViewModel.getCinema().observe(
+                getViewLifecycleOwner(),
+                cinema -> {
+                    this.cinema = cinema;
+                    mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+                    if (mapFragment != null) {
+                        mapFragment.getMapAsync(this);
+                    }
 
-                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-            }
-        });
+                    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+                }
+        );
 
         return root;
     }
@@ -184,5 +185,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 Log.e("Location permission denied", "Location permission denied");
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

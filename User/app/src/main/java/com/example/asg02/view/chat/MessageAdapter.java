@@ -1,4 +1,4 @@
-package com.example.asg02.view.ui.chat;
+package com.example.asg02.view.chat;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asg02.databinding.ItemMessageReceiveBinding;
 import com.example.asg02.databinding.ItemMessageSendBinding;
 import com.example.asg02.model.Message;
+import com.example.asg02.utils.DateTimeUtils;
 
 public class MessageAdapter extends ListAdapter<Message, RecyclerView.ViewHolder> {
     private String userId;
@@ -65,7 +66,8 @@ public class MessageAdapter extends ListAdapter<Message, RecyclerView.ViewHolder
         }
 
         public void bind(Message message) {
-            binding.executePendingBindings();
+            binding.messageText.setText(message.getText());
+            binding.timeText.setText(DateTimeUtils.convertTimestampToDate(message.getTimestamp()));
         }
     }
 
@@ -78,7 +80,8 @@ public class MessageAdapter extends ListAdapter<Message, RecyclerView.ViewHolder
         }
 
         public void bind(Message message) {
-            binding.executePendingBindings();
+            binding.messageText.setText(message.getText());
+            binding.timeText.setText(DateTimeUtils.convertTimestampToDate(message.getTimestamp()));
         }
     }
 

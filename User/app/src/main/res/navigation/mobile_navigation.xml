@@ -102,5 +102,10 @@
               android:label="@string/title_fragment_select_cinema_map" tools:layout="@layout/fragment_select_cinema_map">
         <action android:id="@+id/action_nav_select_cinema_map_to_nav_maps" app:destination="@id/nav_maps"/>
     </fragment>
+    <fragment
+        android:id="@+id/nav_list_event"
+        android:name="com.example.asg02.view.ui.event.ListEventFragment"
+        android:label="@string/title_fragment_event"
+        tools:layout="@layout/fragment_list_events" />
 
 </navigation>

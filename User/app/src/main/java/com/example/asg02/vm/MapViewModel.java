@@ -14,21 +14,6 @@ public class MapViewModel extends ViewModel {
     private MutableLiveData<Manager> manager = new MutableLiveData<>();
     private MutableLiveData<Cinema> cinema = new MutableLiveData<>();
 
-    // Mediator
-    private MediatorLiveData<Boolean> mapDataReady = new MediatorLiveData<>();
-
-    public MapViewModel() {
-        mapDataReady.addSource(manager, value -> checkMapDataReady());
-        mapDataReady.addSource(cinema, value -> checkMapDataReady());
-    }
-
-    private void checkMapDataReady() {
-        if (manager.getValue() != null && cinema.getValue() != null) {
-            mapDataReady.setValue(true);
-            return;
-        }
-        mapDataReady.setValue(false);
-    }
 
     public LiveData<Manager> getManager() {
         return manager;
@@ -58,11 +43,5 @@ public class MapViewModel extends ViewModel {
         manager.setValue(null);
         cinema.setValue(null);
         currentLatLng.setValue(null);
-
-        mapDataReady.setValue(false);
-    }
-
-    public LiveData<Boolean> isMapDataReady() {
-        return mapDataReady;
     }
 }

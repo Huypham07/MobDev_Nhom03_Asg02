@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.chat.ChatActivity"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:elevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/title_activity_chat"
+        app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/textContentLayout"
@@ -21,20 +32,14 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_message_receive" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_marginBottom="0dp"
-            android:background="#dfdfdf"
-            app:layout_constraintBottom_toTopOf="@+id/layoutChatbox"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
         <LinearLayout
             android:id="@+id/layoutChatbox"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@android:color/white"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
             android:minHeight="48dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,23 +52,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/background_input_message"
                 android:hint="Bạn cần giúp gì?"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:maxLines="6"/>
 
-            <Button
-                android:id="@+id/sendBtn"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                android:text="Gửi"
-                android:textSize="14sp" />
+                android:id="@+id/buttonSendMessage"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_send_message"
+                app:tint="@color/blue"
+                android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</LinearLayout>

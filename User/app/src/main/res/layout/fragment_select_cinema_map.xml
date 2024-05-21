@@ -6,7 +6,18 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               tools:context=".view.ui.map.SelectCinemaFragment">
-
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp">
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/route" />
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:orientation="vertical"

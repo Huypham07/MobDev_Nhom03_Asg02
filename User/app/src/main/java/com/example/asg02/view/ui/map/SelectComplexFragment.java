@@ -17,12 +17,13 @@ import com.example.asg02.model.Manager;
 import com.example.asg02.model.Movie;
 import com.example.asg02.view.ui.booking.process.adapter.GridViewAdapter;
 import com.example.asg02.vm.BookingViewModel;
+import com.example.asg02.vm.MapViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectComplexFragment extends Fragment {
-    private BookingViewModel bookingViewModel;
+    private MapViewModel mapViewModel;
     private FragmentSelectComplexBinding binding;
     private GridViewAdapter adapter;
     private List<Manager> managers = new ArrayList<>();
@@ -31,7 +32,7 @@ public class SelectComplexFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        bookingViewModel = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
+        mapViewModel = new ViewModelProvider(requireActivity()).get(MapViewModel.class);
 
         binding = FragmentSelectComplexBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -51,8 +52,8 @@ public class SelectComplexFragment extends Fragment {
                 gridView.setAdapter(adapter);
                 gridView.setOnItemClickListener((parent, view, position, id) -> {
                     Manager manager = managers.get(position);
+                    mapViewModel.setManager(manager);
                     NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-//                    bookingViewModel.setManager(manager);
                     navController.navigate(R.id.action_nav_select_complex_map_to_nav_select_cinema_map);
                 });
             }
