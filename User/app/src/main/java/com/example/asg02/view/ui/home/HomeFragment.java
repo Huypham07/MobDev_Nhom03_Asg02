@@ -1,5 +1,6 @@
 package com.example.asg02.view.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.example.asg02.R;
 import com.example.asg02.databinding.FragmentHomeBinding;
 import com.example.asg02.model.Event;
+import com.example.asg02.view.chat.ChatActivity;
 import com.example.asg02.view.ui.home.movieOverview.CustomFragmentAdapter;
+import com.example.asg02.vm.AccountViewModel;
 import com.example.asg02.vm.BaseViewModel;
 import com.example.asg02.vm.BookingViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -28,6 +31,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private BaseViewModel baseViewModel;
     private BookingViewModel bookingViewModel;
+    private AccountViewModel accountViewModel;
     private FragmentHomeBinding binding;
     private TabLayoutMediator mediator;
     private CustomFragmentAdapter fragmentAdapter;
@@ -37,6 +41,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        accountViewModel = new ViewModelProvider(requireActivity()).get(AccountViewModel.class);
         bookingViewModel = new ViewModelProvider(requireActivity()).get(BookingViewModel.class);
         baseViewModel = new ViewModelProvider(requireActivity()).get(BaseViewModel.class);
 
@@ -85,6 +90,12 @@ public class HomeFragment extends Fragment {
         binding.map.setOnClickListener(v -> {
             NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
             controller.navigate(R.id.nav_select_complex_map);
+        });
+
+        binding.fab.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            intent.putExtra("userId", accountViewModel.getUserId().getValue());
+            startActivity(intent);
         });
 
         return root;

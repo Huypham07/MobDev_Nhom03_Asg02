@@ -21,7 +21,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="120dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                     android:max="5"
                     android:numStars="5"
 
-                    android:rating="3" />
+                    android:rating="0" />
 
                 <TextView
                     android:id="@+id/movie_duration"
@@ -301,7 +301,7 @@
                 android:layout_marginBottom="16dp"
                 android:max="5"
                 android:numStars="5"
-                android:rating="3" />
+                android:rating="0" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"
@@ -332,12 +332,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
-                android:orientation="vertical" />
+                tools:listitem="@layout/item_review"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

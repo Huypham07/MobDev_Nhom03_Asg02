@@ -1,8 +1,11 @@
 package com.example.asg02.utils;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTimeUtils {
@@ -45,5 +48,15 @@ public class DateTimeUtils {
         }
         LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
         return localTime.isAfter(now.toLocalTime());
+    }
+
+    public static String convertTimestampToDate(long timestamp) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+
+        ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return dtf.format(zdt);
     }
 }

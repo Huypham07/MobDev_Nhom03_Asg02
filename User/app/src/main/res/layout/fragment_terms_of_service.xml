@@ -7,8 +7,11 @@
         tools:context=".view.ui.setting.tos.TermsOfServiceFragment">
 
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Terms of Service"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Chưa có nguồn dữ liệu"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 </FrameLayout>

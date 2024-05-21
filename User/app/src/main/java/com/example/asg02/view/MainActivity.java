@@ -10,6 +10,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -143,6 +144,11 @@ public class MainActivity extends BaseActivity {
                 binding.appBarMain.toolbar.setNavigationIcon(R.drawable.account_icon);
                 binding.appBarMain.ticket.setVisibility(View.VISIBLE);
                 binding.appBarMain.navigationToggle.setVisibility(View.VISIBLE);
+            } else if (ctr.getCurrentDestination().getId() == R.id.nav_select_cinema_map
+                    || ctr.getCurrentDestination().getId() == R.id.nav_maps) {
+                binding.appBarMain.toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_ios_new_24);
+                binding.appBarMain.ticket.setVisibility(View.GONE);
+                binding.appBarMain.navigationToggle.setVisibility(View.GONE);
             } else if (ctr.getCurrentDestination().getId() == R.id.nav_success
                     || ctr.getCurrentDestination().getId() == R.id.nav_qr_code_of_booking) {
                 binding.appBarMain.toolbar.setNavigationIcon(null);
@@ -224,6 +230,25 @@ public class MainActivity extends BaseActivity {
                 return;
             }
             controller.navigate(R.id.nav_select_complex_map);
+            closeDrawer();
+        });
+
+        binding.navViewLayout.events.setOnClickListener(v -> {
+            if (controller.getCurrentDestination().getId() == R.id.nav_list_event) {
+                closeDrawer();
+                return;
+            }
+            controller.navigate(R.id.nav_list_event);
+            closeDrawer();
+        });
+
+        binding.navViewLayout.info.setOnClickListener(v -> {
+            String url = "https://github.com/Huypham07/MobDev_Nhom03_Asg02";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+
+//            if (intent.resolveActivity(getPackageManager()) != null) {
+//            }
             closeDrawer();
         });
     }

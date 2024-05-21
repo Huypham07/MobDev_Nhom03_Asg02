@@ -89,6 +89,8 @@ public class LoginActivity extends BaseActivity {
             String id = editId.getText().toString();
             String password = editPassword.getText().toString();
             binding.progressBar.setVisibility(View.VISIBLE);
+            binding.forgotPassword.setClickable(false);
+            binding.registerButton.setClickable(false);
             loginController.login(id, password).thenAccept(account -> {
                 User user = (User) account;
                 if (user != null) {
@@ -105,6 +107,8 @@ public class LoginActivity extends BaseActivity {
                 } else {
                     binding.errorLogin.setVisibility(View.VISIBLE);
                 }
+                binding.forgotPassword.setClickable(true);
+                binding.registerButton.setClickable(true);
                 binding.progressBar.setVisibility(View.GONE);
             });
         });

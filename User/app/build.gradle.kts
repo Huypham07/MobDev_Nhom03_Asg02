@@ -11,8 +11,8 @@ android {
     defaultConfig {
         applicationId = "com.example.asg02"
         minSdk = 29
-        //noinspection EditedTargetSdkVersion
-        targetSdk = 33
+        //noinspection ExpiredTargetSdkVersion,EditedTargetSdkVersion
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -33,6 +33,11 @@ android {
         viewBinding = true
     }
     dataBinding { enable = true }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -58,7 +63,6 @@ dependencies {
     implementation("androidx.preference:preference:1.2.1")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.android.gms:play-services-places:17.0.0")
     implementation("com.google.android.libraries.places:places:3.4.0")
     implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
@@ -69,6 +73,7 @@ dependencies {
     implementation(files("libs/rcalenderlib_v2.6.0.aar"))
     implementation(files("libs/zpdk-release-v3.1.aar"))
     implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.test:core:1.5.0")
 
     //test
     testImplementation("junit:junit:4.13.2")
