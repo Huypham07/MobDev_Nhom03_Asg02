@@ -5,6 +5,7 @@ import com.example.asg02.model.Movie;
 import java.util.*;
 
 public class MovieRecommender {
+    int totalDocs;
     private Set<String> vietnameseStopWords = new HashSet<>(Arrays.asList(
             "và", "hoặc", "cũng", "với", "trong", "một", "là", "của", "được", "cho", "các",
             "để", "về", "không", "này", "ở", "những", "đã", "có", "trên", "như", "làm", "đến"
@@ -24,22 +25,40 @@ public class MovieRecommender {
         return filteredDocument;
     }
 
-    private Map<String, Double> calculateTFIDF(String genre, String description, List<Map<String, Double>> allDocs) {
+    private Map<String, Double> calculateTFIDF(String genre, String description, String director, String actor, List<Map<String, Double>> allDocs) {
         combinedDocument.clear();
-
-        String[] genres = genre.split("\\s+");
-        for (String g : genres) {
-            combinedDocument.put(g.toLowerCase(), 1);
-        }
 
         String[] descriptionTerms = description.split("\\s+");
         List<String> cleanedDescription = removeStopWordsAndPunctuation(descriptionTerms);
         for (String term : cleanedDescription) {
-            combinedDocument.put(term, combinedDocument.getOrDefault(term, 0) + 2);
+            combinedDocument.put(term, 1 );//combinedDocument.getOrDefault(term, 0) + 1);
+            //System.out.print(term + " ");
         }
+//        System.out.println();
+//        String[] genreTerms = genre.split("\\s+");
+//        List<String> cleanedGenre = removeStopWordsAndPunctuation(genreTerms);
+//        for (String term : cleanedGenre) {
+//            combinedDocument.put(term, 1000 );//combinedDocument.getOrDefault(term, 0) + 1);
+//            System.out.print(term + " ");
+//        }
+//        System.out.println();
+//        String[] directorTerms = director.split("\\s+");
+//        List<String> cleanedDirector = removeStopWordsAndPunctuation(directorTerms);
+//        for (String term : cleanedDirector) {
+//            combinedDocument.put(term, 10 );//combinedDocument.getOrDefault(term, 0) + 1);
+//            System.out.print(term + " ");
+//        }
+//        System.out.println();
+//        String[] actorTerms = actor.split("\\s+");
+//        List<String> cleanedActor = removeStopWordsAndPunctuation(actorTerms);
+//        for (String term : cleanedActor) {
+//            combinedDocument.put(term, 10 );//combinedDocument.getOrDefault(term, 0) + 1);
+//            System.out.print(term + " ");
+//        }
+//        System.out.println();
 
         Map<String, Double> tfidfMap = new HashMap<>();
-        int totalDocs = allDocs.size() + 1; // Including current document
+        //int totalDocs = allDocs.size() + 1; // Including current document
         for (Map.Entry<String, Integer> entry : combinedDocument.entrySet()) {
             String term = entry.getKey();
             int tf = entry.getValue();
@@ -88,9 +107,9 @@ public class MovieRecommender {
     public List<Movie> recommendMovies(List<Movie> movieList, List<Movie> movieWatchedByUser) {
         List<Map<String, Double>> allDocs = new ArrayList<>();
         Map<Movie, Map<String, Double>> movieTFIDFMap = new HashMap<>();
-
+        totalDocs = movieList.size(); //+ movieWatchedByUser.size();
         for (Movie movie : movieList) {
-            Map<String, Double> tfidf = calculateTFIDF(movie.getGenre(), movie.getDescription(), allDocs);
+            Map<String, Double> tfidf = calculateTFIDF(movie.getGenre(), movie.getDescription(), movie.getDirector() , movie.getActors(), allDocs);
             allDocs.add(tfidf);
             movieTFIDFMap.put(movie, tfidf);
         }
@@ -112,7 +131,8 @@ public class MovieRecommender {
             double similarity2 = cosineSimilarity(movieTFIDFMap.get(movie2), averageTFIDF);
             return Double.compare(similarity2, similarity1);
         });
-
-        return movieList;
+        List<Movie> result = new ArrayList<>();
+        result.addAll(movieList);
+        return result;
     }
 }

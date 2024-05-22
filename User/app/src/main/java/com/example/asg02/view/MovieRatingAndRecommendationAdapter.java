@@ -49,6 +49,10 @@ public class MovieRatingAndRecommendationAdapter extends RecyclerView.Adapter<Mo
     public int getItemCount() {
         return movieList.size();
     }
+    public void updateMovieList(List<Movie> newMovieList) {
+        this.movieList = newMovieList;
+        notifyDataSetChanged();
+    }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
@@ -69,8 +73,5 @@ public class MovieRatingAndRecommendationAdapter extends RecyclerView.Adapter<Mo
         byte[] bytes = java.util.Base64.getDecoder().decode(uri);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
-    public void updateMovieList(List<Movie> newMovieList) {
-        this.movieList = newMovieList;
-        notifyDataSetChanged();
-    }
+
 }

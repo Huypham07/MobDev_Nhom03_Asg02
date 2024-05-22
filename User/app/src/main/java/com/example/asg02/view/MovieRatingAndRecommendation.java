@@ -38,7 +38,7 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
     List<Integer> movieIdWatchedByCustomerList;
 
     MovieRecommender movieRecommender;
-
+    MovieRatingAndRecommendationAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,26 +64,27 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Load data and then initialize recommendation list
+        // Initialize the RecyclerView with an empty adapter
+        setupRecyclerView();
+
+        // Load data and then initialize the recommendation list
         loadBookingData(userId, () -> {
             loadMovieData(() -> {
-                if (movieRecommendationList == null) {
-                    Log.e("Before", "movieRecommendationList null");
-                } else {
-                    Log.e("Before", "movieRecommendationList isn't null. \n"
-                            + movieRecommendationList.toString()
-                            + "\n" + movieWatchedByCustomerList.toString());
+                String s = "";
+                for (int i = 0; i < movieRatingList.size(); i++) {
+                    s = s + " " + movieRatingList.get(i).getName();
+                }
+                Log.d("BeforeRecommendation", "movieRatingList: " + s);
+                List<Movie> clone = new ArrayList<>();
+                clone.addAll(movieRatingList);
+                movieRecommendationList = movieRecommender.recommendMovies(clone, movieWatchedByCustomerList);
+                s = "";
+                for (int i = 0; i < movieRecommendationList.size(); i++) {
+                    s = s + " " + movieRecommendationList.get(i).getName();
+                }
+                Log.d("AfterRecommendation", "movieRecommendationList: " + s);
 
-                }
-                movieRecommendationList = movieRecommender.recommendMovies(movieRecommendationList, movieWatchedByCustomerList);
-                if (movieRecommendationList == null) {
-                    Log.e("After", "movieRecommendationList null");
-                } else {
-                    Log.e("After", "movieRecommendationList isn't null. \n"
-                            + movieRecommendationList.toString()
-                            + "\n" + movieWatchedByCustomerList.toString());
-                }
-                setupRecyclerView();
+                runOnUiThread(() -> adapter.updateMovieList(movieRatingList)); // Initially set with movieRatingList
             });
         });
 
@@ -103,9 +104,9 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                         if (userId.equals(userIdFromBooking)) {
                             movieIdWatchedByCustomerList.add(show.getMovieId());
                         }
-                        Log.e("Success", userId + " " + userIdFromBooking + " \nmovieId:" + show.getMovieId());
                     }
                 }
+                Log.d("BookingData", "Hoàn thành tải dữ liệu đặt chỗ");
                 callback.run();
             }
 
@@ -127,13 +128,15 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                     Movie movie = movieSnapshot.getValue(Movie.class);
                     if (movie != null) {
                         movieRatingList.add(movie);
-                        movieRecommendationList.add(movie);
                         if (movieIdWatchedByCustomerList.contains(movie.getId())) {
                             movieWatchedByCustomerList.add(movie);
                         }
                     }
                 }
-                callback.run();
+                movieRatingList.sort((movie1, movie2) -> Float.compare(movie2.getRating(), movie1.getRating()));
+
+                Log.d("MovieData", "Hoàn thành tải dữ liệu phim");
+                runOnUiThread(callback);
             }
 
             @Override
@@ -144,10 +147,9 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        MovieRatingAndRecommendationAdapter adapter1;
-        adapter1 = new MovieRatingAndRecommendationAdapter(this, movieRecommendationList);
+        adapter = new MovieRatingAndRecommendationAdapter(this, new ArrayList<>()); // Initialize with an empty list
         movieListView.setLayoutManager(new LinearLayoutManager(this));
-        movieListView.setAdapter(adapter1);
+        movieListView.setAdapter(adapter);
     }
 
     private void setupSpinner() {
@@ -162,11 +164,14 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                 String selectedItem = (String) parent.getItemAtPosition(position);
                 Toast.makeText(MovieRatingAndRecommendation.this, "Bạn đã chọn: " + selectedItem, Toast.LENGTH_SHORT).show();
                 if (selectedItem.equals("Đánh giá")) {
+                    adapter.updateMovieList(movieRatingList);
                     Log.e("Success", "success rating");
                 } else if (selectedItem.equals("Phù hợp")) {
+                    adapter.updateMovieList(movieRecommendationList);
                     Log.e("Success", "success recommendation");
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
