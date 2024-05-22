@@ -7,8 +7,10 @@ import com.example.asg02.controller.booking.GetBookingLogicTest;
 import com.example.asg02.controller.cinema.GetCinemaLogicTest;
 import com.example.asg02.controller.event.GetAllEventLogicTest;
 import com.example.asg02.controller.movie.GetMovieLogicTest;
+import com.example.asg02.controller.province.GetProvinceLogicTest;
 import com.example.asg02.controller.review.GetReviewLogicTest;
 import com.example.asg02.controller.show.GetShowLogicTest;
+import com.example.asg02.view.chat.ChatLogicTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -23,7 +25,9 @@ import org.junit.runners.Suite;
         GetAllEventLogicTest.class,
         GetMovieLogicTest.class,
         GetReviewLogicTest.class,
-        GetShowLogicTest.class}
+        GetShowLogicTest.class,
+        ChatLogicTest.class,
+        GetProvinceLogicTest.class}
 )
 public class UnitTestSuite {
 }

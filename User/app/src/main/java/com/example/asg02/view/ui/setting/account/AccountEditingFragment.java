@@ -27,7 +27,7 @@ import android.widget.ImageView;
 
 import com.example.asg02.R;
 import com.example.asg02.controller.account.DeleteAccountController;
-import com.example.asg02.controller.GetProvinceController;
+import com.example.asg02.controller.province.GetProvinceController;
 import com.example.asg02.controller.account.UpdateAccountController;
 import com.example.asg02.databinding.FragmentAccountEditingBinding;
 import com.example.asg02.model.User;

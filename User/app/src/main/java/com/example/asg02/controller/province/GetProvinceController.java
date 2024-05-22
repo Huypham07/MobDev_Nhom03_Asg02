@@ -1,4 +1,4 @@
-package com.example.asg02.controller;
+package com.example.asg02.controller.province;
 
 import com.example.asg02.model.Province;
 import com.example.asg02.utils.FirebaseUtils;

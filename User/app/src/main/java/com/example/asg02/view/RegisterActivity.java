@@ -24,7 +24,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 
 import com.example.asg02.R;
-import com.example.asg02.controller.GetProvinceController;
+import com.example.asg02.controller.province.GetProvinceController;
 import com.example.asg02.controller.account.RegisterController;
 import com.example.asg02.databinding.ActivityRegisterBinding;
 import com.example.asg02.model.User;
