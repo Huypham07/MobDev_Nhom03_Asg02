@@ -1,47 +1,39 @@
 package com.example.asg02.model;
 
-public abstract class Message {
-    private String message;
-    private Time time;
-    private Account sender;
-    private Account receiver;
+public class Message {
+    private String senderId;
+    private String text;
+    private long timestamp;
 
-    public Message(String message, Time time, Account sender, Account receiver) {
-        this.message = message;
-        this.time = time;
-        this.sender = sender;
-        this.receiver = receiver;
+    public Message() {}
+
+    public Message(String senderId, String text, long timestamp) {
+        this.senderId = senderId;
+        this.text = text;
+        this.timestamp = timestamp;
     }
 
-    public String getMessage() {
-        return message;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public Time getTime() {
-        return time;
+    public String getText() {
+        return text;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Account getSender() {
-        return sender;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setSender(Account sender) {
-        this.sender = sender;
-    }
-
-    public Account getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(Account receiver) {
-        this.receiver = receiver;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

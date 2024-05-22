@@ -1,44 +1,99 @@
 package com.example.asg02.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.asg02.R;
+import com.example.asg02.databinding.ItemMessageReceiveBinding;
+import com.example.asg02.databinding.ItemMessageSendBinding;
 import com.example.asg02.model.Message;
-import com.example.asg02.model.User;
+import com.example.asg02.DateTimeUtils;
 
-import java.util.List;
+public class MessageAdapter extends ListAdapter<Message, RecyclerView.ViewHolder> {
+    private String userId;
+    private static final int HOLDER_TYPE_MESSAGE_RECEIVED = 1;
+    private static final int HOLDER_TYPE_MESSAGE_SENT = 2;
 
-public class MessageAdapter extends ArrayAdapter {
+    public MessageAdapter(String userId) {
+        super(new MessageDiffCallback());
+        this.userId = userId;
+    }
 
-    private final Context context;
-    private final List<Message> messages;
-
-    public MessageAdapter(@NonNull Context context, List<Message> messages) {
-        super(context, 0, messages);
-        this.context = context;
-        this.messages = messages;
+    @Override
+    public int getItemViewType(int position) {
+        if (getItem(position).getSenderId().equals(userId)) {
+            return HOLDER_TYPE_MESSAGE_RECEIVED;
+        } else {
+            return HOLDER_TYPE_MESSAGE_SENT;
+        }
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.list_message_layout, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        if (viewType == HOLDER_TYPE_MESSAGE_SENT) {
+            ItemMessageSendBinding binding = ItemMessageSendBinding.inflate(layoutInflater, parent, false);
+            return new SentViewHolder(binding);
+        } else if (viewType == HOLDER_TYPE_MESSAGE_RECEIVED) {
+            ItemMessageReceiveBinding binding = ItemMessageReceiveBinding.inflate(layoutInflater, parent, false);
+            return new ReceivedViewHolder(binding);
+        } else {
+            throw new IllegalStateException("Unexpected view type: " + viewType);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Message message = getItem(position);
+        if (holder.getItemViewType() == HOLDER_TYPE_MESSAGE_SENT) {
+            ((SentViewHolder) holder).bind(message);
+        } else {
+            ((ReceivedViewHolder) holder).bind(message);
+        }
+    }
+
+    class ReceivedViewHolder extends RecyclerView.ViewHolder {
+        private final ItemMessageReceiveBinding binding;
+
+        public ReceivedViewHolder(ItemMessageReceiveBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        Message message = messages.get(position);
+        public void bind(Message message) {
+            binding.messageText.setText(message.getText());
+            binding.timeText.setText(DateTimeUtils.convertTimestampToDate(message.getTimestamp()));
+        }
+    }
 
-        TextView messageTextView = view.findViewById(R.id.messageTextView);
-        messageTextView.setText(message.getMessage());
-        return view;
+    class SentViewHolder extends RecyclerView.ViewHolder {
+        private final ItemMessageSendBinding binding;
+
+        public SentViewHolder(ItemMessageSendBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(Message message) {
+            binding.messageText.setText(message.getText());
+            binding.timeText.setText(DateTimeUtils.convertTimestampToDate(message.getTimestamp()));
+        }
+    }
+
+    static class MessageDiffCallback extends DiffUtil.ItemCallback<Message> {
+        @Override
+        public boolean areItemsTheSame(@NonNull Message oldItem, @NonNull Message newItem) {
+            return oldItem.equals(newItem);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Message oldItem, @NonNull Message newItem) {
+            return oldItem.getTimestamp() == newItem.getTimestamp();
+        }
     }
 }
