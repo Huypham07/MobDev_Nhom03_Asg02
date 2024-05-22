@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.asg02"
+    namespace = "com.example.admin"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.asg02"
+        applicationId = "com.example.admin"
         minSdk = 29
         targetSdk = 33
         versionCode = 1
