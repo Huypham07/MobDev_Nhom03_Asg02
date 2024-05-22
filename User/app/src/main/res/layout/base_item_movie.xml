@@ -47,16 +47,17 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/movie_censor"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_line"
-                android:text="K"
-                android:textSize="10sp"
-                android:gravity="center_horizontal"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rectangle_line"
+                android:gravity="center_horizontal"
+                android:text="K"
+                android:textSize="10sp" />
         </LinearLayout>
 
         <TextView android:layout_width="wrap_content"
