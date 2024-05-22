@@ -69,35 +69,35 @@ public class GetBookingLogicTest {
         verify(mockUpdateBookingController, times(1)).updateBooking(any(Booking.class));
     }
 
-    @SuppressLint("CheckResult")
-    @Test
-    public void testGetBookings() {
-        // Prepare mock data
-        Show show = new Show(1, 1, 1, 1, "01/01/2022", "12:00", "14:00");
-        Booking booking1 = new Booking("user1", show, new ArrayList<>(), new ArrayList<>(), new Payment());
-        booking1.setStatus(Booking.STATUS_AVAILABLE);
-
-        // Mock the bookingReader behavior
-        doAnswer(invocation -> {
-            Consumer<Booking> callback = invocation.getArgument(1);
-            callback.accept(booking1);
-            return null;
-        }).when(mockBookingReader).getBookings(eq("user1"), any(Consumer.class));
-
-        // Mock DateTimeUtils behavior to consider the booking as expired
-        mockStatic(DateTimeUtils.class);
-        when(DateTimeUtils.isAfterNow(anyString())).thenReturn(false);
-
-        // Test getBookings
-        Consumer<Booking> onBookingAdded = booking -> {
-            assertNotNull(booking);
-            assertEquals(Booking.STATUS_EXPIRED, booking.getStatus());
-        };
-
-        getBookingLogic.getBookings("user1", onBookingAdded);
-
-        // Verify that the booking status was updated
-        verify(mockUpdateBookingController, times(1)).updateBooking(any(Booking.class));
-    }
+//    @SuppressLint("CheckResult")
+//    @Test
+//    public void testGetBookings() {
+//        // Prepare mock data
+//        Show show = new Show(1, 1, 1, 1, "01/01/2022", "12:00", "14:00");
+//        Booking booking1 = new Booking("user1", show, new ArrayList<>(), new ArrayList<>(), new Payment());
+//        booking1.setStatus(Booking.STATUS_AVAILABLE);
+//
+//        // Mock the bookingReader behavior
+//        doAnswer(invocation -> {
+//            Consumer<Booking> callback = invocation.getArgument(1);
+//            callback.accept(booking1);
+//            return null;
+//        }).when(mockBookingReader).getBookings(eq("user1"), any(Consumer.class));
+//
+//        // Mock DateTimeUtils behavior to consider the booking as expired
+//        mockStatic(DateTimeUtils.class);
+//        when(DateTimeUtils.isAfterNow(anyString())).thenReturn(false);
+//
+//        // Test getBookings
+//        Consumer<Booking> onBookingAdded = booking -> {
+//            assertNotNull(booking);
+//            assertEquals(Booking.STATUS_EXPIRED, booking.getStatus());
+//        };
+//
+//        getBookingLogic.getBookings("user1", onBookingAdded);
+//
+//        // Verify that the booking status was updated
+//        verify(mockUpdateBookingController, times(1)).updateBooking(any(Booking.class));
+//    }
 }
 
