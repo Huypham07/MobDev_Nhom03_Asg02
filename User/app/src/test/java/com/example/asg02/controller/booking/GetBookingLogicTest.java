@@ -14,6 +14,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+import android.annotation.SuppressLint;
+
 import com.example.asg02.model.Booking;
 import com.example.asg02.model.Payment;
 import com.example.asg02.model.Show;
@@ -67,6 +69,7 @@ public class GetBookingLogicTest {
         verify(mockUpdateBookingController, times(1)).updateBooking(any(Booking.class));
     }
 
+    @SuppressLint("CheckResult")
     @Test
     public void testGetBookings() {
         // Prepare mock data
