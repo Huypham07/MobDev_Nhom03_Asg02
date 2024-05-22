@@ -69,4 +69,8 @@ public class MovieRatingAndRecommendationAdapter extends RecyclerView.Adapter<Mo
         byte[] bytes = java.util.Base64.getDecoder().decode(uri);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
+    public void updateMovieList(List<Movie> newMovieList) {
+        this.movieList = newMovieList;
+        notifyDataSetChanged();
+    }
 }
