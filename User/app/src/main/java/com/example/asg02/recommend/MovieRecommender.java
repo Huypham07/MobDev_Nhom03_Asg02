@@ -1,4 +1,4 @@
-package com.example.asg02.view;
+package com.example.asg02.recommend;
 
 import com.example.asg02.model.Movie;
 

@@ -27,7 +27,7 @@
         android:theme="@style/Theme.MobDev_Nhom03_Asg02User"
         tools:targetApi="31">
         <activity
-            android:name=".view.MovieRatingAndRecommendation"
+            android:name=".view.MovieRatingAndRecommendationActivity"
             android:exported="false" />
 
         <meta-data

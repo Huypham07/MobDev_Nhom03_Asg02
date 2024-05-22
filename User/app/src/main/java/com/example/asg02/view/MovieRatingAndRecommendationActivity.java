@@ -18,6 +18,8 @@ import com.example.asg02.R;
 import com.example.asg02.model.Booking;
 import com.example.asg02.model.Movie;
 import com.example.asg02.model.Show;
+import com.example.asg02.recommend.MovieRatingAndRecommendationAdapter;
+import com.example.asg02.recommend.MovieRecommender;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieRatingAndRecommendation extends AppCompatActivity {
+public class MovieRatingAndRecommendationActivity extends AppCompatActivity {
     ImageButton back;
     String userId;
     Spinner chooseTypeSpinner;
@@ -60,7 +62,7 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
         }
 
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(MovieRatingAndRecommendation.this, MainActivity.class);
+            Intent intent = new Intent(MovieRatingAndRecommendationActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -162,7 +164,7 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
-                Toast.makeText(MovieRatingAndRecommendation.this, "Bạn đã chọn: " + selectedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MovieRatingAndRecommendationActivity.this, "Bạn đã chọn: " + selectedItem, Toast.LENGTH_SHORT).show();
                 if (selectedItem.equals("Đánh giá")) {
                     adapter.updateMovieList(movieRatingList);
                     Log.e("Success", "success rating");

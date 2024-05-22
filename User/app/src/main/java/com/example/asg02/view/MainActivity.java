@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity {
         });
         binding.navViewLayout.movieRatingAndRecommendation.setOnClickListener(v -> {
             closeDrawer();
-            Intent intent = new Intent(MainActivity.this, MovieRatingAndRecommendation.class);
+            Intent intent = new Intent(MainActivity.this, MovieRatingAndRecommendationActivity.class);
             intent.putExtra("user", user);
             intent.putExtra("userId", userId);
             startActivityForResult(intent, REQUEST_SETTINGS_CODE);

@@ -1,4 +1,4 @@
-package com.example.asg02.view;
+package com.example.asg02.recommend;
 
 import android.content.Context;
 import android.graphics.Bitmap;
