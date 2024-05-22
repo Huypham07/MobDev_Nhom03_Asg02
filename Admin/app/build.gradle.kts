@@ -27,11 +27,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
+    dataBinding { enable = true }
     buildToolsVersion = "33.0.1"
 }
 
 dependencies {
-
+    implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
