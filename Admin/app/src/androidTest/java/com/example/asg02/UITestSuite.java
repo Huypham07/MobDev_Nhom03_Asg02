@@ -16,5 +16,5 @@ import org.junit.runners.Suite;
         AdminShowEventActivityUITest.class,
         }
 )
-public class ActivityTestSuite {
+public class UITestSuite {
 }
