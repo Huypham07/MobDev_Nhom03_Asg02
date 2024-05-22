@@ -3,11 +3,11 @@ package com.example.asg02;
 import com.example.asg02.controller.CreateEventController;
 import com.example.asg02.model.Event;
 
-public class AddEventLogic {
+public class CreateEventLogic {
 
     private final CreateEventController createEventController;
 
-    public AddEventLogic(CreateEventController createEventController) {
+    public CreateEventLogic(CreateEventController createEventController) {
         this.createEventController = createEventController;
     }
 

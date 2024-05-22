@@ -2,8 +2,6 @@ package com.example.asg02;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -13,14 +11,14 @@ import static org.mockito.Mockito.verify;
 import com.example.asg02.controller.CreateEventController;
 import com.example.asg02.model.Event;
 
-public class AddEventLogicTest {
+public class CreateEventLogicTest {
     private CreateEventController mockController;
-    private AddEventLogic addEventLogic;
+    private CreateEventLogic addEventLogic;
 
     @Before
     public void setUp() {
         mockController = mock(CreateEventController.class);
-        addEventLogic = new AddEventLogic(mockController);
+        addEventLogic = new CreateEventLogic(mockController);
     }
 
     @Test
