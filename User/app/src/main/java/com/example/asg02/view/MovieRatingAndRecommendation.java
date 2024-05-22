@@ -36,7 +36,7 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
     List<Movie> movieRecommendationList;
     List<Movie> movieWatchedByCustomerList;
     List<Integer> movieIdWatchedByCustomerList;
-    MovieRatingAndRecommendationAdapter adapter;
+
     MovieRecommender movieRecommender;
 
 
@@ -54,24 +54,47 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
         movieIdWatchedByCustomerList = new ArrayList<>();
         movieRecommender = new MovieRecommender();
 
-        adapter = new MovieRatingAndRecommendationAdapter(this, movieRatingList);
-        movieListView.setLayoutManager(new LinearLayoutManager(this));
-        movieListView.setAdapter(adapter);
         Intent getResultIntent = getIntent();
         if (getResultIntent != null) {
-            userId = getResultIntent.getStringExtra("userId"); // Giá trị mặc định là -1 nếu không tìm thấy userId
+            userId = getResultIntent.getStringExtra("userId");
         }
 
         back.setOnClickListener(v -> {
             Intent intent = new Intent(MovieRatingAndRecommendation.this, MainActivity.class);
             startActivity(intent);
         });
-        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Booking");
+
+        // Load data and then initialize recommendation list
+        loadBookingData(userId, () -> {
+            loadMovieData(() -> {
+                if (movieRecommendationList == null) {
+                    Log.e("Before", "movieRecommendationList null");
+                } else {
+                    Log.e("Before", "movieRecommendationList isn't null. \n"
+                            + movieRecommendationList.toString()
+                            + "\n" + movieWatchedByCustomerList.toString());
+
+                }
+                movieRecommendationList = movieRecommender.recommendMovies(movieRecommendationList, movieWatchedByCustomerList);
+                if (movieRecommendationList == null) {
+                    Log.e("After", "movieRecommendationList null");
+                } else {
+                    Log.e("After", "movieRecommendationList isn't null. \n"
+                            + movieRecommendationList.toString()
+                            + "\n" + movieWatchedByCustomerList.toString());
+                }
+                setupRecyclerView();
+            });
+        });
+
+        setupSpinner();
+    }
+
+    private void loadBookingData(String userId, Runnable callback) {
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Bookings");
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                movieRatingList.clear();
-                movieRecommendationList.clear();
                 for (DataSnapshot bookingSnapshot : dataSnapshot.getChildren()) {
                     Booking booking = bookingSnapshot.getValue(Booking.class);
                     if (booking != null) {
@@ -80,10 +103,10 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                         if (userId.equals(userIdFromBooking)) {
                             movieIdWatchedByCustomerList.add(show.getMovieId());
                         }
-                    } else {
+                        Log.e("Success", userId + " " + userIdFromBooking + " \nmovieId:" + show.getMovieId());
                     }
                 }
-                adapter.notifyDataSetChanged();
+                callback.run();
             }
 
             @Override
@@ -91,7 +114,9 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                 Log.w("Firebase", "loadPost:onCancelled", databaseError.toException());
             }
         });
+    }
 
+    private void loadMovieData(Runnable callback) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Movies");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,17 +127,13 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                     Movie movie = movieSnapshot.getValue(Movie.class);
                     if (movie != null) {
                         movieRatingList.add(movie);
-                        if (!movieIdWatchedByCustomerList.contains(movie.getId())) {
-                            movieRecommendationList.add(movie);
-                        } else {
+                        movieRecommendationList.add(movie);
+                        if (movieIdWatchedByCustomerList.contains(movie.getId())) {
                             movieWatchedByCustomerList.add(movie);
                         }
-                        Log.e("Success", "success");
-                    } else {
-                        Log.e("Failed", "failed");
                     }
                 }
-                adapter.notifyDataSetChanged();
+                callback.run();
             }
 
             @Override
@@ -120,8 +141,16 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                 Log.w("Firebase", "loadPost:onCancelled", databaseError.toException());
             }
         });
-        movieRecommendationList = movieRecommender.recommendMovies(movieRecommendationList, movieWatchedByCustomerList);
+    }
 
+    private void setupRecyclerView() {
+        MovieRatingAndRecommendationAdapter adapter1;
+        adapter1 = new MovieRatingAndRecommendationAdapter(this, movieRecommendationList);
+        movieListView.setLayoutManager(new LinearLayoutManager(this));
+        movieListView.setAdapter(adapter1);
+    }
+
+    private void setupSpinner() {
         String[] chooseTypeArray = {"Đánh giá", "Phù hợp"};
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, chooseTypeArray);
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
@@ -133,14 +162,11 @@ public class MovieRatingAndRecommendation extends AppCompatActivity {
                 String selectedItem = (String) parent.getItemAtPosition(position);
                 Toast.makeText(MovieRatingAndRecommendation.this, "Bạn đã chọn: " + selectedItem, Toast.LENGTH_SHORT).show();
                 if (selectedItem.equals("Đánh giá")) {
-                    adapter.updateMovieList(movieRatingList);
-                    adapter.notifyDataSetChanged();
+                    Log.e("Success", "success rating");
                 } else if (selectedItem.equals("Phù hợp")) {
-                    adapter.updateMovieList(movieRecommendationList);
-                    adapter.notifyDataSetChanged();
+                    Log.e("Success", "success recommendation");
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
