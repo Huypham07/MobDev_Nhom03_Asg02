@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -31,7 +32,7 @@ public class GetCinemaLogicTest {
     public void testGetAllCinemas() throws Exception {
         // Prepare mock data
         Cinema cinema1 = new Cinema(1, "Cinema 1", "Manager 1", 10.0, 20.0, "Address 1");
-        List<Cinema> cinemas = Arrays.asList(cinema1);
+        List<Cinema> cinemas = Collections.singletonList(cinema1);
         CompletableFuture<List<Cinema>> futureCinemas = CompletableFuture.completedFuture(cinemas);
 
         // Mock the cinemaReader behavior
@@ -50,7 +51,7 @@ public class GetCinemaLogicTest {
     public void testGetAllCinemasByManager() throws Exception {
         // Prepare mock data
         Cinema cinema1 = new Cinema(1, "Cinema 1", "Manager 1", 10.0, 20.0, "Address 1");
-        List<Cinema> cinemas = Arrays.asList(cinema1);
+        List<Cinema> cinemas = Collections.singletonList(cinema1);
         CompletableFuture<List<Cinema>> futureCinemas = CompletableFuture.completedFuture(cinemas);
 
         // Mock the cinemaReader behavior
@@ -103,7 +104,7 @@ public class GetCinemaLogicTest {
     public void testGetAllCinemaHalls() throws Exception {
         // Prepare mock data
         CinemaHall hall1 = new CinemaHall("Hall 1", 1, 10, 20);
-        List<CinemaHall> halls = Arrays.asList(hall1);
+        List<CinemaHall> halls = Collections.singletonList(hall1);
         CompletableFuture<List<CinemaHall>> futureHalls = CompletableFuture.completedFuture(halls);
 
         // Mock the cinemaReader behavior
