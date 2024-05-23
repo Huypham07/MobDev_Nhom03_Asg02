@@ -42,9 +42,6 @@
         <activity
             android:name=".view.MoviesInCinemaActivity"
             android:exported="true" />
-        <activity
-            android:name=".TestActivity"
-            android:exported="false" />
 
         <activity
             android:name=".view.ManagerActivity"
