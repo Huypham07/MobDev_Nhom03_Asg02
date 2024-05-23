@@ -3,6 +3,7 @@ package com.example.asg02.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ManagerAddShowActivity extends AppCompatActivity {
@@ -52,6 +54,7 @@ public class ManagerAddShowActivity extends AppCompatActivity {
         enterStartTimeEditText = findViewById(R.id.enterStartTime);
         enterEndTimeEditText = findViewById(R.id.enterEndTime);
         enterDateEditText = findViewById(R.id.enterDate);
+        enterDateEditText.setOnClickListener(v -> showDatePickerDialog());
         finishAddShowButton = findViewById(R.id.finishAddShow);
         createShowController = new CreateShowController(this);
         cinemaNamesList = new ArrayList<>();
@@ -198,5 +201,23 @@ public class ManagerAddShowActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+    private void showDatePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                ManagerAddShowActivity.this,
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1;
+                    enterDateEditText.setText(selectedDate);
+                },
+                year, month, day
+        );
+        datePickerDialog.show();
+    }
+
 }
