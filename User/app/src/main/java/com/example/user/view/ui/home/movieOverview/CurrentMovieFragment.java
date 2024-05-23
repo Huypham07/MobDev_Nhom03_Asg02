@@ -70,8 +70,8 @@ public class CurrentMovieFragment extends Fragment {
         });
 
         movieAdapter.setOnItemClickListener(pos -> {
-            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
             bookingViewModel.setMovie(movieList.get(pos));
+            NavController controller = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
             controller.navigate(R.id.action_nav_home_to_nav_movie_details);
         });
 

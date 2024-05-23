@@ -30,6 +30,7 @@ import com.example.user.databinding.ActivityMainBinding;
 import com.example.user.model.User;
 import com.example.user.utils.FirebaseUtils;
 import com.example.user.utils.ImageUtils;
+import com.example.user.utils.ScheduleNotificationUtils;
 import com.example.user.utils.ViewUtils;
 import com.example.user.vm.AccountViewModel;
 import com.example.user.vm.BaseViewModel;
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity {
         StrictMode.setThreadPolicy(policy);
 
         // ZaloPay SDK Init
-        ZaloPaySDK.init(2553, Environment.SANDBOX);
+        ZaloPaySDK.init(2554, Environment.SANDBOX);
         // bind components with ids
         sharedPreferences = getSharedPreferences("LoginSharedPrefs", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -99,14 +100,20 @@ public class MainActivity extends BaseActivity {
         accountViewModel.setUser(user);
         accountViewModel.setUserId(userId);
 
-        binding.navViewLayout.name.setText(user.getName());
-        binding.navViewLayout.point.setText(String.valueOf(user.getPoint()));
-        binding.navViewLayout.expense.setText(String.valueOf(user.getExpense()));
-        if (user.getAvatar() != null) {
-            binding.navViewLayout.imageView.setImageBitmap(ImageUtils.cropToCircleWithBorder(ImageUtils.decodeBitmap(user.getAvatar()), 20, Color.parseColor("#59351A")));
-        } else {
-            binding.navViewLayout.imageView.setImageResource(R.drawable.account_icon);
-        }
+        accountViewModel.getUser().observe(
+                this,
+                user -> {
+                    this.user = user;
+                    binding.navViewLayout.name.setText(user.getName());
+                    binding.navViewLayout.point.setText(String.valueOf(user.getPoint()));
+                    binding.navViewLayout.expense.setText(String.valueOf(user.getExpense()));
+                    if (user.getAvatar() != null) {
+                        binding.navViewLayout.imageView.setImageBitmap(ImageUtils.cropToCircleWithBorder(ImageUtils.decodeBitmap(user.getAvatar()), 20, Color.parseColor("#59351A")));
+                    } else {
+                        binding.navViewLayout.imageView.setImageResource(R.drawable.account_icon);
+                    }
+                }
+        );
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
@@ -116,6 +123,8 @@ public class MainActivity extends BaseActivity {
         img.setImageBitmap(ImageUtils.generateBarcode(userId, 200, 50));
         binding.navViewLayout.layoutBarcode.barCodeText.setText(userId);
 
+        // register notification
+        ScheduleNotificationUtils.scheduleNotificationWork(this, userId);
 
         // access permission
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -237,13 +246,18 @@ public class MainActivity extends BaseActivity {
             closeDrawer();
         });
 
+        binding.navViewLayout.movieRatingAndRecommendation.setOnClickListener(v -> {
+            if (controller.getCurrentDestination().getId() == R.id.nav_order_by_movie) {
+                closeDrawer();
+                return;
+            }
+            closeDrawer();
+            controller.navigate(R.id.nav_order_by_movie);
+        });
         binding.navViewLayout.info.setOnClickListener(v -> {
             String url = "https://github.com/Huypham07/MobDev_Nhom03_Asg02";
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
-
-//            if (intent.resolveActivity(getPackageManager()) != null) {
-//            }
             closeDrawer();
         });
     }

@@ -1,4 +1,4 @@
-package com.example.user.view.ui.movie.review;
+package com.example.user.view.ui.movie.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

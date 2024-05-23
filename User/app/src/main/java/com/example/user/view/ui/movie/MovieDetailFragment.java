@@ -31,7 +31,7 @@ import com.example.user.utils.ImageUtils;
 import com.example.user.utils.StringUtils;
 import com.example.user.utils.ViewUtils;
 import com.example.user.view.MainActivity;
-import com.example.user.view.ui.movie.review.ReviewAdapter;
+import com.example.user.view.ui.movie.adapter.ReviewAdapter;
 import com.example.user.vm.AccountViewModel;
 import com.example.user.vm.BookingViewModel;
 import com.google.android.material.snackbar.Snackbar;

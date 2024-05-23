@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/layout"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
@@ -103,15 +104,6 @@
                 android:background="@color/white"
                 android:elevation="4dp"
                 android:orientation="vertical">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/voucher"
-                    android:hint="Nhập mã giảm giá"
-                    android:layout_marginStart="20dp"
-                    android:textSize="16sp"
-                    android:maxLines="1"
-                    android:layout_marginEnd="20dp"/>
 
                 <CheckBox
                     android:id="@+id/use_point"

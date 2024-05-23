@@ -27,6 +27,7 @@ import com.example.user.model.User;
 import com.example.user.utils.DateTimeUtils;
 import com.example.user.utils.ImageUtils;
 import com.example.user.utils.StringUtils;
+import com.example.user.view.MainActivity;
 import com.example.user.vm.AccountViewModel;
 import com.example.user.vm.BookingViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -56,8 +57,9 @@ public class PayFragment extends Fragment {
     private double discount;
     private User user;
     private String userId;
+    private long userPoint;
 
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    @SuppressLint({"SetTextI18n", "DefaultLocale", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +76,8 @@ public class PayFragment extends Fragment {
                     if (isDataReady) {
                         user = accountViewModel.getUser().getValue();
                         userId = accountViewModel.getUserId().getValue();
-                        binding.usePoint.setText(StringUtils.formatMoney(user.getPoint() * 1000) + "đ");
+                        userPoint = user.getPoint();
+                        binding.usePoint.setText("Trừ điểm tích lũy (" + StringUtils.formatMoney(userPoint * 1000) + "đ)");
                     }
                 }
         );
@@ -102,6 +105,10 @@ public class PayFragment extends Fragment {
                 }
         );
 
+        binding.layout.setOnTouchListener((v, event) -> {
+            ((MainActivity) getActivity()).hideKeyboard();
+            return true;
+        });
         return root;
     }
 
@@ -121,9 +128,10 @@ public class PayFragment extends Fragment {
                         Booking booking = new Booking(userId, show, new ArrayList<>(), seats
                                 , new Payment(token, totalPrice, today));
                         new CreateBookingController().createBooking(booking);
-                        user.setPoint(user.getPoint() + bonusPoint);
+                        user.setPoint(userPoint + bonusPoint);
                         user.setExpense(user.getExpense() + totalPrice);
                         new UpdateAccountController().updateCurrentAccount(user);
+                        accountViewModel.setUser(user);
                         Snackbar.make(binding.payByZaloPay, "Đặt vé thành công", Snackbar.LENGTH_LONG).show();
                         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
                         navController.navigate(R.id.action_nav_pay_to_nav_success);
@@ -166,12 +174,12 @@ public class PayFragment extends Fragment {
 
         binding.usePoint.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                totalPrice -= user.getPoint();
-                discount = user.getPoint();
-                user.setPoint(0);
+                totalPrice -= userPoint;
+                discount = userPoint;
+                userPoint = 0;
             } else {
                 totalPrice += discount;
-                user.setPoint((long) discount);
+                userPoint = ((long) discount);
                 discount = 0;
             }
             updateBill();
@@ -189,5 +197,4 @@ public class PayFragment extends Fragment {
         super.onDestroy();
         binding = null;
     }
-
 }

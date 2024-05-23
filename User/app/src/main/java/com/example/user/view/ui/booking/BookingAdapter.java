@@ -48,6 +48,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
 
     public class BookingHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        TextView bookingId;
         TextView name;
         TextView duration;
         TextView hall;
@@ -61,6 +62,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
         public BookingHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.movie_image);
+            bookingId = itemView.findViewById(R.id.booking_id);
             name = itemView.findViewById(R.id.movie_name);
             duration = itemView.findViewById(R.id.movie_duration);
             hall = itemView.findViewById(R.id.hall);
@@ -90,6 +92,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
         CinemaHall cinemaHall = cinemaHallList.get(position);
 
         holder.imageView.setImageBitmap(ImageUtils.decodeBitmap(movie.getPoster()));
+        holder.bookingId.setText(String.valueOf(booking.getId()));
         holder.name.setText(movie.getName());
         holder.duration.setText(DateTimeUtils.convertMinsToStringTime(movie.getDurationMins()));
 

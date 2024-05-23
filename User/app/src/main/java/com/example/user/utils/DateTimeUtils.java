@@ -17,15 +17,13 @@ public class DateTimeUtils {
         return hourString + minuteString;
     }
 
-    public static LocalDateTime now = LocalDateTime.now();
-
     public static LocalDateTime transferStringToDateTime(String dateTime) {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     public static boolean isAfterNow(String dateTime) {
         LocalDateTime date = transferStringToDateTime(dateTime);
-        return date.isAfter(now);
+        return date.isAfter(getNow());
     }
 
     public static boolean isAfterToday(String releaseDate) {
@@ -35,11 +33,15 @@ public class DateTimeUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(releaseDate, formatter);
 
-        return date.isAfter(now.toLocalDate());
+        return date.isAfter(getNow().toLocalDate());
     }
 
     public static String getToday() {
-        return now.toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return getNow().toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public static LocalDateTime getNow() {
+        return LocalDateTime.now();
     }
 
     public static boolean isExpiredTime(String time) {
@@ -47,7 +49,7 @@ public class DateTimeUtils {
             return true;
         }
         LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
-        return localTime.isAfter(now.toLocalTime());
+        return localTime.isAfter(getNow().toLocalTime());
     }
 
     public static String convertTimestampToDate(long timestamp) {

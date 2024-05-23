@@ -21,6 +21,7 @@
     <string name="title_fragment_select_cinema_map">Chọn rạp cần đến</string>
     <string name="title_fragment_maps">Chỉ đường</string>
     <string name="title_activity_chat">Hỏi đáp</string>
+    <string name="title_fragment_order_by_movie">Gợi ý cho bạn</string>
 
     <!-- API KEY -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">

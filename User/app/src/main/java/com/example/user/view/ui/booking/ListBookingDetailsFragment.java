@@ -104,14 +104,14 @@ public class ListBookingDetailsFragment extends Fragment {
                         for (int i = 0; i < bookings.size(); i++) {
                             String dateTime = bookings.get(i).getShow().getDate() + " " + bookings.get(i).getShow().getEndTime();
                             if (isExpired) {
-                                if (!DateTimeUtils.isAfterNow(dateTime)) {
+                                if (bookings.get(i).getStatus() == Booking.STATUS_USED || bookings.get(i).getStatus() == Booking.STATUS_EXPIRED) {
                                     bookingList.add(bookings.get(i));
                                     movieList.add(listBookingViewModel.getMovieList().getValue().get(i));
                                     cinemaList.add(listBookingViewModel.getCinemaList().getValue().get(i));
                                     cinemaHallList.add(listBookingViewModel.getCinemaHallList().getValue().get(i));
                                 }
                             } else {
-                                if (DateTimeUtils.isAfterNow(dateTime)) {
+                                if (bookings.get(i).getStatus() == Booking.STATUS_AVAILABLE) {
                                     bookingList.add(bookings.get(i));
                                     movieList.add(listBookingViewModel.getMovieList().getValue().get(i));
                                     cinemaList.add(listBookingViewModel.getCinemaList().getValue().get(i));

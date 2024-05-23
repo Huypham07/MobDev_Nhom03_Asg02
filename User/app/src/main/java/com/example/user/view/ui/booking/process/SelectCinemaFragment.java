@@ -110,7 +110,7 @@ public class SelectCinemaFragment extends Fragment {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                             LocalDate date = LocalDate.of(i, i1 + 1, i2);
-                            if (date.isBefore(DateTimeUtils.now.toLocalDate())) {
+                            if (date.isBefore(DateTimeUtils.getNow().toLocalDate())) {
                                 return;
                             }
                             chooseDate.setText(String.format("%02d/%02d/%04d", i2, i1 + 1, i));

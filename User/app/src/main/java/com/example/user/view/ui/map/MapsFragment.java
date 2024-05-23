@@ -161,11 +161,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     public float calculateDistance(LatLng cinemaLatLng) {
         float[] results = new float[1];
-        if (currentLatLng == null) {
-            Log.e("e", "e");
-        } else {
-            Log.e("a", "a");
-        }
         android.location.Location.distanceBetween(currentLatLng.latitude, currentLatLng.longitude, cinemaLatLng.latitude, cinemaLatLng.longitude, results);
         float distanceInMeters = results[0];
         float distanceInKm = distanceInMeters / 1000;

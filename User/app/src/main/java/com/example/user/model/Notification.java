@@ -1,6 +1,7 @@
 package com.example.user.model;
 
-public abstract class Notification {
+public class Notification {
+    private int id;
     private String userId;
     private String content;
     private long timestamp;
@@ -16,6 +17,15 @@ public abstract class Notification {
         this.content = content;
         this.timestamp = timestamp;
         this.status = status;
+        this.id = hashCode();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -48,5 +58,10 @@ public abstract class Notification {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

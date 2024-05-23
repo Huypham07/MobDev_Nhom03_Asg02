@@ -55,6 +55,8 @@
                 android:id="@+id/movie_duration"
                 android:textSize="16sp"
                 android:textColor="@color/textGrey"
+                android:drawableStart="@drawable/movie_length"
+                android:drawablePadding="8dp"
                 android:text="120 phút"/>
 
         </LinearLayout>
