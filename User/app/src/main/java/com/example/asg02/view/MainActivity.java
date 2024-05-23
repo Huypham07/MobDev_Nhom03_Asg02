@@ -27,11 +27,8 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.asg02.controller.movie.GetMovieController;
 import com.example.asg02.databinding.ActivityMainBinding;
-import com.example.asg02.model.Account;
 import com.example.asg02.model.User;
 import com.example.asg02.utils.FirebaseUtils;
 import com.example.asg02.utils.ImageUtils;
@@ -170,6 +167,13 @@ public class MainActivity extends BaseActivity {
             intent.putExtra("userId", userId);
             startActivityForResult(intent, REQUEST_SETTINGS_CODE);
         });
+        binding.navViewLayout.movieRatingAndRecommendation.setOnClickListener(v -> {
+            closeDrawer();
+            Intent intent = new Intent(MainActivity.this, MovieRatingAndRecommendationActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("userId", userId);
+            startActivityForResult(intent, REQUEST_SETTINGS_CODE);
+        });
 
         // logout
         binding.navViewLayout.logOut.setOnClickListener(v -> {
@@ -207,6 +211,8 @@ public class MainActivity extends BaseActivity {
             controller.navigate(R.id.nav_notification);
             closeDrawer();
         });
+
+
 
         binding.navViewLayout.myTicket.setOnClickListener(v -> {
             if (controller.getCurrentDestination().getId() == R.id.nav_listBooking) {
@@ -279,6 +285,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         binding.navViewLayout.name.setText(user.getName());
+
     }
 
     @Override

@@ -20,9 +20,7 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = SettingsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
-
         controller = Navigation.findNavController(this, R.id.nav_host_fragment_content_settings);
         controller.addOnDestinationChangedListener((ctr, des, arg) -> {
             getSupportActionBar().setTitle(des.getLabel());
