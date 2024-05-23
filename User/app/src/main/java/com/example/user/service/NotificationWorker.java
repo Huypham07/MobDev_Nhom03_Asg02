@@ -51,7 +51,7 @@ public class NotificationWorker extends Worker {
                 if (booking.getStatus() == Booking.STATUS_AVAILABLE) {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
                     try {
-                        Date expirationDate = sdf.parse(booking.getShow().getDate() + " - " + booking.getShow().getEndTime());
+                        Date expirationDate = sdf.parse(booking.getShow().getDate() + " - " + booking.getShow().getStartTime());
                         long expirationTimeMillis = expirationDate.getTime();
 
                         if (expirationTimeMillis - System.currentTimeMillis() <= 3 * 60 * 60 * 1000) {
