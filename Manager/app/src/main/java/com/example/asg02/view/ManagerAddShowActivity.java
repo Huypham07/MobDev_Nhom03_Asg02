@@ -195,10 +195,14 @@ public class ManagerAddShowActivity extends AppCompatActivity {
                 String date = enterDateEditText.getText().toString();
                 String startTime = enterStartTimeEditText.getText().toString();
                 String endTime = enterEndTimeEditText.getText().toString();
-                Show show = new Show(finalCinemaId.intValue(), finalHallId.intValue(), finalMovieId.intValue(), startTime, endTime, date);
-                createShowController.createShow(show);
-                Intent intent = new Intent(ManagerAddShowActivity.this, ManagerActivity.class);
-                startActivity(intent);
+                if (date.isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
+                    Toast.makeText(ManagerAddShowActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_LONG);
+                } else {
+                    Show show = new Show(finalCinemaId.intValue(), finalHallId.intValue(), finalMovieId.intValue(), startTime, endTime, date);
+                    createShowController.createShow(show);
+                    Intent intent = new Intent(ManagerAddShowActivity.this, ManagerActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

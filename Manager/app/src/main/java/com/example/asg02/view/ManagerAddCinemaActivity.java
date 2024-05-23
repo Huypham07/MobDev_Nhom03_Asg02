@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.asg02.R;
 import com.example.asg02.controller.CreateCinemaController;
@@ -49,11 +51,21 @@ public class ManagerAddCinemaActivity extends AppCompatActivity {
     }
 
     private void onAddCinemaButtonClick() {
-        String name = enterCinemaNameEditText.getText().toString();
-        double latitude = Double.valueOf(enterLatitudeEditText.getText().toString()).doubleValue();
-        double longitude = Double.valueOf(enterLongitudeEditText.getText().toString()).doubleValue();
-        String detailAddress = enterDetailAddressEditText.getText().toString();
-        addCinemaLogic.handleAddCinema(name, latitude, longitude, detailAddress);
-        navigateToManagerActivity();
+
+        try {
+            String name = enterCinemaNameEditText.getText().toString();
+            double latitude = Double.valueOf(enterLatitudeEditText.getText().toString());
+            double longitude = Double.valueOf(enterLongitudeEditText.getText().toString()).doubleValue();
+            String detailAddress = enterDetailAddressEditText.getText().toString();
+            if (name.isEmpty() || detailAddress.isEmpty()) {
+                Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_LONG);
+            } else {
+                addCinemaLogic.handleAddCinema(name, latitude, longitude, detailAddress);
+                navigateToManagerActivity();
+            }
+        } catch (NumberFormatException e) {
+            Log.e("LatitudeError", "Invalid latitude format", e);
+            Toast.makeText(this, "Lỗi định dạng kinh độ, vĩ độ", Toast.LENGTH_SHORT).show();
+        }
     }
 }

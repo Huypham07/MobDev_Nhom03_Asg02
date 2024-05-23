@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.asg02.R;
 import com.example.asg02.controller.CreateHallController;
@@ -96,13 +97,22 @@ public class ManagerAddHallActivity extends AppCompatActivity {
         finishAddHallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = enterHallNameEditText.getText().toString();
-                Integer seatsPerRow = Integer.valueOf(enterSeatsPerRowEditText.getText().toString());
-                Integer seatsPerColumn = Integer.valueOf(enterSeatsPerColumnEditText.getText().toString());
-                Hall hall = new Hall(name, seatsPerRow.intValue(), seatsPerColumn.intValue(), cinemaId.intValue());
-                createHallController.createHall(hall);
-                Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
-                startActivity(intent);
+                try {
+                    String name = enterHallNameEditText.getText().toString();
+                    Integer seatsPerRow = Integer.valueOf(enterSeatsPerRowEditText.getText().toString());
+                    Integer seatsPerColumn = Integer.valueOf(enterSeatsPerColumnEditText.getText().toString());
+                    if (name.isEmpty()) {
+                        Toast.makeText(ManagerAddHallActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_LONG);
+                    } else {
+                        Hall hall = new Hall(name, seatsPerRow.intValue(), seatsPerColumn.intValue(), cinemaId.intValue());
+                        createHallController.createHall(hall);
+                        Intent intent = new Intent(ManagerAddHallActivity.this, ManagerActivity.class);
+                        startActivity(intent);
+                    }
+                } catch (NumberFormatException e) {
+                    Log.e("LatitudeError", "Invalid latitude format", e);
+                    Toast.makeText(ManagerAddHallActivity.this, "Lỗi định dạng kinh độ, vĩ độ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
