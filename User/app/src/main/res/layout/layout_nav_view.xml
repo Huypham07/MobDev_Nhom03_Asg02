@@ -122,30 +122,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/info"
                 android:drawableTop="@drawable/info_icon" app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="1dp"/>
-
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"/>
         <TextView
-
                 android:text="Tin mới &amp; Ưu đãi" android:textColor="@color/greyBackground" android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/events"
                 android:drawableTop="@drawable/gift_icon" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"/>
-
-
-        <TextView
-            android:id="@+id/movieRatingAndRecommendation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/movie_icon"
-            android:text="Phim"
-            android:textColor="@color/greyBackground"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/info"
-            app:layout_constraintHorizontal_bias="0.315"
-            app:layout_constraintStart_toEndOf="@+id/events" />
-
         <TextView
                 android:text="Vé của tôi" android:textColor="@color/greyBackground" android:textSize="15sp"
                 android:layout_width="wrap_content"

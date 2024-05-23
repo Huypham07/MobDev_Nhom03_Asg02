@@ -56,6 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
 
         return new MovieHolder(itemView);
     }
+
     @Override
     public void onBindViewHolder(@NonNull @NotNull MovieAdapter.MovieHolder holder, int position) {
         holder.poster.setImageBitmap(ImageUtils.decodeBitmap(movieList.get(position).getPoster()));
@@ -63,6 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieHolder>
             if (listener != null) {
                 listener.onItemClick(position);
             }
+
         });
         holder.duration.setText(" " + DateTimeUtils.convertMinsToStringTime(movieList.get(position).getDurationMins()));
         holder.name.setText(movieList.get(position).getName().toUpperCase());
