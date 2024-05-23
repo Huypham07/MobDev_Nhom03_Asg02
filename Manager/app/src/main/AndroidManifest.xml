@@ -43,10 +43,6 @@
             android:name=".MoviesInCinemaActivity"
             android:exported="true" />
         <activity
-            android:name=".TestActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".ManagerActivity"
             android:exported="true">
             <intent-filter>
