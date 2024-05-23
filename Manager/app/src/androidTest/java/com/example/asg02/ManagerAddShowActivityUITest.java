@@ -34,14 +34,8 @@ public class ManagerAddShowActivityUITest {
         onView(withId(R.id.enterDate)).perform(ViewActions.typeText("2024-05-17"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.enterStartTime)).perform(ViewActions.typeText("09:00"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.enterEndTime)).perform(ViewActions.typeText("11:00"), ViewActions.closeSoftKeyboard());
-
-        // Click the finish button
-//        Espresso.onView(ViewMatchers.withId(R.id.finishAddShow)).perform(ViewActions.scrollTo()).perform(ViewActions.click());
-
-        // Add assertions here to verify the behavior after clicking the button
     }
 
-    // Cần viết thêm ui test cho spinner
     @Test
     public void testChooseCinemaInShowSpinner() {
         Espresso.onView(withId(R.id.chooseCinemaInShow)).perform(ViewActions.click());

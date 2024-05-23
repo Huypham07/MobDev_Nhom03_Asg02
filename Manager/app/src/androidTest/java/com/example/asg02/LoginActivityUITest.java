@@ -24,9 +24,6 @@ public class LoginActivityUITest {
     @Test
     public void testForgotPasswordLink() {
         Espresso.onView(ViewMatchers.withId(R.id.forgot_password)).perform(ViewActions.click());
-
-        // Kiểm tra xem đã chuyển sang màn hình quên mật khẩu hay không (dùng id của view trên màn hình mới để kiểm tra)
-//        Espresso.onView(ViewMatchers.withId(R.id.forgot_password_screen)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
     @Test
@@ -35,8 +32,5 @@ public class LoginActivityUITest {
         Espresso.onView(ViewMatchers.withId(R.id.enterPassword)).perform(ViewActions.typeText("password"), ViewActions.closeSoftKeyboard());
 
         Espresso.onView(ViewMatchers.withId(R.id.login)).perform(ViewActions.click());
-
-        // Kiểm tra xem đã chuyển sang màn hình chính của ứng dụng hay không (dùng id của view trên màn hình mới để kiểm tra)
-//        Espresso.(ViewMatchers.withId(R.id.main_screen)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 }
