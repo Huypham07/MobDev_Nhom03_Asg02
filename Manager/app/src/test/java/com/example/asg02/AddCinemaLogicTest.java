@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import android.content.SharedPreferences;
 
 import com.example.asg02.controller.CreateCinemaController;
+import com.example.asg02.logic.AddCinemaLogic;
 import com.example.asg02.model.Cinema;
 
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.ChangePasswordController;
 
 public class ManagerChangePassword extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.logic;
 
 import android.content.SharedPreferences;
 
