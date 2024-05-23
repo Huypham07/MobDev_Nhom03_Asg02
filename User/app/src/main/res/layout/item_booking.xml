@@ -12,13 +12,27 @@
         android:layout_height="match_parent"
         android:id="@+id/layout"
         android:orientation="horizontal">
-        <ImageView
+        <LinearLayout
             android:layout_width="100dp"
-            android:layout_height="140dp"
-            android:id="@+id/movie_image"
-            android:src="@drawable/baby"
-            android:layout_marginStart="10dp"
-            android:scaleType="centerCrop" android:layout_gravity="center_vertical"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                android:id="@+id/movie_image"
+                android:src="@drawable/baby"
+                android:scaleType="centerCrop" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/booking_id"
+                android:textSize="13sp"
+                android:text="1234567"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/nav_find"
-            android:name="com.example.asg02.view.ui.recovery.findAccount.FindAccountFragment"
+            android:name="com.example.user.view.ui.recovery.findAccount.FindAccountFragment"
             android:label="@string/find_account"
             tools:layout="@layout/fragment_find_account">
         <action android:id="@+id/action_nav_find_to_nav_auth" app:destination="@id/nav_auth"/>
@@ -15,7 +15,7 @@
 
     <fragment
             android:id="@+id/nav_auth"
-            android:name="com.example.asg02.view.ui.recovery.auth.AuthenticationFragment"
+            android:name="com.example.user.view.ui.recovery.auth.AuthenticationFragment"
             android:label="@string/authentication"
             tools:layout="@layout/fragment_authentication">
         <action android:id="@+id/action_nav_auth_to_nav_reset" app:destination="@id/nav_reset"/>
@@ -23,7 +23,7 @@
 
     <fragment
             android:id="@+id/nav_reset"
-            android:name="com.example.asg02.view.ui.recovery.reset.ResetPasswordFragment"
+            android:name="com.example.user.view.ui.recovery.reset.ResetPasswordFragment"
             android:label="@string/reset_password"
             tools:layout="@layout/fragment_reset_password"/>
 </navigation>

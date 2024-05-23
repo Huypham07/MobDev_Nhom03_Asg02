@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.asg02"
+    namespace = "com.example.user"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.asg02"
+        applicationId = "com.example.user"
         minSdk = 29
         //noinspection ExpiredTargetSdkVersion,EditedTargetSdkVersion
         targetSdk = 32
@@ -56,6 +56,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-messaging")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.navigation:navigation-fragment:2.7.7")
@@ -74,6 +75,7 @@ dependencies {
     implementation(files("libs/zpdk-release-v3.1.aar"))
     implementation("androidx.activity:activity:1.8.0")
     implementation("androidx.test:core:1.5.0")
+    implementation("androidx.work:work-runtime:2.9.0")
 
     //test
     testImplementation("junit:junit:4.13.2")
