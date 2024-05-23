@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import android.content.SharedPreferences;
 
 import com.example.asg02.controller.CreateShowController;
+import com.example.asg02.logic.AddShowLogic;
 import com.example.asg02.model.Show;
 
 import org.junit.Before;

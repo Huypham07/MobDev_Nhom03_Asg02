@@ -1,19 +1,17 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.CreateCinemaController;
-import com.example.asg02.model.Cinema;
+import com.example.asg02.logic.AddCinemaLogic;
 
 public class ManagerAddCinemaActivity extends AppCompatActivity {
     ImageButton back;

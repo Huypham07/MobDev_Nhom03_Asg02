@@ -14,6 +14,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import com.example.asg02.view.ManagerChangePassword;
+
 @LargeTest
 public class ManagerChangePasswordUITest {
 

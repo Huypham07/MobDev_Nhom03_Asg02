@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center|left"
+                android:text="DOANH THU"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/dayIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="Doanh thu trong ngày:"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+        <TextView
+            android:id="@+id/monthIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Doanh thu trong tháng:"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dayIncome" />
+
+        <TextView
+            android:id="@+id/yearIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Doanh thu trong năm:"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/monthIncome" />
+
+        <TextView
+            android:id="@+id/totalIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Tổng doanh thu:"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearIncome" />
+
+    <TextView
+        android:id="@+id/finishWatching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Xong"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalIncome" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

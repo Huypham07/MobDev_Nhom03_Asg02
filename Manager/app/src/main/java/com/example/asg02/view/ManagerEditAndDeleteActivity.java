@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.EditAndDeleteController;
 import com.example.asg02.model.Cinema;
 import com.example.asg02.model.Hall;

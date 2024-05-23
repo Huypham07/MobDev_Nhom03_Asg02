@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManagerEditAndDeleteActivity">
+    tools:context=".view.ManagerEditAndDeleteActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -205,7 +205,7 @@
                 <TextView
                     android:id="@+id/showInfoOfCinemaHallShow"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     android:text="TextView"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="69dp" />

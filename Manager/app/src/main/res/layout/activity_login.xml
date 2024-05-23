@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA"
-    tools:context=".LoginActivity">
+    tools:context=".view.LoginActivity">
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
