@@ -1,17 +1,16 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.example.asg02.R;
 
 public class CinemaSystemActivity extends AppCompatActivity {
     ImageButton back;

@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,13 +13,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asg02.R;
 import com.example.asg02.model.Booking;
-import com.example.asg02.model.Manager;
 import com.example.asg02.model.Payment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

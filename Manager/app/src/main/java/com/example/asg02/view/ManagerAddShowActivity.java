@@ -1,4 +1,4 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.CreateShowController;
 import com.example.asg02.model.Show;
 import com.google.firebase.database.DataSnapshot;

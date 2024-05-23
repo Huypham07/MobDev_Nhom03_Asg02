@@ -1,21 +1,18 @@
-package com.example.asg02;
+package com.example.asg02.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asg02.R;
 import com.example.asg02.controller.InfoController;
-import com.example.asg02.model.Account;
 
 public class InfoActivity extends AppCompatActivity {
     ImageButton back;

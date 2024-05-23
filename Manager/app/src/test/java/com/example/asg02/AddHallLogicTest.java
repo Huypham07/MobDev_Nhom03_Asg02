@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import android.content.SharedPreferences;
 
 import com.example.asg02.controller.CreateHallController;
+import com.example.asg02.logic.AddHallLogic;
 import com.example.asg02.model.Hall;
 
 import org.junit.Before;
